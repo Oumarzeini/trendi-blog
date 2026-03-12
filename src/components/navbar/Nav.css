@@ -1,0 +1,31 @@
+ul {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+li {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 0 4px blue;
+}
+
+li p {
+  color: rgb(55, 136, 250);
+  font-size: 1.1rem;
+  font-weight: 700;
+}

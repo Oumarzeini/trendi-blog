@@ -1,0 +1,14 @@
+.resultsContainer {
+    flex-grow: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+}
+
+.defaultText {
+    font-size: 1.2rem;
+    text-align: center;
+    color: gray;
+}

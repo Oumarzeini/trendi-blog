@@ -1,0 +1,105 @@
+.settingsHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+.figureContainer {
+  position: relative;
+}
+
+.editIconSpan {
+  background-color: rgb(55, 136, 250);
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  z-index: 100;
+}
+
+.SettingsNameNUsernameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.inputLabelContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  margin: auto;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: gray;
+}
+
+
+.fullnameInput,
+.usernameInput {
+  width: 90%;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #95baf5;
+  letter-spacing: 1px;
+  outline: none;
+  font-size: 1.1rem;
+}
+
+.descriptionInputContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1rem;
+  padding: 10px;
+}
+
+.descriptionTextInput {
+  width: 100%;
+  min-height: 100px;
+  height: fit-content;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #95baf5;
+  letter-spacing: 1px;
+  outline: none;
+  font-size: 1.1rem;
+}
+
+.descriptionTextInput::-webkit-scrollbar {
+    display: none;
+}
+
+.saveProfileBtn {
+  width: 300px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(55, 136, 250);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding:10px;
+}

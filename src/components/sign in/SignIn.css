@@ -1,0 +1,31 @@
+.forgotPasswordP:hover {
+  color: blue !important;
+}
+
+.submitBtn:active {
+  scale: 09;
+  background-color: rgb(55, 136, 250);
+  color: white;
+}
+
+.errMsg {
+  color: rgb(113, 0, 0);
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.187);
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 8px;
+  letter-spacing: 1px;
+}
+
+.successMsg {
+  color: green;
+  text-align: center;
+  font-weight: 600px;
+  background-color:rgba(0, 128, 0, 0.163);
+  padding: 10px;
+  border: 1px solid green;
+  border-radius: 8px;
+  letter-spacing: 1px;
+}
+

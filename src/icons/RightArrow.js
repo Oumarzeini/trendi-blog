@@ -1,0 +1,24 @@
+const RightArrow = ({ height, width, color }) => (
+  <svg
+    height={height}
+    width={width}
+    viewBox="0 0 72 72"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M49.212 51.534L67 35.036L49.212 18.538l-3.789 4.076l10.396 9.641H5v5.562h50.819l-10.396 9.642z"
+      fill={color}
+    />
+    <path
+      d="M49.212 51.534L67 35.036L49.212 18.538l-3.789 4.076l10.396 9.641H5v5.562h50.819l-10.396 9.642z"
+      fill="none"
+      stroke="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit="10"
+      strokeWidth="2"
+    />
+  </svg>
+);
+
+export default RightArrow;
