@@ -1,5 +1,4 @@
 import "./ProfilePage.css";
-import { Setting } from "iconsax-reactjs";
 import BackArrow from "../../../icons/BackArrow";
 import Edit from "../../../icons/Edit";
 import Add from "../../../icons/Add";
@@ -10,14 +9,7 @@ function ProfilePage() {
   const navigate = useNavigate();
   return (
     <>
-      <header className="ProfilePageHeader">
-        <Link to="/home">
-          <BackArrow height={"25px"} width={"25px"} color={"blue"} />
-        </Link>
-        <Link to="/settings">
-          <Setting color="blue" />
-        </Link>
-      </header>
+      <header className="ProfilePageHeader"></header>
 
       <section className="infoSection">
         <figure>
