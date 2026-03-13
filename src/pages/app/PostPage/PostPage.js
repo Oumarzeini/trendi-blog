@@ -7,7 +7,7 @@ import neymarImg from "../../../images/neymar smiling.webp";
 import messiImg from "../../../images/messi smiling.webp";
 //icons
 import Comment from "../../../icons/Comment";
-import { Heart } from "iconsax-reactjs";
+//import { Heart } from "iconsax-reactjs";
 import Share from "../../../icons/Share";
 import BackArrow from "../../../icons/BackArrow";
 //hooks
@@ -90,12 +90,12 @@ const PostPage = () => {
             className="likes"
             onClick={() => setHeartColor(!heartColor)}
           >
-            <Heart
+            {/* <Heart
               size={26}
               color={heartColor ? "red" : "black"}
               variant={heartColor ? "Bold" : "Outline"}
               stroke={heartColor ? "red" : "black"}
-            />
+            /> */}
             1034
           </span>
 
@@ -128,12 +128,12 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              <Heart
+              {/* <Heart
                 size={15}
                 color={heartColor ? "red" : "black"}
                 variant={heartColor ? "Bold" : "Outline"}
                 stroke={heartColor ? "red" : "black"}
-              />
+              /> */}
               233
             </span>
           </div>
@@ -157,12 +157,12 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              <Heart
+              {/* <Heart
                 size={15}
                 color={heartColor ? "red" : "black"}
                 variant={heartColor ? "Bold" : "Outline"}
                 stroke={heartColor ? "red" : "black"}
-              />
+              /> */}
               15
             </span>
           </div>
@@ -183,12 +183,12 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              <Heart
+              {/* <Heart
                 size={15}
                 color={heartColor ? "red" : "black"}
                 variant={heartColor ? "Bold" : "Outline"}
                 stroke={heartColor ? "red" : "black"}
-              />
+              /> */}
               1000
             </span>
           </div>

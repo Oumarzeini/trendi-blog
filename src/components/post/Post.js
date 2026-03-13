@@ -2,7 +2,7 @@ import "./Post.css";
 import readingImg from "../../images/reading illustration.jpg";
 import profilePlaceholder from "../../images/user placeholder.png";
 import Comment from "../../icons/Comment";
-import { Heart } from "iconsax-reactjs";
+// import { Heart } from "iconsax-reactjs";
 const Post = ({ variant = "full", post }) => {
   if (!post) {
     return (
@@ -59,7 +59,7 @@ const Post = ({ variant = "full", post }) => {
 
             <div className="intractionContainer">
               <span className="likes">
-                <Heart size={variant === "full" ? 27 : 10} />
+                {/* <Heart size={variant === "full" ? 27 : 10} /> */}
                 {post.likes}
               </span>
 
