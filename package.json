@@ -1,6 +1,7 @@
 {
   "name": "trendy-blog",
   "version": "0.1.0",
+  "homepage": "https://oumarzeini.github.io/TrendyBlog",
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.93.3",
@@ -13,8 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "predeplay": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
