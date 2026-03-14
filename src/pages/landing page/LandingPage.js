@@ -2,7 +2,6 @@ import "./LandingPage.css";
 // COMPONENTS
 import Nav from "../../components/navbar/Nav";
 import Post from "../../components/post/Post";
-import NavGroupe from "../../components/sidebar/NavGroupe";
 // ICONS
 import Menu from "../../icons/Menu";
 import MenuClose from "../../icons/MenuClose";
@@ -378,7 +377,7 @@ const LandingPage = () => {
                 }}
                 className="heading"
               >
-                <img src={appLogo} alt="Application logo" />
+                <img src={appLogo} alt="" />
                 TrendyBlog
               </h3>
               <p className="subHeading">

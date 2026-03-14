@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Settings = () => {
   const [fullname, setFullname] = useState("Alex Rivera");
-  const [username, setUsername] = useState("arivera_writes");
+  const [username] = useState("arivera_writes");
 
   return (
     <>
@@ -22,7 +22,7 @@ const Settings = () => {
         <section className="infoSection">
           <div className="figureContainer">
             <figure>
-              <img src={profileImg} alt="Profile image" />
+              <img src={profileImg} alt="" />
               <span className="editIconSpan">
                 <Edit width={"30px"} height={"30px"} color={"white"} />
               </span>

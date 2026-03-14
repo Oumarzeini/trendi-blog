@@ -29,7 +29,7 @@ const SignIn = ({ authOption }) => {
 
       setLoading(true);
 
-      const { data: existingEmail, error: checkError } = await supabase
+      const { data: existingEmail } = await supabase
         .from("profiles")
         .select("email")
         .eq("email", email)
@@ -83,7 +83,6 @@ const SignIn = ({ authOption }) => {
         return;
       } else {
         setSuccess("successsfully signed in");
-        console.log(email, password, user);
         navigate("/home");
       }
     } catch (err) {

@@ -1,4 +1,3 @@
-import HomeIcon from "../icons/NavIcons/HomeIcon";
 import Feed from "../icons/NavIcons/Feed";
 import ExploreIcon from "../icons/NavIcons/ExploreIcon";
 import Notification from "../icons/NavIcons/Notification";

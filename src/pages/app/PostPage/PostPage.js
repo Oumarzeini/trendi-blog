@@ -13,13 +13,11 @@ import BackArrow from "../../../icons/BackArrow";
 //hooks
 import { useState } from "react";
 // Utility imports
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PostPage = () => {
   const [heartColor, setHeartColor] = useState(false);
   const [comment, setComment] = useState("");
-
-  const id = useParams();
 
   const handleInvalid = (e) => {
     e.target.setCustomValidity("I can see you didn't enter sh!t.");
@@ -32,7 +30,7 @@ const PostPage = () => {
   return (
     <section className="postPageSection">
       <figure className="postImgFigure">
-        <img src={readingImg} alt="" />
+        <img src={readingImg} alt="attached image" />
         <Link to={"/home"}>
           <span className="backArrow">
             <BackArrow width={"25px"} height={"25px"} color={"blue"} />
@@ -52,7 +50,7 @@ const PostPage = () => {
 
       <div className="userContainer">
         <figure className="profileImgFigure">
-          <img src={profilePlaceholder} alt="profile image" />
+          <img src={profilePlaceholder} alt="" />
         </figure>
 
         <div className="nameNUsernameContainer">
@@ -109,7 +107,7 @@ const PostPage = () => {
       <div className="commentsContainer">
         <div className="commentContainer">
           <figure className="CommentProfileImgFigure">
-            <img src={ronaldoImg} alt="profile image" />
+            <img src={ronaldoImg} alt="" />
           </figure>
 
           <div className="nameAndCommentContainer">
@@ -140,7 +138,7 @@ const PostPage = () => {
         </div>
         <div className="commentContainer">
           <figure className="CommentProfileImgFigure">
-            <img src={neymarImg} alt="profile image" />
+            <img src={neymarImg} alt="" />
           </figure>
 
           <div className="nameAndCommentContainer">
@@ -169,7 +167,7 @@ const PostPage = () => {
         </div>
         <div className="commentContainer">
           <figure className="CommentProfileImgFigure">
-            <img src={messiImg} alt="profile image" />
+            <img src={messiImg} alt="" />
           </figure>
 
           <div className="nameAndCommentContainer">

@@ -1,6 +1,4 @@
 import "./Post.css";
-import readingImg from "../../images/reading illustration.jpg";
-import profilePlaceholder from "../../images/user placeholder.png";
 import Comment from "../../icons/Comment";
 // import { Heart } from "iconsax-reactjs";
 const Post = ({ variant = "full", post }) => {

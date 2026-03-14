@@ -1,8 +1,6 @@
 import "./NewPostPage.css";
-import BackArrow from "../../../icons/BackArrow";
 import ImageIcon from "../../../icons/ImageIcon";
 import Eye from "../../../icons/Eye";
-import { Link } from "react-router-dom";
 
 const NewPostPage = () => {
   return (

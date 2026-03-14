@@ -1,9 +1,8 @@
 import "./ProfilePage.css";
-import BackArrow from "../../../icons/BackArrow";
 import Edit from "../../../icons/Edit";
 import Add from "../../../icons/Add";
 import profileImg from "../../../images/profileImage.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
   const navigate = useNavigate();
