@@ -33,7 +33,7 @@ const AuthPage = () => {
       <SignIn authOption={authOption} />
 
       <div className="continueContainer">
-        <Link to="/home">
+        <Link to="/app">
           <p className="continueAG">Continue as a guest</p>
         </Link>
       </div>
