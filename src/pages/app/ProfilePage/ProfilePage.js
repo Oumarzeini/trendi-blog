@@ -12,7 +12,7 @@ function ProfilePage() {
 
       <section className="infoSection">
         <figure>
-          <img src={profileImg} alt="Profile image" />
+          <img src={profileImg} alt="" />
         </figure>
         <div className="nameNUsernameContainer">
           <p className="fullname">Alex Rivera</p>

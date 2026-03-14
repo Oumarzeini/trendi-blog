@@ -40,7 +40,7 @@ const AppLayout = () => {
     <>
       <main className="homeMain">
         <header className="homeHeader">
-          <img src={appLogo} alt="logoImage" />
+          <img src={appLogo} alt="" />
 
           <Search
             setSearchFocus={setSearchFocus}

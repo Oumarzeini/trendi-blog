@@ -30,7 +30,7 @@ const PostPage = () => {
   return (
     <section className="postPageSection">
       <figure className="postImgFigure">
-        <img src={readingImg} alt="attached image" />
+        <img src={readingImg} alt="" />
         <Link to={"/home"}>
           <span className="backArrow">
             <BackArrow width={"25px"} height={"25px"} color={"blue"} />

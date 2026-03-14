@@ -94,7 +94,7 @@ const LandingPage = () => {
           </>
         : <>
             <div className="logoContainer">
-              <img src={Logo} alt="App Logo" />
+              <img src={Logo} alt="" />
               <p>TrendyBlog</p>
             </div>
 
@@ -179,7 +179,7 @@ const LandingPage = () => {
           </div>
 
           <figure className="bloggingImageFigure">
-            <img src={blogImage} alt="Blogging image" />
+            <img src={blogImage} alt="" />
           </figure>
         </section>
 

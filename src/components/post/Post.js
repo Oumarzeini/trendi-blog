@@ -26,7 +26,7 @@ const Post = ({ variant = "full", post }) => {
               height={"100px"}
               width={"100px"}
               src={post.image}
-              alt="placeholder image"
+              alt=""
             />
           </figure>
 
@@ -46,7 +46,7 @@ const Post = ({ variant = "full", post }) => {
           <div className="bottomContainer">
             <div className="userContainer">
               <figure className="profileImgFigure">
-                <img src={post.authorImage} alt="profile image" />
+                <img src={post.authorImage} alt="" />
               </figure>
 
               <div className="nameNUsernameContainer">

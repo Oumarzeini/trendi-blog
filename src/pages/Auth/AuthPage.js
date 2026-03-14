@@ -11,7 +11,7 @@ const AuthPage = () => {
     <main className="authPageMain">
       <section className="logoSection">
         <figure>
-          <img width={"200px"} height={"200px"} src={appLogo} alt="logo" />
+          <img width={"200px"} height={"200px"} src={appLogo} alt="" />
         </figure>
         <p>Read, write and connect on the go.</p>
       </section>
