@@ -1,6 +1,6 @@
 import "./Post.css";
 import Comment from "../../icons/Comment";
-// import { Heart } from "iconsax-reactjs";
+import Heart from "../../icons/Heart";
 const Post = ({ variant = "full", post }) => {
   if (!post) {
     return (
@@ -57,7 +57,11 @@ const Post = ({ variant = "full", post }) => {
 
             <div className="intractionContainer">
               <span className="likes">
-                {/* <Heart size={variant === "full" ? 27 : 10} /> */}
+                <Heart
+                  width={variant === "full" ? "25px" : "10"}
+                  height={variant === "full" ? "25px" : "10"}
+                  color={"black"}
+                />
                 {post.likes}
               </span>
 

@@ -6,8 +6,7 @@
 }
 
 .postContainer {
-  min-width: 400px;
-  max-width: 700px;
+  width: 100px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -16,10 +15,6 @@
   margin-inline: 1rem;
   border-radius: 8px;
   background-color: white;
-}
-
-.postContainer:hover .post-image {
-  transform: scale(1.03);
 }
 
 .imageFigure {
@@ -38,6 +33,10 @@
     transition: transform .3s linear;
   }
 }
+
+/* .postContainer:hover .post-image {
+  transform: scale(1.03);
+} */
 
 .textContainer {
   width: 100%;
@@ -139,8 +138,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  
- 
+  gap: 5px;
 }
 
 .likes:hover {
@@ -325,17 +323,11 @@
   }
 }
 
-@media (max-width: 500px) {
-  .full--postContainer {
-    width: 400px;
-    height: initial;
-}
-}
-
 @media (max-width: 768px) {
   .full--postContainer {
-    width: 500px;
+    width: 390px;
     height: initial;
+    margin-inline:auto;
 }
 }
 

@@ -1,6 +1,6 @@
 import "./Search.css";
 import SearchIcon from "../../icons/SearchIcon";
-//import { CloseCircle } from "iconsax-reactjs";
+import Close from "../../icons/Close";
 import { useRef, useEffect, useState } from "react";
 
 const Search = ({ setSearchFocus, openSearch, setOpenSearch }) => {
@@ -34,7 +34,7 @@ const Search = ({ setSearchFocus, openSearch, setOpenSearch }) => {
             }}
             className="closeIconSpan"
           >
-            {/* <CloseCircle color="rgb(193, 193, 193)" size={30} />{" "} */}
+            <Close width={"25px"} height={"25px"} color="rgb(193, 193, 193)" />
           </span>
         </>
       : <span

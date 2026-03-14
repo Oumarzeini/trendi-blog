@@ -6,6 +6,7 @@ import { Link, Outlet } from "react-router-dom";
 import User from "../../icons/User";
 import { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const AppLayout = () => {
   // const [showHeader, setShowHeader] = useState(true);
@@ -13,6 +14,7 @@ const AppLayout = () => {
   // const [lastScrollY, setLastScrollY] = useState(0);
   const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+  const { width } = useWindowSize();
 
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -59,9 +61,9 @@ const AppLayout = () => {
           </Link>
         </header>
 
-        <Sidebar />
+        {width > 768 && <Sidebar />}
 
-        <section
+        {/* <section
           style={{
             width: "100%",
             height: "100%",
@@ -71,11 +73,11 @@ const AppLayout = () => {
             alignItems: "center",
             backgroundColor: "#f6f6fb",
           }}
-        >
-          {searchFocus ?
-            <SearchResult />
-          : <Outlet />}
-        </section>
+        > */}
+        {searchFocus ?
+          <SearchResult />
+        : <Outlet />}
+        {/* </section> */}
       </main>
     </>
   );

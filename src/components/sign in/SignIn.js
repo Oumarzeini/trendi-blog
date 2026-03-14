@@ -102,7 +102,7 @@ const SignIn = ({ authOption }) => {
       <div style={styles.labelinputcontainer} className="labelinputcontainer">
         <label htmlFor="email">Email Address</label>
         <div style={styles.inputContainer} className="inputContainer">
-          <Mail height={"30px"} width={"30px"} color={"black"} />
+          <Mail height={"30px"} width={"30px"} color={"gray"} />
           <input
             id="email"
             type="email"
@@ -117,7 +117,7 @@ const SignIn = ({ authOption }) => {
       <div style={styles.labelinputcontainer} className="labelinputcontainer">
         <label htmlFor="password">Password</label>
         <div style={styles.inputContainer} className="inputContainer">
-          <Lock height={"30px"} width={"30px"} color={"black"} />
+          <Lock height={"30px"} width={"30px"} color={"gray"} />
           <input
             type="password"
             id="password"
@@ -198,7 +198,8 @@ const styles = {
     gap: 10,
     paddingBlock: 5,
     paddingInline: 10,
-    backgroundColor: "rgb(237, 237, 237)",
+    border: " 1px solid rgb(237, 237, 237)",
+    backgroundColor: "white",
     borderRadius: 10,
   },
 

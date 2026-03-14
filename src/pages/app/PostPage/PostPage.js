@@ -7,7 +7,7 @@ import neymarImg from "../../../images/neymar smiling.webp";
 import messiImg from "../../../images/messi smiling.webp";
 //icons
 import Comment from "../../../icons/Comment";
-//import { Heart } from "iconsax-reactjs";
+import Heart from "../../../icons/Heart";
 import Share from "../../../icons/Share";
 import BackArrow from "../../../icons/BackArrow";
 //hooks
@@ -31,22 +31,17 @@ const PostPage = () => {
     <section className="postPageSection">
       <figure className="postImgFigure">
         <img src={readingImg} alt="" />
-        <Link to={"/home"}>
-          <span className="backArrow">
-            <BackArrow width={"25px"} height={"25px"} color={"blue"} />
-          </span>
-        </Link>
       </figure>
 
       <h3 className="title">
         The Future of Minimalist Design in Mobile Interfaces
       </h3>
 
-      <p className="categoryContainer">
+      <div className="categoryContainer">
         <span className="category">Design</span>{" "}
         <span className="bullet">&bull;</span>{" "}
         <span className="date">Jan 25, 2026</span>
-      </p>
+      </div>
 
       <div className="userContainer">
         <figure className="profileImgFigure">
@@ -59,7 +54,7 @@ const PostPage = () => {
         </div>
       </div>
 
-      {/* <hr /> */}
+      <hr />
 
       <article className="postContent">
         In the rapidly evolving world of digital interfaces, **minimalism** has
@@ -88,12 +83,7 @@ const PostPage = () => {
             className="likes"
             onClick={() => setHeartColor(!heartColor)}
           >
-            {/* <Heart
-              size={26}
-              color={heartColor ? "red" : "black"}
-              variant={heartColor ? "Bold" : "Outline"}
-              stroke={heartColor ? "red" : "black"}
-            /> */}
+            <Heart width={"25px"} height={"25px"} color={"black"} />
             1034
           </span>
 
@@ -119,6 +109,8 @@ const PostPage = () => {
             <p className="commentContent">
               yeah man, totally agree designers and frontenders need to pay
               attention for these details too often, yet the great majority
+              don't. yeah man, totally agree designers and frontenders need to
+              pay attention for these details too often, yet the great majority
               don't.
             </p>
 
@@ -126,12 +118,7 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              {/* <Heart
-                size={15}
-                color={heartColor ? "red" : "black"}
-                variant={heartColor ? "Bold" : "Outline"}
-                stroke={heartColor ? "red" : "black"}
-              /> */}
+              <Heart width={"20px"} height={"20px"} color={"black"} />
               233
             </span>
           </div>
@@ -155,12 +142,7 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              {/* <Heart
-                size={15}
-                color={heartColor ? "red" : "black"}
-                variant={heartColor ? "Bold" : "Outline"}
-                stroke={heartColor ? "red" : "black"}
-              /> */}
+              <Heart width={"20px"} height={"20px"} color={"black"} />
               15
             </span>
           </div>
@@ -181,12 +163,7 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              {/* <Heart
-                size={15}
-                color={heartColor ? "red" : "black"}
-                variant={heartColor ? "Bold" : "Outline"}
-                stroke={heartColor ? "red" : "black"}
-              /> */}
+              <Heart width={"20px"} height={"20px"} color={"black"} />
               1000
             </span>
           </div>

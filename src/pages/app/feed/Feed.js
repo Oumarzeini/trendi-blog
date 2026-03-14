@@ -74,6 +74,10 @@ const PostsContainer = styled.div`
   align-items: center;
   width: 100%;
   padding-top: 30px;
+
+  @media (max-width: 768px) {
+    padding-top: 10px;
+  }
 `;
 
 const Feed = () => {
@@ -82,7 +86,7 @@ const Feed = () => {
       <h2 className="latestUpdates">Latest Updates</h2>
       <PostsContainer>
         {posts.map((post) => (
-          <Link to={`/post/${post.id}`} key={post.id}>
+          <Link to={`/app/post/${post.id}`} key={post.id}>
             <Post post={post} key={post.id} />
           </Link>
         ))}

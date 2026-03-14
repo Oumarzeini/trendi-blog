@@ -135,6 +135,17 @@
     }
 }
 
+@media (max-width: 768px) {
+  .newPostMain {
+    width: 100%;
+  }
+
+  .titleNCategoryContainer, .addImageContainer, .contentContainer {
+    width: 100%;
+  }
+
+}
+
 @media (min-width: 768px) {
   .titleNCategoryContainer, .addImageContainer, .contentContainer {
     width: 100%;
