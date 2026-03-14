@@ -9,11 +9,11 @@ import messiImg from "../../../images/messi smiling.webp";
 import Comment from "../../../icons/Comment";
 import Heart from "../../../icons/Heart";
 import Share from "../../../icons/Share";
-import BackArrow from "../../../icons/BackArrow";
+//import BackArrow from "../../../icons/BackArrow";
 //hooks
 import { useState } from "react";
 // Utility imports
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 const PostPage = () => {
   const [heartColor, setHeartColor] = useState(false);
