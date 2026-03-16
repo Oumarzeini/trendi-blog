@@ -364,6 +364,7 @@
 
     & .opinionProfileContainer {
       display: flex;
+      flex-direction: row !important;
       gap: 10px;
       margin-top: 1rem;
 
@@ -549,6 +550,7 @@
 
     & .socialsContainer {
       display: flex;
+      flex-direction: row !important;
       justify-content: start;
       align-items: center;
       width: 50%;
