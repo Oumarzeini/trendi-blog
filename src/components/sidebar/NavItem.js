@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import PrimaryLink from "../primary/PrimaryLink";
 
 const StyledIcon = styled.span`
   display: flex;
@@ -17,7 +18,7 @@ const StyledNavLink = styled(NavLink)`
   gap: 10px;
   width: 100%;
   padding: 10px;
-  background-color: #f6f6fb;
+  background-color: transparent;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -37,8 +38,17 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const NavItem = ({ icon, label, path }) => {
+const NavItem = ({ icon, label, path, isPrimary }) => {
   const Icon = icon;
+
+  if (isPrimary) {
+    return (
+      <PrimaryLink path={path}>
+        <Icon />
+        <p>{label}</p>
+      </PrimaryLink>
+    );
+  }
   return (
     <StyledNavLink to={path} end>
       <StyledIcon>

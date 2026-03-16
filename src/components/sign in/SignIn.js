@@ -83,7 +83,7 @@ const SignIn = ({ authOption }) => {
         return;
       } else {
         setSuccess("successsfully signed in");
-        navigate("/home");
+        navigate("/app");
       }
     } catch (err) {
       setError(err.message);
@@ -198,7 +198,7 @@ const styles = {
     gap: 10,
     paddingBlock: 5,
     paddingInline: 10,
-    border: " 1px solid rgb(237, 237, 237)",
+    border: " 1px solid gray",
     backgroundColor: "white",
     borderRadius: 10,
   },

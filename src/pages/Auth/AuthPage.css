@@ -177,3 +177,10 @@ a {
     font-weight: 500;
     cursor: pointer;
 }
+
+@media (min-width: 768px) {
+  .authPageMain {
+    width: 50%;
+    margin: 0 auto;
+  }
+}

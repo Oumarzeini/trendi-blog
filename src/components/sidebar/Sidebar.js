@@ -2,6 +2,7 @@ import navItems from "../../data/navigation";
 import SidebarSection from "./SidebarSection";
 import NavItem from "./NavItem";
 import styled from "styled-components";
+import Theme from "../theme/Theme";
 
 const StyledAside = styled.aside`
   position: fixed;
@@ -36,11 +37,13 @@ const Sidebar = () => {
               key={item.label}
               label={item.label}
               icon={item.icon}
-              path={item.path}
+              path={item?.path}
+              isPrimary={item?.isPrimary}
             />
           ))}
         </SidebarSection>
       ))}
+      <Theme />
     </StyledAside>
   );
 };

@@ -172,7 +172,8 @@ const PostPage = () => {
 
       <div className="commentFormContainer">
         <form className="commentForm" onSubmit={(e) => e.preventDefault()}>
-          <textarea
+          <input
+            type="text"
             onInvalid={handleInvalid}
             onInput={handleInput}
             required
@@ -181,7 +182,7 @@ const PostPage = () => {
             placeholder="add a comment..."
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-          ></textarea>
+          />
           <button
             style={{
               opacity: comment ? 1 : 0.7,

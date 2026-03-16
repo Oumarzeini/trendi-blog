@@ -22,7 +22,7 @@ function App() {
         <Route path="post/:id" element={<PostPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
-        <Route path="newPost" element={<NewPostPage />} />
+        <Route path="new-post" element={<NewPostPage />} />
         <Route path="*" element={<Missing />} />
       </Route>
     </Routes>

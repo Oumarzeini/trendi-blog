@@ -2,6 +2,11 @@
   --BG-COLOR: #f6f6fb;
 }
 
+.dark {
+   --DARK-BG: #080832;
+  --DARK-COLOR: #d5e4ff;
+}
+
 .homeMain {
   width: 100%;
   display: flex;

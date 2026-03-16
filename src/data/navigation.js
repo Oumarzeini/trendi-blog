@@ -2,6 +2,7 @@ import Feed from "../icons/NavIcons/Feed";
 import ExploreIcon from "../icons/NavIcons/ExploreIcon";
 import Notification from "../icons/NavIcons/Notification";
 import Bookmark from "../icons/NavIcons/Bookmark";
+import Add from "../icons/NavIcons/Add";
 import Categories from "../icons/NavIcons/Categories";
 import Hashtag from "../icons/NavIcons/Hashtag";
 import People from "../icons/NavIcons/People";
@@ -10,8 +11,8 @@ import Draft from "../icons/NavIcons/Draft";
 import Stats from "../icons/NavIcons/Stats";
 import ProfileIcon from "../icons/NavIcons/ProfileIcon";
 import Settings from "../icons/NavIcons/Settings";
-import Moon from "../icons/NavIcons/Moon";
-import Logout from "../icons/NavIcons/Logout";
+// import Moon from "../icons/NavIcons/Moon";
+// import Logout from "../icons/NavIcons/Logout";
 
 const navItems = [
   {
@@ -25,7 +26,7 @@ const navItems = [
       {
         icon: ExploreIcon,
         label: "Explore",
-        path: "newPost",
+        path: "explore",
       },
       {
         icon: Notification,
@@ -36,6 +37,12 @@ const navItems = [
         icon: Bookmark,
         label: "Bookmarks",
         path: "bookmarks",
+      },
+      {
+        icon: Add,
+        label: "Create Post",
+        path: "new-post",
+        isPrimary: true,
       },
     ],
   },
@@ -92,16 +99,15 @@ const navItems = [
         label: "Settings",
         path: "settings",
       },
-      {
-        icon: Moon,
-        label: "Dark Mode",
-        path: "",
-      },
-      {
-        icon: Logout,
-        label: "Logout",
-        path: "",
-      },
+      // {
+      //   icon: Moon,
+      //   label: "Dark Mode",
+      //   dropDown: ["dark", "light"],
+      // },
+      // {
+      //   icon: Logout,
+      //   label: "Logout",
+      // },
     ],
   },
 ];
