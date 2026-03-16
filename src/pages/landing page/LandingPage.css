@@ -363,7 +363,7 @@
     }
 
     & .opinionProfileContainer {
-      display: flex;
+      display: flex !important;
       flex-direction: row !important;
       gap: 10px;
       margin-top: 1rem;
@@ -512,7 +512,7 @@
     height: fit-content;
 
     & .heading {
-      display: flex;
+      display: flex !important;
       justify-content: center;
       align-items: center;
       font-size: 0.8rem;
@@ -549,7 +549,7 @@
     }
 
     & .socialsContainer {
-      display: flex;
+      display: flex !important;
       flex-direction: row !important;
       justify-content: start;
       align-items: center;
