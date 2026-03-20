@@ -3,7 +3,8 @@ import Search from "../../components/search/Search";
 import SearchResult from "../search result/SearchResult";
 import appLogo from "../../images/appLogo.png";
 import { Link, Outlet } from "react-router-dom";
-import User from "../../icons/User";
+//import User from "../../icons/User";
+import profileImg from "../../images/profileImage.jpg";
 import { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import useWindowSize from "../../hooks/useWindowSize";
@@ -42,7 +43,7 @@ const AppLayout = () => {
     <>
       <main className="homeMain">
         <header className="homeHeader">
-          <img src={appLogo} alt="" />
+          <img className="app-logo" src={appLogo} alt="" />
 
           <Search
             setSearchFocus={setSearchFocus}
@@ -52,16 +53,20 @@ const AppLayout = () => {
 
           <Link to={"/app/profile"}>
             {" "}
-            <User
+            {/* <User
               width={"35"}
               height={"35"}
               fillColor={"none"}
               color={"rgb(55, 136, 250)"}
-            />
+            /> */}
+            <figure>
+              <img src={profileImg} />
+            </figure>
           </Link>
         </header>
 
-        {width > 768 && <Sidebar />}
+        {/* {width > 768 && <Sidebar />} */}
+        <Sidebar />
 
         {/* <section
           style={{
