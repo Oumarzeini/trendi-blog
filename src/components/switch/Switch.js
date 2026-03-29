@@ -1,9 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
   position: relative;
   appearance: none;
   cursor: pointer;
+  
 
   &::before {
     content: "";
@@ -30,7 +32,7 @@ const Input = styled.input`
     transition: transform 0.3s linear;
   }
 
-  &&:checked:after {
+  &&:checked::after {
     background-color: #687cff;
     transform: translateY(-6px);
     border-radius: 50%;
@@ -39,10 +41,31 @@ const Input = styled.input`
   &:checked::before {
     background-color: #b7c1ff;
   }
+
+  &&.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 `;
 
-const Switch = () => {
-  return <Input type="checkbox" />;
+const Switch = ({ isDisabled }) => {
+  const [check, setCheck] = useState(false);
+  const handleSwitch = () => {
+    setCheck(!check);
+  };
+  return (
+    <Input
+      type="checkbox"
+      className={isDisabled ? "disabled" : ""}
+      onChange={
+        isDisabled ?
+          () => {
+            setCheck(false);
+          }
+        : handleSwitch
+      }
+      checked={check}
+    />
+  );
 };
 
 export default Switch;

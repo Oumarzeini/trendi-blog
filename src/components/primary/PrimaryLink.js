@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useStoreActions } from "easy-peasy";
 
 const PrimaryLink = styled(NavLink)`
   display: flex;
@@ -23,7 +24,15 @@ const PrimaryLink = styled(NavLink)`
 `;
 
 const PrimaryBtn = ({ path, children }) => {
-  return <PrimaryLink to={path}>{children}</PrimaryLink>;
+  const setSidebarIsOpen = useStoreActions(
+    (actions) => actions.setSidebarIsOpen,
+  );
+
+  return (
+    <PrimaryLink onClick={() => setSidebarIsOpen(false)} to={path}>
+      {children}
+    </PrimaryLink>
+  );
 };
 
 export default PrimaryBtn;

@@ -23,10 +23,50 @@ const ContentWraper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+  gap: 10px;
 
   & h3 {
     font-size: 0.8rem;
   }
+`;
+
+const Footer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  gap: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  & .saveBtn {
+    width: fit-content;
+    background-color: rgb(55, 136, 250);
+    display: grid;
+    place-content: center;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+
+    &:active {
+      scale: 0.9;
+    }
+    &:hover {
+      background-color: rgba(55, 136, 250, 0.84);
+    }
+  }
+`;
+
+const Line = styled.div`
+  width: 100%;
+  margin-inline: auto;
+  height: 1px;
+  background-color: gray;
 `;
 
 const Notifications = () => {
@@ -43,19 +83,44 @@ const Notifications = () => {
           title="Comments on my posts"
           subTitle="Get notified when someone intracts with your articles."
         />
-        <NotifComponent
-          title="New followers"
-          subTitle="Receive an alert when you audience grows."
-        />
+        <Line />
+
         <NotifComponent
           title="Mentions & Tags"
           subTitle="Alerts when you are referenced in discussions "
         />
+        <Line />
         <NotifComponent
           title="Weekly Digest"
           subTitle="Summarized activity sent to your inbox."
         />
+
+        <Line />
+        <NotifComponent
+          title="New followers"
+          note="(Coming soon...)"
+          subTitle="Receive an alert when you audience grows."
+          disabled={true}
+        />
+
+        <Line style={{ marginTop: "20px" }} />
+
+        <h3 style={{ marginTop: "10px" }}>Real-Time Push</h3>
+        <NotifComponent
+          title="Breaking Alerts"
+          subTitle="Major system or community alerts."
+        />
+        <Line />
+        <NotifComponent
+          title="Direct Messages"
+          note=" (Coming soon...)"
+          disabled={true}
+          subTitle="Instant alerts for private conversation."
+        />
       </ContentWraper>
+      <Footer>
+        <button className="saveBtn">Save Notification Settings</button>
+      </Footer>
     </Container>
   );
 };

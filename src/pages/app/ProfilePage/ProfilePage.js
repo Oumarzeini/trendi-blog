@@ -2,14 +2,12 @@ import "./ProfilePage.css";
 import Edit from "../../../icons/Edit";
 import Add from "../../../icons/Add";
 import profileImg from "../../../images/profileImage.jpg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function ProfilePage() {
   const navigate = useNavigate();
   return (
-    <>
-      <header className="ProfilePageHeader"></header>
-
+    <section className="profile-main">
       <section className="infoSection">
         <figure>
           <img src={profileImg} alt="" />
@@ -28,20 +26,14 @@ function ProfilePage() {
         <button
           className="editProfileBtn"
           onClick={() => {
-            navigate("/settings");
+            navigate("/app/settings");
           }}
         >
           <Edit height={"25px"} width={"25px"} color={"white"} /> Edit Profile
         </button>
-
-        <button
-          className="editProfileBtn"
-          onClick={() => {
-            navigate("/newPost");
-          }}
-        >
+        <Link className="editProfileBtn" to={"/app/new-post"}>
           <Add height={"25px"} width={"25px"} color={"white"} /> New Post
-        </button>
+        </Link>
       </section>
 
       <section className="recentStoriesSection">
@@ -49,7 +41,7 @@ function ProfilePage() {
 
         <p>No stories yet.</p>
       </section>
-    </>
+    </section>
   );
 }
 

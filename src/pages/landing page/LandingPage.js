@@ -19,9 +19,10 @@ import Linkedin from "../../icons/LinkedIn";
 import Logo from "../../images/appLogo.png";
 import blogImage from "../../images/blogImage2.jpg";
 import appLogo from "../../images/appLogo.png";
-// REACT
+// REACT & EXTERNAL LIBRARIES
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "animate.css";
 // HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
 
@@ -165,7 +166,10 @@ const LandingPage = () => {
 
             {width > 768 && (
               <div className="CTABtnsContainer">
-                <button className="btn1">
+                <button
+                  onClick={() => navigate("/auth")}
+                  className="btn1 animate__zoomOutRight"
+                >
                   Start Writing Free{" "}
                   <RightArrow
                     height={"20px"}
@@ -173,7 +177,7 @@ const LandingPage = () => {
                     color="white"
                   />{" "}
                 </button>
-                <button className="btn2">Explore Stories</button>
+                {/* <button className="btn2">Explore Stories</button> */}
               </div>
             )}
           </div>
@@ -185,11 +189,14 @@ const LandingPage = () => {
 
         {width < 768 && (
           <div className="CTABtnsContainer">
-            <button className="btn1">
+            <button
+              onClick={() => navigate("/auth")}
+              className="btn1 animate__zoomOutRight"
+            >
               Start Writing Free{" "}
               <RightArrow height={"20px"} width={"20px"} color="white" />{" "}
             </button>
-            <button className="btn2">Explore Stories</button>
+            {/* <button className="btn2">Explore Stories</button> */}
           </div>
         )}
 

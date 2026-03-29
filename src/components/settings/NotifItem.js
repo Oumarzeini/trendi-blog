@@ -6,7 +6,7 @@ const Wraper = styled.div`
   display: flex;
   align-items: center;
   gap: 50px;
-  margin-top: 30px;
+  margin-top: 10px;
 `;
 
 const TextContainer = styled.div`
@@ -21,21 +21,35 @@ const TextContainer = styled.div`
     font-size: 1rem;
   }
 
+  & .note {
+    font-size: 0.7rem;
+    color: rgb(55, 136, 250);
+  }
+
   & .description {
     width: 70%;
     color: gray;
     font-size: 0.9rem;
   }
+
+  &&.notAvailable {
+    opacity: 0.5;
+  }
 `;
 
-const NotifComponent = ({ title, subTitle }) => {
+const NotifComponent = ({ title, subTitle, note, disabled }) => {
   return (
     <Wraper>
-      <TextContainer>
-        <p className="label">{title}</p>
+      <TextContainer className={disabled ? "notAvailable" : ""}>
+        <p className="label">
+          {title}{" "}
+          {note ?
+            <span className="note">{note}</span>
+          : ""}{" "}
+        </p>
         <p className="description">{subTitle}</p>
       </TextContainer>
-      <Switch />
+      <Switch isDisabled={disabled} />
     </Wraper>
   );
 };

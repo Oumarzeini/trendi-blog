@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import PrimaryLink from "../primary/PrimaryLink";
+import { useStoreActions } from "easy-peasy";
 
 const StyledIcon = styled.span`
   display: flex;
@@ -40,6 +41,9 @@ const StyledNavLink = styled(NavLink)`
 
 const NavItem = ({ icon, label, path, isPrimary }) => {
   const Icon = icon;
+  const setSidebarIsOpen = useStoreActions(
+    (actions) => actions.setSidebarIsOpen,
+  );
 
   if (isPrimary) {
     return (
@@ -50,7 +54,7 @@ const NavItem = ({ icon, label, path, isPrimary }) => {
     );
   }
   return (
-    <StyledNavLink to={path} end>
+    <StyledNavLink onClick={() => setSidebarIsOpen(false)} to={path} end>
       <StyledIcon>
         <Icon />
       </StyledIcon>

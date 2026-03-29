@@ -1,21 +1,37 @@
 import "./app-layout.css";
+//COMPONENTS
 import Search from "../../components/search/Search";
-import SearchResult from "../search result/SearchResult";
-import appLogo from "../../images/appLogo.png";
-import { Link, Outlet } from "react-router-dom";
-//import User from "../../icons/User";
-import profileImg from "../../images/profileImage.jpg";
-import { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
+//ASSETS
+import appLogo from "../../images/appLogo.png";
+import profileImg from "../../images/profileImage.jpg";
+import OpenSidebar from "../../icons/open-sidebar";
+import CloseSidebar from "../../icons/close-sidebar";
+//import User from "../../icons/User";
+//HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
+//PAGES
+import SearchResult from "../search result/SearchResult";
+//FROM REACT AND EXTERNAL LIBRARIES
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const AppLayout = () => {
-  // const [showHeader, setShowHeader] = useState(true);
-  // const [headerEffect, setHeaderEffect] = useState(false);
-  // const [lastScrollY, setLastScrollY] = useState(0);
   const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+
+  // document.body.style.backgroundColor = "#0f0a56";
+  // document.body.style.color = "#7068e1";
+
+  const overlayOn = useStoreState((state) => state.overlayOn);
+  const sidebarIsOpen = useStoreState((state) => state.sidebarIsOpen);
+  const setSidebarIsOpen = useStoreActions(
+    (actions) => actions.setSidebarIsOpen,
+  );
+
   const { width } = useWindowSize();
+  const path = useLocation().pathname;
 
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -41,15 +57,58 @@ const AppLayout = () => {
 
   return (
     <>
-      <main className="homeMain">
-        <header className="homeHeader">
+      <div
+        className="overlay"
+        style={{
+          display: overlayOn ? "block" : "none",
+        }}
+      ></div>
+      <main className={overlayOn ? "layout-main scroll-off" : "layout-main"}>
+        <header className="layout-header">
+          {width < 768 ?
+            sidebarIsOpen ?
+              <span
+                onClick={() => setSidebarIsOpen(false)}
+                style={{
+                  display: "grid",
+                  placeContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                {" "}
+                <CloseSidebar
+                  height={"40px"}
+                  width={"40px"}
+                  color={"rgb(55, 136, 250)"}
+                />
+              </span>
+            : <span
+                onClick={() => setSidebarIsOpen(true)}
+                style={{
+                  display: "grid",
+                  placeContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                {" "}
+                <OpenSidebar
+                  height={"40px"}
+                  width={"40px"}
+                  color={"rgb(55, 136, 250)"}
+                />{" "}
+              </span>
+
+          : ""}
+
           <img className="app-logo" src={appLogo} alt="" />
 
-          <Search
-            setSearchFocus={setSearchFocus}
-            openSearch={openSearch}
-            setOpenSearch={setOpenSearch}
-          />
+          {path.includes("feed") ?
+            <Search
+              setSearchFocus={setSearchFocus}
+              openSearch={openSearch}
+              setOpenSearch={setOpenSearch}
+            />
+          : ""}
 
           <Link to={"/app/profile"}>
             {" "}
@@ -65,20 +124,8 @@ const AppLayout = () => {
           </Link>
         </header>
 
-        {/* {width > 768 && <Sidebar />} */}
         <Sidebar />
 
-        {/* <section
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            alignItems: "center",
-            backgroundColor: "#f6f6fb",
-          }}
-        > */}
         {searchFocus ?
           <SearchResult />
         : <Outlet />}

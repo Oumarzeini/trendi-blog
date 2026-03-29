@@ -1,12 +1,12 @@
 import Feed from "../icons/NavIcons/Feed";
-import ExploreIcon from "../icons/NavIcons/ExploreIcon";
+//import ExploreIcon from "../icons/NavIcons/ExploreIcon";
 import Notification from "../icons/NavIcons/Notification";
 import Bookmark from "../icons/NavIcons/Bookmark";
 import Add from "../icons/NavIcons/Add";
 import Categories from "../icons/NavIcons/Categories";
 import Hashtag from "../icons/NavIcons/Hashtag";
-import People from "../icons/NavIcons/People";
-import Following from "../icons/NavIcons/Following";
+// import People from "../icons/NavIcons/People";
+// import Following from "../icons/NavIcons/Following";
 import Draft from "../icons/NavIcons/Draft";
 import Stats from "../icons/NavIcons/Stats";
 import ProfileIcon from "../icons/NavIcons/ProfileIcon";
@@ -23,11 +23,11 @@ const navItems = [
         label: "Feed",
         path: "feed",
       },
-      {
-        icon: ExploreIcon,
-        label: "Explore",
-        path: "explore",
-      },
+      // {
+      //   icon: ExploreIcon,
+      //   label: "Explore",
+      //   path: "explore",
+      // },
       {
         icon: Notification,
         label: "Notifications",
@@ -59,21 +59,21 @@ const navItems = [
         label: "Trending Tags",
         path: "trending",
       },
-      {
-        icon: People,
-        label: "Top Authors",
-        path: "top-authors",
-      },
+      // {
+      //   icon: People,
+      //   label: "Top Authors",
+      //   path: "top-authors",
+      // },
     ],
   },
   {
     title: "PERSONAL",
     items: [
-      {
-        icon: Following,
-        label: "Following",
-        path: "following",
-      },
+      // {
+      //   icon: Following,
+      //   label: "Following",
+      //   path: "following",
+      // },
       {
         icon: Draft,
         label: "Drafts",

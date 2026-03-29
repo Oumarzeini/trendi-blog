@@ -34,6 +34,7 @@ const Input = ({ type, width, label, value, setValue }) => {
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        disabled={type === "email" ? true : false}
       ></StyledInput>
     </Wraper>
   );

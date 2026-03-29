@@ -3,6 +3,7 @@ import SidebarSection from "./SidebarSection";
 import NavItem from "./NavItem";
 import styled from "styled-components";
 import Theme from "../theme/Theme";
+import { useStoreState } from "easy-peasy";
 
 const StyledAside = styled.aside`
   position: fixed;
@@ -17,19 +18,39 @@ const StyledAside = styled.aside`
   border-right: 1px solid gray;
   padding: 10px;
   padding-bottom: 100px;
+  z-index: 101;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   @media (max-width: 768px) {
-    display: none;
+    width: 0;
+    padding: 0;
+    overflow: auto;
+    transition: width 0.3s linear;
+
+    &.open {
+      width: 100%;
+      padding: 10px;
+      padding-bottom: 100px;
+      transition: width 0.3s linear;
+    }
+
+    &.close {
+      width: 0;
+      padding: 0;
+      overflow: auto;
+      transition: width 0.3s linear;
+    }
   }
 `;
 
 const Sidebar = () => {
+  const sidebarIsOpen = useStoreState((state) => state.sidebarIsOpen);
+
   return (
-    <StyledAside>
+    <StyledAside className={sidebarIsOpen ? "open" : "close"}>
       {navItems.map((section) => (
         <SidebarSection key={section.title} title={section.title}>
           {section.items.map((item) => (

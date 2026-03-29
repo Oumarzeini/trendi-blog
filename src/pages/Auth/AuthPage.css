@@ -136,6 +136,7 @@
 @media (min-width: 768px) {
     main {
         width: 70%;
+       
         margin: 0 auto;
         display: flex;
         flex-direction: column;

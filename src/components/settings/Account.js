@@ -102,11 +102,10 @@ const Verified = styled.p`
   height: 40px;
   padding: 5px;
   padding-inline: 10px;
-  background-color: #abf3b1;
-  border: 1px solid green;
+
   color: green;
   border-radius: 5px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   font-weight: 400;
   margin-block: auto;
@@ -174,7 +173,7 @@ const Account = () => {
   const [name, setName] = useState("Alexander Thompson");
   const [username, setUsername] = useState("Alexander_Thompson9");
   const [email, setEmail] = useState("Alexander@gmail.com");
-  const [password, setPassword] = useState("***********");
+  const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
