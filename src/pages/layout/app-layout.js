@@ -119,7 +119,7 @@ const AppLayout = () => {
               color={"rgb(55, 136, 250)"}
             /> */}
             <figure>
-              <img src={profileImg} />
+              <img src={profileImg} alt="" />
             </figure>
           </Link>
         </header>

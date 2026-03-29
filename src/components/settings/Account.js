@@ -191,7 +191,7 @@ const Account = () => {
       <ContentWraper>
         <div className="profile-container">
           <figure>
-            <img src={profileImg} />
+            <img src={profileImg} alt="" />
           </figure>
           <label htmlFor="avatarInput">
             <Upload height={"15px"} width={"15px"} color="gray" /> Upload Avatar
