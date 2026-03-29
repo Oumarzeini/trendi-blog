@@ -75,7 +75,7 @@
     & .editProfileBtn {
         width: 50%;
         height: 40px;
-        display: flex;
+        display: flex !important;
         justify-content: space-evenly;
         align-items: center;
         background-color: rgb(55, 136, 250);
