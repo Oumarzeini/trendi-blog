@@ -22,7 +22,6 @@ import appLogo from "../../images/appLogo.png";
 // REACT & EXTERNAL LIBRARIES
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "animate.css";
 // HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
 
