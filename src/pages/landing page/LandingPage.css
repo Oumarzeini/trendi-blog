@@ -140,7 +140,7 @@
     padding-inline: 10px;
     border-radius: 15px;
     font-size: 0.9rem;
-    display: flex;
+    display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     gap: 5px;
