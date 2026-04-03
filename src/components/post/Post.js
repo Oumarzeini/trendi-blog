@@ -1,6 +1,8 @@
 import "./Post.css";
 import Comment from "../../icons/Comment";
 import Heart from "../../icons/Heart";
+import GlobalBookmark from "../../icons/global-bookmark";
+
 const Post = ({ variant = "full", post }) => {
   if (!post) {
     return (
@@ -72,6 +74,14 @@ const Post = ({ variant = "full", post }) => {
                   color={"black"}
                 />
                 {post.comments}
+              </span>
+
+              <span className="bookmark">
+                <GlobalBookmark
+                  width={variant === "full" ? "25px" : "10"}
+                  height={variant === "full" ? "25px" : "10"}
+                  color={"black"}
+                />
               </span>
             </div>
           </div>

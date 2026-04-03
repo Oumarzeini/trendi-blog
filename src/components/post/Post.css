@@ -138,7 +138,7 @@
 }
 
 .likes,
-.comments {
+.comments, .bookmark {
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -158,7 +158,7 @@
   }
 }
 
-.comments {
+.comments, .bookmark {
   fill: #3788fa;
   & path {
     fill: var(--text);

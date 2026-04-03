@@ -12,6 +12,7 @@ import Share from "../../../icons/Share";
 //import BackArrow from "../../../icons/BackArrow";
 //hooks
 import { useState } from "react";
+import GlobalBookmark from "../../../icons/global-bookmark";
 // Utility imports
 //import { Link } from "react-router-dom";
 
@@ -90,6 +91,14 @@ const PostPage = () => {
           <span className="comments">
             <Comment width={"25px"} height={"25px"} color={"black"} />
             23
+          </span>
+          <span
+            style={{
+              cursor: "pointer",
+            }}
+            className="comments bookmark"
+          >
+            <GlobalBookmark width={"25px"} height={"25px"} color={"black"} />
           </span>
         </div>
       </div>
