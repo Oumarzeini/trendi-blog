@@ -19,7 +19,7 @@
   flex-direction: column;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.466);
+  box-shadow: 0 0 4px var(--border);
   gap: 20px;
 
 
@@ -38,7 +38,8 @@
       border: none;
       outline: none;
       font-size: 1.2rem;
-      background-color: #f6f6fb;
+      background-color: var(--bg);
+      color: var(--text);
     }
   }
 }
@@ -56,7 +57,7 @@
   flex-direction: column;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.466);
+  box-shadow: 0 0 4px var(--border);
   gap: 20px;
 
   & label {
@@ -70,17 +71,18 @@
     outline: none;
     font-size: 1.2rem;
     min-height: 200px;
-    background-color: #f6f6fb;
+    background-color: var(--bg);
+    color: var(--text);
   }
 }
 
 .addImageContainer {
   display: flex;
-  padding: 10px;
+ 
 
   & label {
-    width: 90%;
-    height: 100px;
+    width: 100%;
+    height: 150px;
     margin-inline: auto;
     border: dashed 1px gray;
     border-radius: 10px;
@@ -116,10 +118,11 @@
       scale: 0.9;
     }
 
-    & .cancelBtn {
-        border: 1px solid black;
-        background-color: white;
+    & .draftBtn {
+        border: 1px solid var(--border);
+        background-color: var(--bg);
          display: flex;
+         color: var(--text);
        
         align-items: center;
         justify-content: center;

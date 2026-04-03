@@ -62,7 +62,7 @@ const StyledMain = styled.main`
     margin-bottom: 1rem;
     font-size: 1.8rem;
     font-weight: 700;
-    color: black;
+    color: var(--text);
   }
 `;
 

@@ -11,10 +11,10 @@
   flex-direction: column;
   gap: 10px;
   align-items: flex-start;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.534);
+  box-shadow: 0 0 8px var(--border);
   margin-inline: 1rem;
   border-radius: 8px;
-  background-color: white;
+  background-color: var(--bg);
 }
 
 .imageFigure {
@@ -71,12 +71,13 @@
 
 .date {
   font-size: 12px;
+  color:var(--text);
 }
 
 .title {
   font-weight: 600;
   font-size: 1.2rem;
-  color: #2d3748;
+  color: var(--text);
   /* color: rgb(0, 179, 250); */
 }
 
@@ -119,10 +120,12 @@
 
   & .name {
     font-weight: 600;
+    color: var(--text);
   }
 
   & .username {
     font-size: 10px;
+    color: var(--text);
   }
 }
 
@@ -131,6 +134,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+  color: var(--text);
 }
 
 .likes,
@@ -141,6 +145,12 @@
   gap: 5px;
 }
 
+.likes {
+   & path {
+    stroke: var(--text);
+  }
+}
+
 .likes:hover {
    & path {
     fill: #ff4d6d;
@@ -148,6 +158,12 @@
   }
 }
 
+.comments {
+  fill: #3788fa;
+  & path {
+    fill: var(--text);
+  }
+}
 .comments:hover {
   fill: #3788fa;
   & path {

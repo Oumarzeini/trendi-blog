@@ -7,10 +7,10 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: #fbfbfb;
+  background-color: var(--surface);
   width: 90%;
   border-radius: 10px;
-  box-shadow: 0 0 3px gray;
+  box-shadow: 0 0 3px var(--border);
 
   @media (max-width: 768px) {
     width: 100%;

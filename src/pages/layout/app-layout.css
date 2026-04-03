@@ -1,11 +1,4 @@
-:root {
-  --BG-COLOR: #f6f6fb;
-}
 
-.dark {
-  --DARK-BG: #080832;
-  --DARK-COLOR: #d5e4ff;
-}
 
 .layout-main {
   width: 100%;
@@ -16,7 +9,8 @@
   align-items: flex-start;
   padding-bottom: 10px;
   gap: 15px;
-  background-color: var(--BG-COLOR);
+  background-color: var(--bg);
+  color: var(--text);
   padding-left: 270px;
   padding-top: 60px;
 
@@ -35,12 +29,14 @@
     border-bottom: 1px solid gray;
     margin: 0;
     box-sizing: border-box;
-    background-color: var(--BG-COLOR);
+    background-color: var(--bg);
+    color: var(--text);
     /* animation: headerIn .3s ease ; */
 
     & .app-logo {
       width: 40px;
       height: 40px;
+      filter: drop-shadow(0 0 5px rgb(124, 175, 246));
     }
 
     & figure {
@@ -53,6 +49,7 @@
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
+        
       }
     }
   }
@@ -69,7 +66,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 99;
+    z-index: 2000;
   }
 
 

@@ -80,7 +80,7 @@ const LandingPage = () => {
   return (
     <>
       <header className="LPHeader">
-        {width > 500 ?
+        {width > 933 ?
           <>
             <Nav />
             <div className="authBtnsContainer">
@@ -137,9 +137,41 @@ const LandingPage = () => {
             }
 
             <ul className={menuOpen ? "navMenu ShowNavMenu" : "navMenu"}>
-              <li>Home</li>
-              <li>Explore</li>
-              <li>About</li>
+              <li
+                onClick={() => {
+                  setMenuIcon(!menuIcon);
+                  setMenuOpen(false);
+                }}
+              >
+                <a href="#trending-stories">Trending Stories</a>
+              </li>
+
+              <li
+                onClick={() => {
+                  setMenuIcon(!menuIcon);
+                  setMenuOpen(false);
+                }}
+              >
+                <a href="#how-it-works">How It Works</a>
+              </li>
+
+              <li
+                onClick={() => {
+                  setMenuIcon(!menuIcon);
+                  setMenuOpen(false);
+                }}
+              >
+                <a href="#what-people-say">What People say</a>
+              </li>
+
+              <li
+                onClick={() => {
+                  setMenuIcon(!menuIcon);
+                  setMenuOpen(false);
+                }}
+              >
+                <a href="#news-letter">News Letter</a>
+              </li>
             </ul>
           </>
         }
@@ -199,7 +231,7 @@ const LandingPage = () => {
           </div>
         )}
 
-        <section className="curatedStoriesSection">
+        <section id="trending-stories" className="curatedStoriesSection">
           <h3>Editor's choice</h3>
           <p>
             carefully curated stories from our community that are trending now.
@@ -212,7 +244,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section className="howItWorksSection">
+        <section id="how-it-works" className="howItWorksSection">
           <h3 className="heading">How TrendyBlog Works</h3>
           <p className="subHeading">
             Get started in minutes and join the world's most vibrant writing
@@ -270,8 +302,9 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section className="opinionsSection">
+        <section id="what-people-say" className="opinionsSection">
           <h3>What the World is Saying</h3>
+
           <div className="opinionsContainer">
             <div className="opinionContainer">
               <div className="flashIconsContainer">
@@ -352,7 +385,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section className="newsletterSection">
+        <section id="news-letter" className="newsletterSection">
           <div className="container">
             <span className="emailIconSpan"></span>
             <h3>The Weekly Trendy Digest</h3>

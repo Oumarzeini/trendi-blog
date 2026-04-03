@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -47,23 +46,20 @@ const Input = styled.input`
     cursor: not-allowed;
 `;
 
-const Switch = ({ isDisabled }) => {
-  const [check, setCheck] = useState(false);
-  const handleSwitch = () => {
-    setCheck(!check);
-  };
+const Switch = ({
+  checked = false,
+  onChange = () => {},
+  isDisabled = false,
+}) => {
   return (
     <Input
       type="checkbox"
       className={isDisabled ? "disabled" : ""}
-      onChange={
-        isDisabled ?
-          () => {
-            setCheck(false);
-          }
-        : handleSwitch
-      }
-      checked={check}
+      onChange={() => {
+        if (isDisabled) return;
+        onChange();
+      }}
+      checked={checked}
     />
   );
 };

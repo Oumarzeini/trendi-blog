@@ -44,10 +44,10 @@ const NewPostPage = () => {
       </div>
 
       <div className="buttonsContainer">
-        <button className="cancelBtn">cancel</button>
+        <button className="draftBtn">Draft</button>
         <button className="publishBtn">
           {" "}
-          <Eye height={"25px"} width={"25px"} color="white" /> publish
+          <Eye height={"25px"} width={"25px"} color="white" /> Publish
         </button>
       </div>
     </main>

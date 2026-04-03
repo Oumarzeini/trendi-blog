@@ -5,7 +5,7 @@ export default createStore({
   setOverlayOn: action((state, payload) => {
     state.overlayOn = payload;
   }),
-  sidebarIsOpen: true,
+  sidebarIsOpen: false,
   setSidebarIsOpen: action((state, payload) => {
     state.sidebarIsOpen = payload;
   }),

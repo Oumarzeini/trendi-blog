@@ -8,7 +8,8 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: #fbfbfb;
+  background-color: var(--bg);
+  color: var(--text);
   width: 90%;
   border-radius: 10px;
   box-shadow: 0 0 3px gray;
@@ -35,7 +36,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid var(--border);
   padding: 10px;
   gap: 10px;
   border-bottom-right-radius: 10px;

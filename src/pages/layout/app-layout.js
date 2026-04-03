@@ -64,7 +64,13 @@ const AppLayout = () => {
         }}
       ></div>
       <main className={overlayOn ? "layout-main scroll-off" : "layout-main"}>
-        <header className="layout-header">
+        <header
+          className="layout-header"
+          // style={{
+          //   justifyContent:
+          //     path.includes("feed") ? "space-between" : "flex-start",
+          // }}
+        >
           {width < 768 ?
             sidebarIsOpen ?
               <span

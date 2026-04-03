@@ -12,7 +12,8 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: #fbfbfb;
+  background-color: var(--bg);
+  color: var(--text) !important;
   width: 90%;
   border-radius: 10px;
   box-shadow: 0 0 3px gray;
@@ -160,7 +161,7 @@ const Footer = styled.div`
     width: 100px;
     padding: 8px;
     font-size: 1rem;
-    color: black;
+    color: var(--text);
     cursor: pointer;
 
     &:active {

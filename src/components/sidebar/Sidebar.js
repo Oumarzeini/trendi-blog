@@ -13,9 +13,9 @@ const StyledAside = styled.aside`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f6f6fb;
+  background-color: var(--surface);
   overflow: auto;
-  border-right: 1px solid gray;
+  border-right: 1px solid var(--border);
   padding: 10px;
   padding-bottom: 100px;
   z-index: 101;

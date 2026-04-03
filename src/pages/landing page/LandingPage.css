@@ -79,14 +79,15 @@
   top: 70px;
   right: 5px;
   width: 0;
-  height: 200px;
+  
   display: flex;
   flex-direction: column;
+  gap: 26px;
   color: rgb(224, 236, 255);
   background-color: rgb(55, 136, 250);
   padding: 0;
   border-radius: 10px;
-  transition: width 0.3s linear;
+  transition: width .2s linear;
   overflow: hidden;
 
   & li {
@@ -95,11 +96,16 @@
     padding-bottom: 5px;
     cursor: pointer;
   }
+
+  & a {
+    color: white;
+  }
 }
 
 .ShowNavMenu {
   width: 200px;
   padding: 10px;
+  padding-block: 20px;
 }
 
 .LPMain {
@@ -348,6 +354,7 @@
       border: 2px solid rgb(224, 236, 255);
       border-radius: 10px;
       gap: 15px;
+       transition: transform .2s linear, filter .2s linear;
 
       & .iconContainer {
         width: fit-content;
@@ -389,6 +396,18 @@
       }
     }
   }
+}
+
+.stepsContainer:hover .step:not(:hover){
+  filter: blur(2px);
+  transform: scale(.9);
+  transition: transform .2s linear, filter .2s linear;
+}
+
+.stepsContainer:hover .step:hover{
+  border: 1px solid rgb(55, 136, 250);
+  transform: scale(1.1);
+  transition: transform .2s linear;
 }
 
 .opinionsSection {

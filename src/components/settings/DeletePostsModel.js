@@ -19,7 +19,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  z-index: 100;
+  z-index: 2001;
 
   @media (max-width: 768px) {
     width: 300px;

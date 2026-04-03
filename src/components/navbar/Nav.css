@@ -4,7 +4,7 @@ ul {
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-  gap: 10px;
+  gap: 25px;
 }
 
 li {
@@ -15,6 +15,11 @@ li {
   gap: 5px;
   font-size: 1rem;
   cursor: pointer;
+
+  & a {
+     white-space: nowrap;
+  }
+ 
 }
 
 li img {
