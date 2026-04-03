@@ -141,8 +141,8 @@
     border-radius: 15px;
     font-size: 0.9rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
     gap: 5px;
   }
 
