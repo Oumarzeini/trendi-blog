@@ -327,6 +327,7 @@
   align-items: center;
   gap: 10px;
   background-color: white;
+   padding-block: 20px;
 
   & h3 {
     font-size: 1.8rem;
@@ -753,6 +754,23 @@
       gap: 50px;
     }
   }
+
+ .howItWorksSection {
+
+ 
+
+  & .stepsContainer {
+    gap: 30px;
+  }
+
+  & .step {
+    width: 300px;
+
+    & .stepDescription {
+      font-size: .8rem;
+    }
+  }
+ }
 
   .newsletterSection {
     width: 100%;
