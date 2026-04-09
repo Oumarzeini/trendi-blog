@@ -11,32 +11,39 @@ const AuthPage = () => {
     <main className="authPageMain">
       <section className="logoSection">
         <figure>
-          <img width={"200px"} height={"200px"} src={appLogo} alt="" />
+          <img src={appLogo} alt="" />
         </figure>
         <p>Read, write and connect on the go.</p>
       </section>
-      <div className="signingOptionsContainer">
-        <button
-          onClick={() => setAuthOption("signin")}
-          className={authOption === "signin" ? "chosenAuthOption" : "signinBtn"}
-        >
-          Sign in
-        </button>
-        <button
-          onClick={() => setAuthOption("signup")}
-          className={authOption === "signup" ? "chosenAuthOption" : "signupBtn"}
-        >
-          Sign up
-        </button>
-      </div>
 
-      <SignIn authOption={authOption} />
+      <section>
+        <div className="signingOptionsContainer">
+          <button
+            onClick={() => setAuthOption("signin")}
+            className={
+              authOption === "signin" ? "chosenAuthOption" : "signinBtn"
+            }
+          >
+            Sign in
+          </button>
+          <button
+            onClick={() => setAuthOption("signup")}
+            className={
+              authOption === "signup" ? "chosenAuthOption" : "signupBtn"
+            }
+          >
+            Sign up
+          </button>
+        </div>
 
-      <div className="continueContainer">
-        <Link to="/app">
-          <p className="continueAG">Continue as a guest</p>
-        </Link>
-      </div>
+        <SignIn authOption={authOption} />
+
+        <div className="continueContainer">
+          <Link to="/app">
+            <p className="continueAG">Continue as a guest</p>
+          </Link>
+        </div>
+      </section>
     </main>
   );
 };

@@ -95,7 +95,7 @@ const LandingPage = () => {
         : <>
             <div className="logoContainer">
               <img src={Logo} alt="" />
-              <p>TrendyBlog</p>
+              <p>Trendi-blog</p>
             </div>
 
             <div className="authBtnsContainer">
@@ -190,7 +190,7 @@ const LandingPage = () => {
               home.
             </h2>
             <p className="heroParagraph">
-              Join TrendyBlog to share your ideas, connect with millions of
+              Join Trendi-blog to share your ideas, connect with millions of
               readers, and turn your passion for writing into a beautiful
               digital reality.
             </p>
@@ -245,7 +245,7 @@ const LandingPage = () => {
         </section>
 
         <section id="how-it-works" className="howItWorksSection">
-          <h3 className="heading">How TrendyBlog Works</h3>
+          <h3 className="heading">How Trendi-blog Works</h3>
           <p className="subHeading">
             Get started in minutes and join the world's most vibrant writing
             community.
@@ -417,7 +417,7 @@ const LandingPage = () => {
                 className="heading"
               >
                 <img src={appLogo} alt="" />
-                TrendyBlog
+                Trendi-blog
               </h3>
               <p className="subHeading">
                 The modern home for writers, thinkers, and storytellers. Join a
@@ -500,7 +500,7 @@ const LandingPage = () => {
           <div className="container">
             <div className="rightContainer">
               <p>
-                © 2026 TrendyBlog Inc. All rights reserved. Built with love by
+                © 2026 Trendi-blog Inc. All rights reserved. Built with love by
                 creators for creators.
               </p>
             </div>

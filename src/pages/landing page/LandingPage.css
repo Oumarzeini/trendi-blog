@@ -92,7 +92,7 @@
 
   & li {
     font-size: 1.1rem;
-    border-bottom: 2px solid rgb(224, 236, 255);
+    
     padding-bottom: 5px;
     cursor: pointer;
   }
