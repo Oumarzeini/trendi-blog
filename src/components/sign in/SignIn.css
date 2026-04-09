@@ -52,7 +52,7 @@
   }
 
   & .forgotPasswordP {
-    color: #5651ff;
+    color: gray;
     font-weight: 500;
     cursor: pointer;
   }

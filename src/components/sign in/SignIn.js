@@ -7,7 +7,7 @@ import Lock from "../../icons/Lock";
 import Eye from "../../icons/Eye";
 import NoEye from "../../icons/no-eye";
 
-const SignIn = ({ authOption }) => {
+const SignIn = ({ authOption, setShowRecover }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -147,7 +147,14 @@ const SignIn = ({ authOption }) => {
         </div>
       </div>
 
-      <p className="forgotPasswordP">Forgot Password ?</p>
+      <p
+        onClick={() => {
+          setShowRecover((showRecover) => !showRecover);
+        }}
+        className="forgotPasswordP"
+      >
+        Forgot Password ?
+      </p>
 
       <button
         className={loading ? "submitBtnLoading" : "submitBtn"}
