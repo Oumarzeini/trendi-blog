@@ -2,11 +2,13 @@ import "./app-layout.css";
 //COMPONENTS
 import Search from "../../components/search/Search";
 import Sidebar from "../../components/sidebar/Sidebar";
+import FeedbackForm from "../../components/feedback form/feedback-form";
 //ASSETS
 import appLogo from "../../images/appLogo.png";
 import profileImg from "../../images/profileImage.jpg";
 import OpenSidebar from "../../icons/open-sidebar";
 import CloseSidebar from "../../icons/close-sidebar";
+import Feedback from "../../icons/feedback";
 //import User from "../../icons/User";
 //HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
@@ -14,63 +16,59 @@ import useWindowSize from "../../hooks/useWindowSize";
 import SearchResult from "../search result/SearchResult";
 //FROM REACT AND EXTERNAL LIBRARIES
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
 const AppLayout = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
 
-  // document.body.style.backgroundColor = "#0f0a56";
-  // document.body.style.color = "#7068e1";
+  const logoRef = useRef();
+  const feedbackIconRef = useRef();
 
   const overlayOn = useStoreState((state) => state.overlayOn);
   const sidebarIsOpen = useStoreState((state) => state.sidebarIsOpen);
   const setSidebarIsOpen = useStoreActions(
     (actions) => actions.setSidebarIsOpen,
   );
+  const feedbackFormOpen = useStoreState((state) => state.feedbackFormOpen);
+  const setFeedbackFormOpen = useStoreActions(
+    (actions) => actions.setFeedbackFormOpen,
+  );
 
   const { width } = useWindowSize();
   const path = useLocation().pathname;
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentScrollY = window.scrollY;
+  if (overlayOn || feedbackFormOpen) {
+    document.body.style.overflow = "hidden";
+  } else document.body.style.overflow = "auto";
 
-  //     if (currentScrollY > lastScrollY && lastScrollY > 50) {
-  //       setShowHeader(false);
-  //       setHeaderEffect(true);
-  //     } else if (currentScrollY <= 10) {
-  //       setShowHeader(true);
-  //       setHeaderEffect(false);
-  //     }
-
-  //     setLastScrollY(currentScrollY);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [lastScrollY]);
+  useEffect(() => {
+    if (openSearch) {
+      logoRef.current.style.display = "none";
+      feedbackIconRef.current.style.display = "none";
+    } else {
+      logoRef.current.style.display = "block";
+      feedbackIconRef.current.style.display = "block";
+    }
+  }, [openSearch]);
 
   return (
     <>
       <div
         className="overlay"
         style={{
-          display: overlayOn ? "block" : "none",
+          display: overlayOn || feedbackFormOpen ? "block" : "none",
         }}
       ></div>
-      <main className={overlayOn ? "layout-main scroll-off" : "layout-main"}>
-        <header
-          className="layout-header"
-          // style={{
-          //   justifyContent:
-          //     path.includes("feed") ? "space-between" : "flex-start",
-          // }}
-        >
+      <main
+        className={
+          overlayOn || feedbackFormOpen ?
+            "layout-main scroll-off"
+          : "layout-main"
+        }
+      >
+        <header className="layout-header">
           {width < 768 ?
             sidebarIsOpen ?
               <span
@@ -106,7 +104,7 @@ const AppLayout = () => {
 
           : ""}
 
-          <img className="app-logo" src={appLogo} alt="" />
+          <img ref={logoRef} className="app-logo" src={appLogo} alt="" />
 
           {path.includes("feed") ?
             <Search
@@ -116,19 +114,35 @@ const AppLayout = () => {
             />
           : ""}
 
-          <Link to={"/app/profile"}>
-            {" "}
-            {/* <User
+          <div className="feedback-profile-container">
+            <span
+              ref={feedbackIconRef}
+              className="feedback-span"
+              onClick={() => setFeedbackFormOpen(true)}
+            >
+              <Feedback
+                height={"35px"}
+                width={"35px"}
+                color={"rgb(55,136,255)"}
+              />
+            </span>
+
+            <Link to={"/app/profile"}>
+              {" "}
+              {/* <User
               width={"35"}
               height={"35"}
               fillColor={"none"}
               color={"rgb(55, 136, 250)"}
             /> */}
-            <figure>
-              <img src={profileImg} alt="" />
-            </figure>
-          </Link>
+              <figure>
+                <img src={profileImg} alt="" />
+              </figure>
+            </Link>
+          </div>
         </header>
+
+        {feedbackFormOpen && <FeedbackForm />}
 
         <Sidebar />
 

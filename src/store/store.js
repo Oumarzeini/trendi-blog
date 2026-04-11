@@ -9,4 +9,8 @@ export default createStore({
   setSidebarIsOpen: action((state, payload) => {
     state.sidebarIsOpen = payload;
   }),
+  feedbackFormOpen: false,
+  setFeedbackFormOpen: action((state, payload) => {
+    state.feedbackFormOpen = payload;
+  }),
 });

@@ -52,6 +52,18 @@
         
       }
     }
+
+    & .feedback-profile-container {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+
+      & .feedback-span {
+        transform: translateY(3px);
+      }
+    }
+
   }
 
 
@@ -66,7 +78,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 2000;
+    z-index: 1000;
   }
 
 
