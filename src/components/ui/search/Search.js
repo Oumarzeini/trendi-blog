@@ -1,6 +1,6 @@
 import "./Search.css";
-import SearchIcon from "../../icons/SearchIcon";
-import Close from "../../icons/Close";
+import SearchIcon from "../../../icons/SearchIcon";
+import Close from "../../../icons/Close";
 import { useRef, useEffect, useState } from "react";
 
 const Search = ({ setSearchFocus, openSearch, setOpenSearch }) => {

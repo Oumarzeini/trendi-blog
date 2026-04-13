@@ -1,5 +1,5 @@
 import "./AuthPage.css";
-import SignIn from "../../components/sign in/SignIn";
+import SignIn from "../../components/auth/sign in/SignIn";
 import appLogo from "../../images/appLogo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";

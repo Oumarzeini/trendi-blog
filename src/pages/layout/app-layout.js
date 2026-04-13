@@ -1,6 +1,6 @@
 import "./app-layout.css";
 //COMPONENTS
-import Search from "../../components/search/Search";
+import Search from "../../components/ui/search/Search";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FeedbackForm from "../../components/feedback form/feedback-form";
 //ASSETS

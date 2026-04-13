@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Feedback from "../../icons/feedback";
+import Close from "../../icons/Close";
 import { useStoreActions } from "easy-peasy";
 
 const Wraper = styled.div`
@@ -11,13 +12,14 @@ const Wraper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1100;
   border-radius: 10px;
   overflow: auto;
+  box-shadow: 0 0 6px var(--border);
 
   @media (max-width: 768px ) {
     width: 500px;
@@ -36,6 +38,14 @@ const Wraper = styled.div`
         display: flex;
         flex-direction: column;
         gap: 10px;
+        position: relative;
+
+        & .close-icon {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
+        }
 
         & h2 {
         display: flex;
@@ -155,8 +165,14 @@ const MessageContainer = styled.div`
     min-height: 100px;
     padding: 5px;
     font-size: 1rem;
-    border: 1px solid black;
+    border: 1px solid gray;
     border-radius: 5px;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+
+  & textarea:focus {
+    outline: 4px solid var(--border);
   }
 `;
 
@@ -178,6 +194,12 @@ const InputWraper = styled.div`
       border-radius: 5px;
       padding: 5px;
       border: 1px solid gray;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    & input:focus {
+      outline: 4px solid var(--border);
     }
 
     & label {
@@ -199,9 +221,9 @@ const ButtonsContainer = styled.div`
   & .cancel-btn {
     width: 150px;
     padding: 10px;
-    background-color: transparent;
-    border: 1px solid black;
-    color: black;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
     border-radius: 8px;
     cursor: pointer;
   }
@@ -250,6 +272,15 @@ const FeedbackForm = () => {
           We would love to hear your thoughts, suggestions, concerns or problems
           with anything so we can improve!
         </p>
+
+        <span
+          onClick={() => {
+            setFeedbackFormOpen(false);
+          }}
+          className="close-icon"
+        >
+          <Close height={"20px"} width={"20px"} color={`var(--text)`} />
+        </span>
       </div>
 
       <div className="type-container">

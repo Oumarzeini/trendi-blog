@@ -1,11 +1,11 @@
 import "./SignIn.css";
-import supabase from "../../supabase";
+import supabase from "../../../supabase";
 import { Activity, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Mail from "../../icons/Mail";
-import Lock from "../../icons/Lock";
-import Eye from "../../icons/Eye";
-import NoEye from "../../icons/no-eye";
+import Mail from "../../../icons/Mail";
+import Lock from "../../../icons/Lock";
+import Eye from "../../../icons/Eye";
+import NoEye from "../../../icons/no-eye";
 
 const SignIn = ({ authOption, setShowRecover }) => {
   const [userEmail, setUserEmail] = useState("");

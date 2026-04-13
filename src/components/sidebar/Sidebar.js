@@ -2,7 +2,7 @@ import navItems from "../../data/navigation";
 import SidebarSection from "./SidebarSection";
 import NavItem from "./NavItem";
 import styled from "styled-components";
-import Theme from "../theme/Theme";
+import Theme from "../ui/theme/Theme";
 import { useStoreState } from "easy-peasy";
 
 const StyledAside = styled.aside`

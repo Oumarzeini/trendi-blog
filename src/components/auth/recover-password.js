@@ -59,7 +59,7 @@ const Heading = styled.h2`
 
 const Paragraph = styled.p`
   font-size: 1rem;
-  color: black;
+  color: var(--text);
   font-weight: 500;
   margin-bottom: 1rem;
 
@@ -72,7 +72,7 @@ const Paragraph = styled.p`
 `;
 
 const Label = styled.label`
-  color: black;
+  color: var(--text);
 `;
 
 const Input = styled.input`
@@ -108,16 +108,20 @@ const BackBtn = styled.button`
   width: 90%;
   outline: none;
   background-color: transparent;
-  color: black;
+  color: var(--text);
   letter-spacing: 1px;
   padding: 10px;
   display: grid;
   place-content: center;
   border-radius: 8px;
-  border: 1px solid black;
+  border: 1px solid var(--border);
   font-size: 1.1rem;
   margin-top: 0.5rem;
   cursor: pointer;
+
+  &:disabled {
+    color: gray;
+  }
 `;
 
 const RecoverPassword = ({ setShowRecover }) => {
@@ -125,6 +129,7 @@ const RecoverPassword = ({ setShowRecover }) => {
   const emailRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [showErr, setShowErr] = useState(false);
+  const [isBackBtnDisabled, setIsBackBtnDisabled] = useState(false);
 
   //const isValidEmail = () => {};
 
@@ -132,9 +137,12 @@ const RecoverPassword = ({ setShowRecover }) => {
     if (email === "") {
       emailRef.current.style.borderColor = "red";
       emailRef.current.style.borderWidth = "3px";
+      setIsBackBtnDisabled(true);
+
       setTimeout(() => {
         emailRef.current.style.borderColor = "black";
         emailRef.current.style.borderWidth = "1px";
+        setIsBackBtnDisabled(false);
       }, 1500);
     } else if (!email.includes("omar")) {
       setShowErr(true);
@@ -175,6 +183,7 @@ const RecoverPassword = ({ setShowRecover }) => {
           Send Email
         </SendBtn>
         <BackBtn
+          disabled={isBackBtnDisabled}
           onClick={() => {
             setShowRecover((showRecover) => !showRecover);
           }}

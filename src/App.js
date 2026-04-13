@@ -9,6 +9,7 @@ import SettingsPage from "./pages/app/Settings/SettingsPage";
 import NewPostPage from "./pages/app/NewPost/NewPostPage";
 import Missing from "./pages/missing/Missing";
 import { Routes, Route } from "react-router-dom";
+import NotificationsPage from "./pages/app/notifications-page/notifications-page";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="new-post" element={<NewPostPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
         <Route path="*" element={<Missing />} />
       </Route>
     </Routes>

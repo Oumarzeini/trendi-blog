@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Switch from "../switch/Switch";
+import Switch from "../ui/switch/Switch";
 
 const Wraper = styled.div`
   width: 100%;

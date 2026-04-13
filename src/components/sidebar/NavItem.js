@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import PrimaryLink from "../primary/PrimaryLink";
+import PrimaryLink from "../ui/primary/PrimaryLink";
 import { useStoreActions } from "easy-peasy";
 
 const StyledIcon = styled.span`
