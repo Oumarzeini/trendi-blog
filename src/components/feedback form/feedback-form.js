@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import Feedback from "../../icons/feedback";
 import Close from "../../icons/Close";
 import { useStoreActions } from "easy-peasy";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const Wraper = styled.div`
   width: 600px;
@@ -23,7 +24,7 @@ const Wraper = styled.div`
 
   @media (max-width: 768px ) {
     width: 500px;
-    height: fit-content;
+    height: 500px;
   }
     
   @media (max-width: 500px) {
@@ -111,7 +112,7 @@ const Wraper = styled.div`
         width: 30%;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 0 2px gray;
+        box-shadow: 0 0 4px var(--border);
         border-radius: 5px;
         margin-top: 5px;
         height: 0;
@@ -120,7 +121,7 @@ const Wraper = styled.div`
         position: absolute;
         top: 80px;
         left: 13px;
-        background-color: white;
+        background-color: var(--bg);
         
         gap: 5px;
         & p {
@@ -253,12 +254,19 @@ const FeedbackForm = () => {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
 
+  const dropdownRef = useRef();
+  const wraperRef = useRef();
+
+  useClickOutside(dropdownRef, () => setDropdownOpen(false));
+
+  useClickOutside(wraperRef, () => setFeedbackFormOpen(false));
+
   const setFeedbackFormOpen = useStoreActions(
     (actions) => actions.setFeedbackFormOpen,
   );
 
   return (
-    <Wraper>
+    <Wraper ref={wraperRef}>
       <div className="header-container">
         <h2>
           {" "}
@@ -286,7 +294,7 @@ const FeedbackForm = () => {
       <div className="type-container">
         <p className="feedback-type">Feedback Type</p>
 
-        <div className="dropdown-container">
+        <div ref={dropdownRef} className="dropdown-container">
           <p
             className="selected-type"
             onClick={() => {
@@ -305,7 +313,7 @@ const FeedbackForm = () => {
                 <path
                   d="M36 18L24 30L12 18"
                   fill="none"
-                  stroke="black"
+                  stroke={`var(--text)`}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="4"
