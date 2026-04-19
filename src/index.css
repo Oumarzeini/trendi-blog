@@ -22,6 +22,7 @@ body {
   --notif-bg-read: var(--surface);
   --notif-border-not-read: var(--primary);
   --notif-border-read: var(--border);
+  --icon-container: rgb(214, 229, 251);
 
   background-color: var(--bg);
   color: var(--text);
@@ -35,6 +36,7 @@ body.dark {
   --border: #324a90;
   --err-color: red;
   --notif-bg-not-read: rgb(0, 46, 110);
+  --icon-container: var(--surface);
   background-color: var(--bg);
   color: var(--text);
 }

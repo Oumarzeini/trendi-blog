@@ -6,6 +6,7 @@ import Post from "../../../components/post/Post";
 import ListViewPost from "../../../components/post/list-view-post";
 import useWindowSize from "../../../hooks/useWindowSize";
 import { useStoreState } from "easy-peasy";
+import { Link } from "react-router-dom";
 
 const Main = styled.main`
   width: 100%;
@@ -148,10 +149,17 @@ const PostsContainer = styled.div`
 
 const BookmarksPage = () => {
   const [sortBy, setSortBy] = useState("newest");
+  const [search, setSearch] = useState("");
 
   const { width } = useWindowSize();
 
   const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
+
+  const searchResults = bookmarked.filter(
+    (post) =>
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.body.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <Main>
@@ -163,7 +171,12 @@ const BookmarksPage = () => {
       <ActionsBar>
         <div className="input-container">
           <SearchIcon height={"15px"} width={"15px"} color={`var(--border)`} />
-          <input type="text" placeholder="search within bookmarks..." />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="search within bookmarks..."
+          />
         </div>
 
         <div className="filter-container">
@@ -195,10 +208,25 @@ const BookmarksPage = () => {
       </ActionsBar>
 
       <PostsContainer>
-        {bookmarked.map((post) =>
+        {!bookmarked.length && (
+          <p
+            style={{
+              marginLeft: "3rem",
+              textAlign: "center",
+              fontWeight: "600",
+            }}
+          >
+            Bookmark you favourite posts to find them here!
+          </p>
+        )}
+        {searchResults.map((post) =>
           width <= 500 ?
-            <ListViewPost variant="compact" post={post} key={post.id} />
-          : <Post variant="compact" post={post} key={post.id} />,
+            <Link to={`/app/post/${post.id}`}>
+              <ListViewPost variant="compact" post={post} key={post.id} />{" "}
+            </Link>
+          : <Link to={`/app/post/${post.id}`}>
+              <Post variant="compact" post={post} key={post.id} />
+            </Link>,
         )}
       </PostsContainer>
     </Main>
