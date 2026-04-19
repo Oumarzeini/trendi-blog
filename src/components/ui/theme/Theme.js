@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Moon from "../../../icons/NavIcons/Moon";
 import styled from "styled-components";
 import Switch from "../switch/Switch";

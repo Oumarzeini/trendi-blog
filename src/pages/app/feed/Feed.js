@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Post from "../../../components/post/Post";
 import { Link } from "react-router-dom";
-import appLogo from "../../../images/appLogo.png";
 import { useStoreState } from "easy-peasy";
 
 const StyledMain = styled.main`
