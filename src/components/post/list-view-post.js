@@ -1,11 +1,22 @@
-import "./Post.css";
+import "./list-view-post.css";
 import Comment from "../../icons/Comment";
 import Heart from "../../icons/Heart";
 import GlobalBookmark from "../../icons/global-bookmark";
 import FilledBookmark from "../../icons/filled-global-bookmark";
 import { useStoreState } from "easy-peasy";
+import { useEffect, useState } from "react";
 
-const Post = ({ variant = "full", post }) => {
+const ListViewPost = ({ variant = "full", post }) => {
+  const [imgExists, setImgExists] = useState(false);
+
+  useEffect(() => {
+    if (post.image) {
+      setImgExists(true);
+    } else {
+      setImgExists(false);
+    }
+  }, [post]);
+
   const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
@@ -28,47 +39,50 @@ const Post = ({ variant = "full", post }) => {
 
   return (
     <>
-      <div className={`postContainer ${variant}--postContainer`}>
-        {post.image && (
-          <figure className="imageFigure">
-            <img
-              className="post-image"
-              height={"100px"}
-              width={"100px"}
-              src={post.image}
-              alt=""
-              loading="lazy"
-            />
-          </figure>
-        )}
+      <div className={`LSpostContainer LS${variant}--postContainer`}>
+        <section
+          className={imgExists ? "LSupper-layer" : "LSupper-layer-no-img"}
+        >
+          {post.image && (
+            <section className="LSimg-section">
+              <figure className="LSimageFigure">
+                <img
+                  className="LSpost-image"
+                  height={"100px"}
+                  width={"100px"}
+                  src={post.image}
+                  alt=""
+                  loading="lazy"
+                />
+              </figure>
+            </section>
+          )}
 
-        <div className="textContainer">
-          <p className="title">{post.title}</p>
+          <section className="LStext-section">
+            <div className="LStextContainer">
+              <p className="LStitle">{post.title}</p>
 
-          <p className="bodyAbbreviation">{post.body.slice(0, 60) + "..."}</p>
+              <p className="LSbodyAbbreviation">
+                {post.body.slice(0, 60) + "..."}
+              </p>
+            </div>
+          </section>
+        </section>
 
-          <div className="detailsContainer">
-            <p className="category--date">
-              <span className="category">{post.category}</span> &bull;{" "}
-              <span className="date">{post.date}</span>
-            </p>
-          </div>
-        </div>
-
-        <div className="bottomContainer">
-          <div className="userContainer">
-            <figure className="profileImgFigure">
+        <div className="LSbottomContainer">
+          <div className="LSuserContainer">
+            <figure className="LSprofileImgFigure">
               <img src={post.authorImage} alt="" />
             </figure>
 
-            <div className="nameNUsernameContainer">
-              <p className="name">{post.author}</p>
-              <p className="username">{post.authorUsername}</p>
+            <div className="LSnameNUsernameContainer">
+              <p className="LSname">{post.author}</p>
+              <p className="LSusername">{post.authorUsername}</p>
             </div>
           </div>
 
-          <div className="intractionContainer">
-            <span className="likes">
+          <div className="LSintractionContainer">
+            <span className="LSlikes">
               <Heart
                 width={variant === "full" ? "25px" : "10"}
                 height={variant === "full" ? "25px" : "10"}
@@ -77,7 +91,7 @@ const Post = ({ variant = "full", post }) => {
               {post.likes}
             </span>
 
-            <span className="comments">
+            <span className="LScomments">
               <Comment
                 width={variant === "full" ? "25px" : "10"}
                 height={variant === "full" ? "25px" : "10"}
@@ -86,7 +100,7 @@ const Post = ({ variant = "full", post }) => {
               {post.comments}
             </span>
 
-            <span className="bookmark">
+            <span className="LSbookmark">
               {isBookmarked ?
                 <FilledBookmark
                   width={variant === "full" ? "25px" : "10"}
@@ -107,4 +121,4 @@ const Post = ({ variant = "full", post }) => {
   );
 };
 
-export default Post;
+export default ListViewPost;

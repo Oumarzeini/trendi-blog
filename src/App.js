@@ -10,6 +10,7 @@ import NewPostPage from "./pages/app/NewPost/NewPostPage";
 import Missing from "./pages/missing/Missing";
 import { Routes, Route } from "react-router-dom";
 import NotificationsPage from "./pages/app/notifications-page/notifications-page";
+import BookmarksPage from "./pages/app/bookmarksPage/bookmarks-page";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="settings" element={<SettingsPage />} />
         <Route path="new-post" element={<NewPostPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
+        <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="*" element={<Missing />} />
       </Route>
     </Routes>

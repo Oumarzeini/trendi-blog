@@ -5,72 +5,78 @@
   font-family: system-ui;
 }
 
-.postContainer {
-  width: 100px;
+.LSpostContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: flex-start;
-  box-shadow: 0 0 8px var(--border);
+  box-shadow: 0 0 2px var(--text);
   margin-inline: 1rem;
   border-radius: 8px;
   background-color: var(--bg);
 }
 
-.imageFigure {
+.LSupper-layer {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+
+
+    & .LSimg-section {
+        width: 100px;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.LSupper-layer-no-img {
+    display: flex;
+   width: 100%;
+}
+
+.LSimageFigure {
   width: 100%;
-  height: 300px;
-  border-bottom: 1px solid gray;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  height: 200px;
+ 
+  border-radius: 5px;
   overflow: hidden;
 
   & img {
     width: 100%;
     height: 100%;
     object-fit: fill;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-radius: 5px;
     transition: transform .3s linear;
   }
 }
 
-.postContainer:hover .post-image {
+.LSpostContainer:hover .LSpost-image {
   transform: scale(1.03);
 }
 
-.textContainer {
+.LStextContainer {
   width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px !important;
+  gap: 15px;
   align-items: flex-start;
- 
 }
 
-.title {
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: var(--text);
-  margin: 0 !important;
-  /* color: rgb(0, 179, 250); */
-}
-
-.bodyAbbreviation {
-  color: gray;
-}
-
-.detailsContainer {
+.LSdetailsContainer {
+  margin-inline: auto;
   width: 100%;
   display: flex;
-  justify-content: flex-start !important;
+  justify-content: center;
   align-items: center;
-  margin-top: 5px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.category {
+.LScategory {
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 1px;
@@ -82,55 +88,67 @@
   border-radius: 5px;
 }
 
-.date {
+.LSdate {
   font-size: 12px;
   color:var(--text);
 }
 
-.bottomContainer {
+.LStitle {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--text);
+  /* color: rgb(0, 179, 250); */
+}
+
+
+
+.LSbodyAbbreviation {
+  color: gray;
+}
+
+.LSbottomContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 10px;
+  padding: 10px !important;
 }
 
-.userContainer {
+.LSuserContainer {
   display: flex;
   gap: 10px;
 }
 
-.profileImgFigure {
+.LSprofileImgFigure {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--primary) !important;
+  border: 1px solid var(--primary);
 
   & img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    object-fit: cover !important;
   }
 }
 
-.nameNUsernameContainer {
+.LSnameNUsernameContainer {
   display: flex;
   flex-direction: column;
   height: 100%;
   gap: 5px;
 
-  & .name {
+  & .LSname {
     font-weight: 600;
     color: var(--text);
   }
 
-  & .username {
+  & .LSusername {
     font-size: 10px;
     color: var(--text);
   }
 }
 
-.intractionContainer {
+.LSintractionContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,34 +156,34 @@
   color: var(--text);
 }
 
-.likes,
-.comments, .bookmark {
+.LSlikes,
+.LScomments, .LSbookmark {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 5px;
 }
 
-.likes {
+.LSlikes {
    & path {
     stroke: var(--text);
   }
 }
 
-.likes:hover {
+.LSlikes:hover {
    & path {
     fill: #ff4d6d;
     stroke: none;
   }
 }
 
-.comments, .bookmark {
+.LScomments, .LSbookmark {
   fill: #3788fa;
   & path {
     fill: var(--text);
   }
 }
-.comments:hover {
+.LScomments:hover {
   fill: #3788fa;
   & path {
     fill: #3788fa;
@@ -173,15 +191,15 @@
 }
 
 /* COMPACT POST */
-.compact--postContainer {
-  width: 300px;
+.LScompact--postContainer {
+  width: 100%;
   height:fit-content;
   cursor: pointer;
 
-  & .imageFigure {
+  & .LSimageFigure {
     width: 100%;
-    height: 40%;
-    border-bottom: 1px solid gray;
+    height: 100%;
+   
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 
@@ -194,7 +212,7 @@
     }
   }
 
-  .textContainer {
+  .LStextContainer {
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -202,13 +220,13 @@
     align-items: flex-start;
   }
 
-  .detailsContainer {
+  .LSdetailsContainer {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 
-    & .category--date {
+    & .LScategory--date {
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -217,7 +235,7 @@
     }
   }
 
-  .category {
+  .LScategory {
     font-weight: 600;
     font-size: .6rem;
     letter-spacing: 1px;
@@ -229,12 +247,12 @@
     border-radius: 5px;
   }
 
-  .date {
+  .LSdate {
     font-size: .6rem;
     white-space: nowrap;
   }
 
-  .title {
+  .LStitle {
     font-weight: 600;
     font-size: .8rem;
     color: rgb(0, 179, 250);
@@ -244,14 +262,14 @@
     margin-bottom: .5rem;
   }
 
-  .bodyAbbreviation {
+  .LSbodyAbbreviation {
     color: gray;
-    font-size: .6rem;
-    
-    text-align: center;
+    font-size: .8rem;
+    width: 90%;
+    text-align: left;
   }
 
-  .bottomContainer {
+  .LSbottomContainer {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -261,13 +279,13 @@
     border-top: 1px solid gray;
   }
 
-  .userContainer {
+  .LSuserContainer {
     display: flex;
     gap: 5px;
     margin: 0;
   }
 
-  .profileImgFigure {
+  .LSprofileImgFigure {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -278,29 +296,28 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      object-fit: cover;
     }
   }
 
-  .nameNUsernameContainer {
+  .LSnameNUsernameContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
     gap: 5px;
 
-    & .name {
+    & .LSname {
       font-weight: 600;
       font-size: .6rem;
       white-space: nowrap;
     }
 
-    & .username {
+    & .LSusername {
       display: none;
     }
   }
 
-  .intractionContainer {
+  .LSintractionContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -308,8 +325,8 @@
 
   }
 
-  .likes,
-  .comments {
+  .LSlikes,
+  .LScomments {
     display: flex;
     justify-content: center;
     align-items:center;
@@ -318,15 +335,14 @@
   }
 }
 
-.full--postContainer {
+.LSfull--postContainer {
     overflow: hidden;
 }
 
 @media (min-width: 400px) {
-  .imageFigure {
+  .LSimageFigure {
     width: 100%;
-    height: 300px;
-    border-bottom: 1px solid black;
+    height: 200px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 
@@ -341,7 +357,7 @@
 }
 
 @media (max-width: 768px) {
-  .full--postContainer {
+  .LSfull--postContainer {
     width: 390px;
     height: initial;
     margin-inline:auto;
@@ -350,22 +366,22 @@
 
 
 @media (min-width: 768px) {
-  .full--postContainer {
+  .LSfull--postContainer {
     width: 450px;
     height: initial;
 }
 
-  .postContainer:hover .title {
+  .LSpostContainer:hover .LStitle {
   color: rgb(55,136,250);
 }
 
 }
 
 @media (min-width: 978px) {
-  .full--postContainer {
+  .LSfull--postContainer {
     width: 700px;
     height: initial;
-    .postContainer:hover .title {
+    .LSpostContainer:hover .LStitle {
   color: rgb(55,136,250);
 }
 }

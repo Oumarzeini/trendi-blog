@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Moon from "../../../icons/NavIcons/Moon";
 import styled from "styled-components";
 import Switch from "../switch/Switch";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const Container = styled.div`
   display: flex;
@@ -24,7 +25,8 @@ const Container = styled.div`
 `;
 
 const Theme = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const darkMode = useStoreState((state) => state.theme.darkMode);
+  const setDarkMode = useStoreActions((actions) => actions.theme.setDarkMode);
 
   useEffect(() => {
     if (darkMode) {
@@ -47,7 +49,10 @@ const Theme = () => {
         <Moon />
         <p>Dark mode</p>
       </div>
-      <Switch checked={darkMode} onChange={() => setDarkMode((s) => !s)} />
+      <Switch
+        checked={darkMode ? true : false}
+        onChange={() => setDarkMode(!darkMode)}
+      />
     </Container>
   );
 };

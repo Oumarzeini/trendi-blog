@@ -1,7 +1,6 @@
 // files
 import "./PostPage.css";
-import readingImg from "../../../images/reading illustration.jpg";
-import profilePlaceholder from "../../../images/user placeholder.png";
+
 import ronaldoImg from "../../../images/ronaldo smiling.avif";
 import neymarImg from "../../../images/neymar smiling.webp";
 import messiImg from "../../../images/messi smiling.webp";
@@ -9,16 +8,31 @@ import messiImg from "../../../images/messi smiling.webp";
 import Comment from "../../../icons/Comment";
 import Heart from "../../../icons/Heart";
 import Share from "../../../icons/Share";
-//import BackArrow from "../../../icons/BackArrow";
-//hooks
-import { useState } from "react";
 import GlobalBookmark from "../../../icons/global-bookmark";
-// Utility imports
-//import { Link } from "react-router-dom";
+import FilledBookmark from "../../../icons/filled-global-bookmark";
+//  OTHER
+import { useState } from "react";
+import { useStoreState, useStoreActions } from "easy-peasy";
+import { useParams, Link } from "react-router-dom";
 
 const PostPage = () => {
   const [heartColor, setHeartColor] = useState(false);
   const [comment, setComment] = useState("");
+
+  const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
+  const toggleBookmark = useStoreActions(
+    (actions) => actions.bookmarks.toggleBookmark,
+  );
+
+  const posts = useStoreState((state) => state.posts);
+
+  const id = Number(useParams().id);
+  //const id = 6;
+  const postObj = posts.filter((post) => (post.id === id ? post : ""));
+
+  const post = postObj[0] || [];
+
+  const isBookmarked = bookmarked.some((item) => item.id === post.id);
 
   const handleInvalid = (e) => {
     e.target.setCustomValidity("I can see you didn't enter sh!t.");
@@ -28,47 +42,48 @@ const PostPage = () => {
     e.target.setCustomValidity("");
   };
 
+  if (!post) return <p>Loading...</p>;
+  if (!post.id)
+    return (
+      <p>
+        Ops post not found !{" "}
+        <Link style={{ color: `var(--primary)` }} to="/app/feed">
+          {" "}
+          go back{" "}
+        </Link>
+      </p>
+    );
+
   return (
     <section className="postPageSection">
-      <figure className="postImgFigure">
-        <img src={readingImg} alt="" />
-      </figure>
+      {post.image && (
+        <figure className="postImgFigure">
+          <img src={post.image} alt="" />
+        </figure>
+      )}
 
-      <h3 className="title">
-        The Future of Minimalist Design in Mobile Interfaces
-      </h3>
+      <h3 className="title">{post.title}</h3>
 
       <div className="categoryContainer">
-        <span className="category">Design</span>{" "}
+        <span className="category">{post.category}</span>{" "}
         <span className="bullet">&bull;</span>{" "}
-        <span className="date">Jan 25, 2026</span>
+        <span className="date"> {post.date} </span>
       </div>
 
       <div className="userContainer">
         <figure className="profileImgFigure">
-          <img src={profilePlaceholder} alt="" />
+          <img src={post.authorImage} alt="" />
         </figure>
 
         <div className="nameNUsernameContainer">
-          <p className="name">Omar Zeini</p>
-          <p className="username">@omar_77</p>
+          <p className="name">{post.author}</p>
+          <p className="username">{post.authorUsername}</p>
         </div>
       </div>
 
       <hr />
 
-      <article className="postContent">
-        In the rapidly evolving world of digital interfaces, **minimalism** has
-        transitioned from a mere aesthetic choice to a fundamental functional
-        requirement. It's no longer just about whitespace; it's about cognitive
-        load management. Negative space is not empty space. It is an active
-        design element that guides the user's eye, creates structure, and
-        emphasizes critical content without the need for heavy borders or
-        dividers. As we move into 2024, we see a shift towards "Warm
-        Minimalism"—a style that retains the clean lines of its predecessor but
-        introduces organic shapes, warmer color palettes, and tactile textures
-        to create inviting digital environments.
-      </article>
+      <article className="postContent">{post.body}</article>
 
       <div className="commentsAndLikesContainer">
         <h2>Comments</h2>
@@ -85,21 +100,44 @@ const PostPage = () => {
             onClick={() => setHeartColor(!heartColor)}
           >
             <Heart width={"25px"} height={"25px"} color={"black"} />
-            1034
+            {post.likes}
           </span>
 
           <span className="comments">
             <Comment width={"25px"} height={"25px"} color={"black"} />
-            23
+            {post.comments}
           </span>
+
           <span
+            onClick={() => {
+              toggleBookmark(post);
+            }}
+            style={{
+              cursor: "pointer",
+            }}
+            className="comments bookmark"
+          >
+            {isBookmarked ?
+              <FilledBookmark
+                width="25px"
+                height="25px"
+                color={`var(--primary)`}
+              />
+            : <GlobalBookmark
+                width="25px"
+                height="25px"
+                color={`var(--primary)`}
+              />
+            }
+          </span>
+          {/* <span
             style={{
               cursor: "pointer",
             }}
             className="comments bookmark"
           >
             <GlobalBookmark width={"25px"} height={"25px"} color={"black"} />
-          </span>
+          </span> */}
         </div>
       </div>
 
