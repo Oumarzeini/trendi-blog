@@ -175,7 +175,7 @@
 /* COMPACT POST */
 .compact--postContainer {
   width: 300px;
-  height:fit-content;
+  height:300px;
   cursor: pointer;
 
   & .imageFigure {

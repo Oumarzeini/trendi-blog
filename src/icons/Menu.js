@@ -5,7 +5,7 @@ const Menu = ({ height, width, color }) => (
     viewBox="-5 -7 24 24"
     xmlns="http://www.w3.org/2000/svg"
     style={{
-      backgroundColor: "rgb(224, 236, 255)",
+      backgroundColor: `var(--icon-container)`,
       padding: "3px",
       borderRadius: "8px",
     }}

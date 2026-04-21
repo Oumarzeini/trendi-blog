@@ -18,8 +18,9 @@ import Linkedin from "../../icons/LinkedIn";
 import Sun from "../../icons/sun";
 // IMAGES
 import Logo from "../../images/appLogo.png";
-import blogImage from "../../images/blogImage2.jpg";
+//import blogImage from "../../images/blogImage2.jpg";
 import appLogo from "../../images/appLogo.png";
+import feedPreview from "../../images/feed-preview.png";
 // REACT & EXTERNAL LIBRARIES
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -229,7 +230,7 @@ const LandingPage = () => {
           </div>
 
           <figure className="bloggingImageFigure">
-            <img src={blogImage} alt="" />
+            <img src={feedPreview} alt="" />
           </figure>
         </section>
 
