@@ -9,47 +9,59 @@ const NewPostPage = () => {
         <h3>New Post</h3>
       </header>
 
-      <div className="titleNCategoryContainer">
-        <div className="labelInputContainer">
-          <label htmlFor="title">POST TITLE</label>
-          <input placeholder="Enter title" id="title" type="text" />
+      <section
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "2rem",
+          width: "80%",
+          margin: "0 auto",
+        }}
+      >
+        <div className="titleNCategoryContainer">
+          <div className="labelInputContainer">
+            <label htmlFor="title">POST TITLE</label>
+            <input placeholder="Enter title" id="title" type="text" />
+          </div>
+          <div className="line"></div>
+          <div className="labelInputContainer">
+            <label htmlFor="category">POST CATEGORY</label>
+            <input
+              placeholder="Enter category"
+              id="category"
+              type="text"
+              maxLength={"16"}
+            />
+          </div>
         </div>
-        <div className="line"></div>
-        <div className="labelInputContainer">
-          <label htmlFor="category">POST CATEGORY</label>
-          <input
-            placeholder="Enter category"
-            id="category"
-            type="text"
-            maxLength={"16"}
-          />
+
+        <div className="contentContainer">
+          <label htmlFor="content">Content</label>
+          <textarea
+            name="content"
+            id="content"
+            placeholder="Enter content"
+          ></textarea>
         </div>
-      </div>
 
-      <div className="contentContainer">
-        <label htmlFor="content">Content</label>
-        <textarea
-          name="content"
-          id="content"
-          placeholder="Enter content"
-        ></textarea>
-      </div>
+        <div className="addImageContainer">
+          <label id="imageLabel" htmlFor="image">
+            <ImageIcon height={"40px"} width={"40px"} color="gray" />
+            Attach an image
+          </label>
+          <input id="image" type="file" accept="image" />
+        </div>
 
-      <div className="addImageContainer">
-        <label id="imageLabel" htmlFor="image">
-          <ImageIcon height={"40px"} width={"40px"} color="gray" />
-          Attach an image
-        </label>
-        <input id="image" type="file" accept="image" />
-      </div>
-
-      <div className="buttonsContainer">
-        <button className="draftBtn">Draft</button>
-        <button className="publishBtn">
-          {" "}
-          <Eye height={"25px"} width={"25px"} color="white" /> Publish
-        </button>
-      </div>
+        <div className="buttonsContainer">
+          <button className="draftBtn">Draft</button>
+          <button className="publishBtn">
+            {" "}
+            <Eye height={"25px"} width={"25px"} color="white" /> Publish
+          </button>
+        </div>
+      </section>
     </main>
   );
 };
