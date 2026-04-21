@@ -15,6 +15,7 @@ import Facebook from "../../icons/Facebook";
 import X from "../../icons/X";
 import Instagram from "../../icons/Instagram";
 import Linkedin from "../../icons/LinkedIn";
+import Sun from "../../icons/sun";
 // IMAGES
 import Logo from "../../images/appLogo.png";
 import blogImage from "../../images/blogImage2.jpg";
@@ -87,9 +88,14 @@ const LandingPage = () => {
               <button onClick={() => navigate("/auth")} className="signInBtn">
                 Sign in
               </button>
-              <button onClick={() => navigate("/auth")} className="signUpBtn">
-                Sign up
-              </button>
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  document.body.classList.toggle("dark");
+                }}
+              >
+                <Sun height={"20px"} width={"20px"} color={`var(--text)`} />
+              </span>
             </div>
           </>
         : <>
@@ -102,9 +108,14 @@ const LandingPage = () => {
               <button onClick={() => navigate("/auth")} className="signInBtn">
                 Sign in
               </button>
-              <button onClick={() => navigate("/auth")} className="signUpBtn">
-                Sign up
-              </button>
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  document.body.classList.toggle("dark");
+                }}
+              >
+                <Sun height={"20px"} width={"20px"} color={`var(--text)`} />
+              </span>
             </div>
 
             {menuIcon ?
@@ -182,8 +193,12 @@ const LandingPage = () => {
           <div className="heroTextContainer">
             <p className="label">
               {" "}
-              <TrendingUp height={"15px"} width={"20px"} color={"black"} /> The
-              #1 writing community
+              <TrendingUp
+                height={"15px"}
+                width={"20px"}
+                color={`var(--text)`}
+              />{" "}
+              The #1 writing community
             </p>
             <h2>
               Your Stories deserve a <span className="trendy">trendy</span>{" "}

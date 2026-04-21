@@ -247,8 +247,7 @@
   .bodyAbbreviation {
     color: gray;
     font-size: .6rem;
-    
-    text-align: center;
+    text-align: left;
   }
 
   .bottomContainer {
