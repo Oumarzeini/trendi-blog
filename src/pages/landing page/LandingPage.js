@@ -21,16 +21,23 @@ import Logo from "../../images/appLogo.png";
 //import blogImage from "../../images/blogImage2.jpg";
 import appLogo from "../../images/appLogo.png";
 import feedPreview from "../../images/feed-preview.png";
-// REACT & EXTERNAL LIBRARIES
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 // HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
+import useDarkMode from "../../hooks/useDarkMode";
+// REACT & OTHER
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 const LandingPage = () => {
   const [menuIcon, setMenuIcon] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const { width } = useWindowSize();
+
+  const darkMode = useStoreState((state) => state.theme.darkMode);
+  const setDarkMode = useStoreActions((actions) => actions.theme.setDarkMode);
+
+  useDarkMode(darkMode);
 
   const navigate = useNavigate();
 
@@ -92,7 +99,7 @@ const LandingPage = () => {
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  document.body.classList.toggle("dark");
+                  setDarkMode(!darkMode);
                 }}
               >
                 <Sun height={"20px"} width={"20px"} color={`var(--text)`} />
@@ -112,7 +119,7 @@ const LandingPage = () => {
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  document.body.classList.toggle("dark");
+                  setDarkMode(!darkMode);
                 }}
               >
                 <Sun height={"20px"} width={"20px"} color={`var(--text)`} />

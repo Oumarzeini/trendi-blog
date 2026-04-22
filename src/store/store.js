@@ -108,7 +108,6 @@ export default createStore({
     },
     {
       id: 6,
-
       category: "Business",
       date: "jan 25, 2026",
       title: "Bootstrapping to $1M: My Three Year Journey",
