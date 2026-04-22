@@ -52,7 +52,7 @@ const navItems = [
       {
         icon: Categories,
         label: "Category",
-        path: "categroy",
+        path: "category",
       },
       {
         icon: Hashtag,

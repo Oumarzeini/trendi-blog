@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Moon from "../../../icons/NavIcons/Moon";
 import styled from "styled-components";
 import Switch from "../switch/Switch";
@@ -28,14 +27,6 @@ const Container = styled.div`
 const Theme = () => {
   const darkMode = useStoreState((state) => state.theme.darkMode);
   const setDarkMode = useStoreActions((actions) => actions.theme.setDarkMode);
-
-  // useEffect(() => {
-  //   if (darkMode) {
-  //     document.body.classList.add("dark");
-  //   } else {
-  //     document.body.classList.remove("dark");
-  //   }
-  // }, [darkMode]);
 
   useDarkMode(darkMode);
 

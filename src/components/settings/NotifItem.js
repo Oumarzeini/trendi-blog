@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Switch from "../ui/switch/Switch";
+import { useState } from "react";
 
 const Wraper = styled.div`
   width: 100%;
@@ -38,6 +39,7 @@ const TextContainer = styled.div`
 `;
 
 const NotifComponent = ({ title, subTitle, note, disabled }) => {
+  const [checked, setChecked] = useState(false);
   return (
     <Wraper>
       <TextContainer className={disabled ? "notAvailable" : ""}>
@@ -49,7 +51,11 @@ const NotifComponent = ({ title, subTitle, note, disabled }) => {
         </p>
         <p className="description">{subTitle}</p>
       </TextContainer>
-      <Switch isDisabled={disabled} />
+      <Switch
+        isDisabled={disabled}
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+      />
     </Wraper>
   );
 };
