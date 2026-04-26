@@ -17,9 +17,7 @@ import Instagram from "../../icons/Instagram";
 import Linkedin from "../../icons/LinkedIn";
 import Sun from "../../icons/sun";
 // IMAGES
-import Logo from "../../images/appLogo.png";
-//import blogImage from "../../images/blogImage2.jpg";
-import appLogo from "../../images/appLogo.png";
+import logo from "../../images/logo.png";
 import feedPreview from "../../images/feed-preview.png";
 // HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
@@ -51,7 +49,7 @@ const LandingPage = () => {
       title: "The Truth About Digital Nomadism in 2024",
       body: "It's not all beaches and laptops. We dive deep into the challenges of maintaining a career while traveling the globe.",
       author: "Elena Rodriguez",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "E_rodri",
       likes: 1240,
       comments: 88,
@@ -65,7 +63,7 @@ const LandingPage = () => {
       title: "Will AI Replace the Human Touch in Creative Writing?",
       body: "Exploring the delicate balance between algorithmic efficiency and the messy, beautiful reality of human emotion.",
       author: "James Wilson",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "james_23",
       likes: 3500,
       comments: 245,
@@ -79,7 +77,7 @@ const LandingPage = () => {
       title: "Bootstrapping to $1M: My Three Year Journey",
       body: "Raw data, failed experiments, and the one strategy that actually worked when everything else was falling apart.",
       author: "Marcus Thorne",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "MT_writes",
       likes: 4200,
       comments: 312,
@@ -108,7 +106,7 @@ const LandingPage = () => {
           </>
         : <>
             <div className="logoContainer">
-              <img src={Logo} alt="" />
+              <img src={logo} alt="" />
               <p>Trendi-blog</p>
             </div>
 
@@ -439,7 +437,7 @@ const LandingPage = () => {
                 }}
                 className="heading"
               >
-                <img src={appLogo} alt="" />
+                <img src={logo} alt="" />
                 Trendi-blog
               </h3>
               <p className="subHeading">

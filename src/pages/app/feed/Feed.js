@@ -37,6 +37,7 @@ const PostsContainer = styled.div`
 `;
 
 const Feed = () => {
+  console.log(process.env.REACT_APP_FIRST_SECRET);
   const posts = useStoreState((state) => state.posts);
   return (
     <StyledMain>

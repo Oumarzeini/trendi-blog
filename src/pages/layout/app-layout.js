@@ -4,7 +4,7 @@ import Search from "../../components/ui/search/Search";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FeedbackForm from "../../components/feedback form/feedback-form";
 //ASSETS
-import appLogo from "../../images/appLogo.png";
+import logo from "../../images/logo.png";
 import profileImg from "../../images/profileImage.jpg";
 import OpenSidebar from "../../icons/open-sidebar";
 import CloseSidebar from "../../icons/close-sidebar";
@@ -22,6 +22,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 const AppLayout = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+  const [showSearch, setShowSearch] = useState(true);
 
   const logoRef = useRef();
   const feedbackIconRef = useRef();
@@ -44,6 +45,24 @@ const AppLayout = () => {
   } else document.body.style.overflow = "auto";
 
   useEffect(() => {
+    if (
+      !path.includes("notifications") &&
+      !path.includes("bookmarks") &&
+      !path.includes("new-post") &&
+      !path.includes("category") &&
+      !path.includes("trending") &&
+      !path.includes("drafts") &&
+      !path.includes("stats") &&
+      !path.includes("profile") &&
+      !path.includes("settings")
+    ) {
+      setShowSearch(true);
+    } else {
+      setShowSearch(false);
+    }
+  }, [path]);
+
+  useEffect(() => {
     if (openSearch) {
       logoRef.current.style.display = "none";
       feedbackIconRef.current.style.display = "none";
@@ -52,6 +71,8 @@ const AppLayout = () => {
       feedbackIconRef.current.style.display = "block";
     }
   }, [openSearch]);
+
+  console.log(process.env.REACT_APP_SOMETHING);
 
   return (
     <>
@@ -104,9 +125,9 @@ const AppLayout = () => {
 
           : ""}
 
-          <img ref={logoRef} className="app-logo" src={appLogo} alt="" />
+          <img ref={logoRef} className="app-logo" src={logo} alt="" />
 
-          {path.includes("feed") ?
+          {showSearch ?
             <Search
               setSearchFocus={setSearchFocus}
               openSearch={openSearch}

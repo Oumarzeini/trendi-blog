@@ -1,6 +1,6 @@
 import "./AuthPage.css";
 import SignIn from "../../components/auth/sign in/SignIn";
-import appLogo from "../../images/appLogo.png";
+import logo from "../../images/logo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import RecoverPassword from "../../components/auth/recover-password";
@@ -13,7 +13,7 @@ const AuthPage = () => {
     <main className="authPageMain">
       <section className="logoSection">
         <figure>
-          <img src={appLogo} alt="" />
+          <img src={logo} alt="" />
         </figure>
         <p>Read, write and connect on the go.</p>
       </section>

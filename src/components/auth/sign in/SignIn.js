@@ -6,10 +6,12 @@ import Mail from "../../../icons/Mail";
 import Lock from "../../../icons/Lock";
 import Eye from "../../../icons/Eye";
 import NoEye from "../../../icons/no-eye";
+import Person from "../../../icons/person";
 
 const SignIn = ({ authOption, setShowRecover }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -20,12 +22,17 @@ const SignIn = ({ authOption, setShowRecover }) => {
   useEffect(() => {
     setError("");
     setSuccess("");
-  }, [userEmail, userPassword]);
+  }, [userEmail, userPassword, userName]);
 
-  const handleSignUp = async (email, password) => {
+  const handleSignUp = async (email, password, name) => {
     try {
-      if (email === "" || password === "") {
-        setError("Please fill Email and Password fields");
+      if (email === "" || password === "" || name === "") {
+        setError("Please fill Name, Email and Password fields and");
+        return;
+      }
+
+      if (name.length < 5) {
+        setError("Minimum name length is 5 characters !");
         return;
       }
 
@@ -97,6 +104,23 @@ const SignIn = ({ authOption, setShowRecover }) => {
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className="signingForm">
+      {authOption === "signup" && (
+        <div className="labelinputcontainer">
+          <label htmlFor="name">What should we call you ?</label>
+          <div className="inputContainer">
+            <Person height={"20px"} width={"20px"} color={"gray"} />
+            <input
+              id="name"
+              type="text"
+              placeholder="Enter your full name"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+      )}
+
       <div className="labelinputcontainer">
         <label htmlFor="email">Email Address</label>
         <div className="inputContainer">
@@ -161,7 +185,7 @@ const SignIn = ({ authOption, setShowRecover }) => {
         onClick={() => {
           authOption === "signin" ?
             handleSignIn(userEmail, userPassword)
-          : handleSignUp(userEmail, userPassword);
+          : handleSignUp(userEmail, userPassword, userName);
         }}
       >
         <span>

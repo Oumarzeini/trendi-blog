@@ -11,13 +11,17 @@ import Share from "../../../icons/Share";
 import GlobalBookmark from "../../../icons/global-bookmark";
 import FilledBookmark from "../../../icons/filled-global-bookmark";
 //  OTHER
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useParams, Link } from "react-router-dom";
 
 const PostPage = () => {
   const [heartColor, setHeartColor] = useState(false);
   const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
   const toggleBookmark = useStoreActions(

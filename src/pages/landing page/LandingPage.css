@@ -59,8 +59,6 @@
   & img {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    box-shadow: 0 0 4px blue;
     margin-right: 5px;
   }
 
@@ -611,8 +609,6 @@
       & img {
         width: 30px;
         height: 30px;
-        box-shadow: 0 0 3px rgb(55, 136, 250);
-        border-radius: 50%;
       }
     }
 
@@ -717,8 +713,8 @@
 
   .logoContainer {
     & img {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
     }
 
     & p {
@@ -954,8 +950,6 @@
         & img {
           width: 30px;
           height: 30px;
-          box-shadow: 0 0 3px rgb(55, 136, 250);
-          border-radius: 50%;
         }
       }
 

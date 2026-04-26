@@ -36,7 +36,7 @@
     & .app-logo {
       width: 40px;
       height: 40px;
-      filter: drop-shadow(0 0 5px rgb(124, 175, 246));
+      filter: drop-shadow(0 0 2px rgb(124, 175, 246));
     }
 
     & figure {
@@ -84,10 +84,16 @@
 
 @media (max-width: 768px) {
   .layout-main {
-   
     padding-top: 60px;
     padding-left: 0;
     margin: 0;
+
+    & .layout-header {
+      & .app-logo {
+        width: 30px;
+        height: 30px;
+      }
+    }
   }
 }
 

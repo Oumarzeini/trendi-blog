@@ -1,5 +1,5 @@
 import { createStore, action, persist } from "easy-peasy";
-import appLogo from "../images/appLogo.png";
+import logo from "../images/logo.png";
 
 export default createStore({
   overlayOn: false,
@@ -45,7 +45,7 @@ export default createStore({
       title: "The Truth About Digital Nomadism in 2024",
       body: "It's not all beaches and laptops. We dive deep into the challenges of maintaining a career while traveling the globe.",
       author: "Elena Rodriguez",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "E_rodri",
       likes: 1240,
       comments: 88,
@@ -59,7 +59,7 @@ export default createStore({
       title: "Will AI Replace the Human Touch in Creative Writing?",
       body: "Exploring the delicate balance between algorithmic efficiency and the messy, beautiful reality of human emotion.",
       author: "James Wilson",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "james_23",
       likes: 3500,
       comments: 245,
@@ -73,7 +73,7 @@ export default createStore({
       title: "Bootstrapping to $1M: My Three Year Journey",
       body: "Raw data, failed experiments, and the one strategy that actually worked when everything else was falling apart.",
       author: "Marcus Thorne",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "MT_writes",
       likes: 4200,
       comments: 312,
@@ -87,7 +87,7 @@ export default createStore({
       title: "Bootstrapping to $1M: My Three Year Journey",
       body: "Raw data, failed experiments, and the one strategy that actually worked when everything else was falling apart.",
       author: "Marcus Thorne",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "MT_writes",
       likes: 4200,
       comments: 312,
@@ -101,7 +101,7 @@ export default createStore({
       title: "Bootstrapping to $1M: My Three Year Journey",
       body: "Raw data, failed experiments, and the one strategy that actually worked when everything else was falling apart.",
       author: "Marcus Thorne",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "MT_writes",
       likes: 4200,
       comments: 312,
@@ -113,7 +113,7 @@ export default createStore({
       title: "Bootstrapping to $1M: My Three Year Journey",
       body: "Raw data, failed experiments, and the one strategy that actually worked when everything else was falling apart.",
       author: "Marcus Thorne",
-      authorImage: appLogo,
+      authorImage: logo,
       authorUsername: "MT_writes",
       likes: 4200,
       comments: 312,
