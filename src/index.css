@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 
   --bg: #f6f6fb;
   --text: #1f1f1f;
@@ -39,6 +40,10 @@ body.dark {
   --icon-container: var(--surface);
   background-color: var(--bg);
   color: var(--text);
+}
+
+main {
+  overflow: hidden !important;
 }
 
 code {

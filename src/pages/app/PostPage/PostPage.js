@@ -103,7 +103,7 @@ const PostPage = () => {
             className="likes"
             onClick={() => setHeartColor(!heartColor)}
           >
-            <Heart width={"25px"} height={"25px"} color={"black"} />
+            <Heart width={"25px"} height={"25px"} color={`var(--text)`} />
             {post.likes}
           </span>
 
@@ -169,7 +169,7 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              <Heart width={"20px"} height={"20px"} color={"black"} />
+              <Heart width={"20px"} height={"20px"} color={"red"} />
               233
             </span>
           </div>
@@ -193,7 +193,7 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              <Heart width={"20px"} height={"20px"} color={"black"} />
+              <Heart width={"20px"} height={"20px"} color={""} />
               15
             </span>
           </div>
@@ -214,7 +214,7 @@ const PostPage = () => {
               className="commentHeart"
               onClick={() => setHeartColor(!heartColor)}
             >
-              <Heart width={"20px"} height={"20px"} color={"black"} />
+              <Heart width={"20px"} height={"20px"} color={"transparent"} />
               1000
             </span>
           </div>

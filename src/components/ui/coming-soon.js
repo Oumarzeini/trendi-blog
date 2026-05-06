@@ -39,7 +39,7 @@ const Wraper = styled.div`
     font-size: 1.1rem;
     font-weight: 600;
     color: white;
-    background: linear-gradient(to right, blue, rgb(177, 206, 250));
+    background: linear-gradient(to right, var(--primary), rgb(177, 206, 250));
     background-clip: text;
     color: transparent;
 

@@ -4,10 +4,12 @@ import logo from "../../images/logo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import RecoverPassword from "../../components/auth/recover-password";
+import SetName from "../../components/auth/set-name";
 
 const AuthPage = () => {
   const [authOption, setAuthOption] = useState("signin");
   const [showRecover, setShowRecover] = useState(false);
+  const [showSetName, setShowSetName] = useState(false);
 
   return (
     <main className="authPageMain">
@@ -18,7 +20,9 @@ const AuthPage = () => {
         <p>Read, write and connect on the go.</p>
       </section>
 
-      {!showRecover ?
+      {showSetName ?
+        <SetName />
+      : !showRecover ?
         <section>
           <div className="signingOptionsContainer">
             <button
@@ -39,7 +43,11 @@ const AuthPage = () => {
             </button>
           </div>
 
-          <SignIn setShowRecover={setShowRecover} authOption={authOption} />
+          <SignIn
+            setShowRecover={setShowRecover}
+            authOption={authOption}
+            setShowSetName={setShowSetName}
+          />
 
           <div className="continueContainer">
             <Link to="/app">

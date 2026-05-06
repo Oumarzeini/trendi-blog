@@ -26,7 +26,7 @@ const StyledInput = styled.input`
   background-color: #e9e9e9a0;
 `;
 
-const Input = ({ type, width, label, value, setValue }) => {
+const Input = ({ type, width, label, value, setValue, placeholder }) => {
   return (
     <Wraper width={width}>
       <Label>{label}</Label>
@@ -35,7 +35,8 @@ const Input = ({ type, width, label, value, setValue }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={type === "email" ? true : false}
-      ></StyledInput>
+        placeholder={placeholder ? placeholder : ""}
+      />
     </Wraper>
   );
 };

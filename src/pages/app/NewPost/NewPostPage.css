@@ -9,10 +9,20 @@
 .newPostHeader {
   width: 100%;
   display: flex;
-  justify-content:start;
+  justify-content: start;
   align-items: flex-start;
   padding: 10px;
   gap: 20px;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .titleNCategoryContainer {
@@ -22,7 +32,6 @@
   border-radius: 10px;
   box-shadow: 0 0 4px var(--border);
   gap: 20px;
-
 
   & .labelInputContainer {
     display: flex !important;
@@ -79,7 +88,6 @@
 
 .addImageContainer {
   display: flex;
- 
 
   & label {
     width: 100%;
@@ -92,7 +100,7 @@
     justify-content: center;
     align-items: center;
     color: gray;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   & input {
@@ -102,41 +110,41 @@
 }
 
 .buttonsContainer {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+
+  & button {
+    width: 50%;
+    height: 40px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  & button:active {
+    scale: 0.9;
+  }
+
+  & .draftBtn {
+    border: 1px solid var(--border);
+    background-color: var(--bg);
     display: flex;
-    justify-content: space-around;
-    gap: 10px;
+    color: var(--text);
 
-    & button {
-        width:50%;
-        height: 40px;
-        font-size: 1.1rem;
-        border-radius: 8px;
-        cursor: pointer;
-    }
+    align-items: center;
+    justify-content: center;
+  }
 
-    & button:active {
-      scale: 0.9;
-    }
-
-    & .draftBtn {
-        border: 1px solid var(--border);
-        background-color: var(--bg);
-         display: flex;
-         color: var(--text);
-       
-        align-items: center;
-        justify-content: center;
-    }
-
-    & .publishBtn {
-         display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        background-color: rgb(55, 136, 250);
-        border: none;
-        color: white;
-    }
+  & .publishBtn {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(55, 136, 250);
+    border: none;
+    color: white;
+  }
 }
 
 @media (max-width: 768px) {
@@ -144,15 +152,21 @@
     width: 100%;
   }
 
-  .titleNCategoryContainer, .addImageContainer, .contentContainer {
+  .innerContainer {
     width: 100%;
   }
 
+  .titleNCategoryContainer,
+  .addImageContainer,
+  .contentContainer {
+    width: 100%;
+  }
 }
 
 @media (min-width: 768px) {
-  .titleNCategoryContainer, .addImageContainer, .contentContainer {
+  .titleNCategoryContainer,
+  .addImageContainer,
+  .contentContainer {
     width: 100%;
   }
-
 }

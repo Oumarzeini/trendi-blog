@@ -184,7 +184,7 @@ hr {
     gap: 5px;
     border: 1px solid rgb(63, 63, 199);
     border-radius: 20px;
-    background-color: white;
+    background-color: var(--bg);
 
     & input {
         width: 90%;
@@ -195,6 +195,8 @@ hr {
         border: none;
         outline: none;
         height: 40px;
+        background-color: transparent;
+        color: var(--text);
     }
 
     & button {
@@ -239,7 +241,7 @@ hr {
     gap: 5px;
     border: 1px solid rgb(63, 63, 199);
     border-radius: 10px;
-    background-color: white;
+    background-color: var(--bg);
 
     & textarea {
         width: 90%;

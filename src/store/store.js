@@ -14,6 +14,20 @@ export default createStore({
   setFeedbackFormOpen: action((state, payload) => {
     state.feedbackFormOpen = payload;
   }),
+
+  showNotify: false,
+  setShowNotify: action((state, payload) => {
+    state.showNotify = payload;
+  }),
+  notifyMsg: "",
+  setNotifyMsg: action((state, payload) => {
+    state.notifyMsg = payload;
+  }),
+  notifyType: "",
+  setNotifyType: action((state, payload) => {
+    state.notifyType = payload;
+  }),
+
   theme: persist({
     darkMode: false,
     setDarkMode: action((state, payload) => {

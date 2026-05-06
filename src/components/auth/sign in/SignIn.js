@@ -1,17 +1,15 @@
 import "./SignIn.css";
-import supabase from "../../../supabase";
+import supabase from "../../../lib/supabase";
 import { Activity, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Mail from "../../../icons/Mail";
 import Lock from "../../../icons/Lock";
 import Eye from "../../../icons/Eye";
 import NoEye from "../../../icons/no-eye";
-import Person from "../../../icons/person";
 
-const SignIn = ({ authOption, setShowRecover }) => {
+const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -22,20 +20,14 @@ const SignIn = ({ authOption, setShowRecover }) => {
   useEffect(() => {
     setError("");
     setSuccess("");
-  }, [userEmail, userPassword, userName]);
+  }, [userEmail, userPassword, authOption]);
 
-  const handleSignUp = async (email, password, name) => {
+  const handleSignUp = async (email, password) => {
     try {
-      if (email === "" || password === "" || name === "") {
+      if (email === "" || password === "") {
         setError("Please fill Name, Email and Password fields and");
         return;
       }
-
-      if (name.length < 5) {
-        setError("Minimum name length is 5 characters !");
-        return;
-      }
-
       setLoading(true);
 
       const { data: existingEmail } = await supabase
@@ -49,19 +41,17 @@ const SignIn = ({ authOption, setShowRecover }) => {
         return;
       }
 
-      const { data: user, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
       });
 
       if (error) {
-        console.log(`Error signing up: ${error.message}`);
         setError(error.message);
         setSuccess("");
         return;
       } else {
         setSuccess("Please check your email for a verification link");
-        console.log(email, password, user);
       }
     } catch (err) {
       setError(err.message);
@@ -91,8 +81,28 @@ const SignIn = ({ authOption, setShowRecover }) => {
         setSuccess("");
         return;
       } else {
-        setSuccess("successsfully signed in");
-        navigate("/app");
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (user) {
+          const { data, error } = await supabase
+            .from("profiles")
+            .select("full_name")
+            .eq("id", user.id)
+            .single();
+
+            if (error) {
+              console.log(`error getting full name: ${error.message}`)
+            }
+
+          if (!data?.full_name) {
+            setShowSetName(true);
+          } else {
+            setSuccess("successsfully signed in");
+            navigate("/app");
+          }
+        }
       }
     } catch (err) {
       setError(err.message);
@@ -104,23 +114,6 @@ const SignIn = ({ authOption, setShowRecover }) => {
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className="signingForm">
-      {authOption === "signup" && (
-        <div className="labelinputcontainer">
-          <label htmlFor="name">What should we call you ?</label>
-          <div className="inputContainer">
-            <Person height={"20px"} width={"20px"} color={"gray"} />
-            <input
-              id="name"
-              type="text"
-              placeholder="Enter your full name"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-      )}
-
       <div className="labelinputcontainer">
         <label htmlFor="email">Email Address</label>
         <div className="inputContainer">
@@ -185,7 +178,7 @@ const SignIn = ({ authOption, setShowRecover }) => {
         onClick={() => {
           authOption === "signin" ?
             handleSignIn(userEmail, userPassword)
-          : handleSignUp(userEmail, userPassword, userName);
+          : handleSignUp(userEmail, userPassword);
         }}
       >
         <span>

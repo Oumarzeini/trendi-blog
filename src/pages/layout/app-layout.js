@@ -5,7 +5,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import FeedbackForm from "../../components/feedback form/feedback-form";
 //ASSETS
 import logo from "../../images/logo.png";
-import profileImg from "../../images/profileImage.jpg";
 import OpenSidebar from "../../icons/open-sidebar";
 import CloseSidebar from "../../icons/close-sidebar";
 import Feedback from "../../icons/feedback";
@@ -18,11 +17,41 @@ import SearchResult from "../search result/SearchResult";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
+import supabase from "../../lib/supabase";
+import getAvatarUrl from "../../utils/getAvatarUrl";
 
 const AppLayout = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [showSearch, setShowSearch] = useState(true);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+      if (error) {
+        console.log(error.message);
+        return;
+      }
+
+      const { data: profile, error: profileErr } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id);
+
+      if (profileErr) {
+        console.log("error getting profile", profileErr.message);
+        return;
+      }
+
+      setUser(profile[0]);
+    };
+
+    getUser();
+  }, [user]);
 
   const logoRef = useRef();
   const feedbackIconRef = useRef();
@@ -71,8 +100,6 @@ const AppLayout = () => {
       feedbackIconRef.current.style.display = "block";
     }
   }, [openSearch]);
-
-  console.log(process.env.REACT_APP_SOMETHING);
 
   return (
     <>
@@ -157,7 +184,7 @@ const AppLayout = () => {
               color={"rgb(55, 136, 250)"}
             /> */}
               <figure>
-                <img src={profileImg} alt="" />
+                <img src={getAvatarUrl(user?.avatar)} alt="" />
               </figure>
             </Link>
           </div>

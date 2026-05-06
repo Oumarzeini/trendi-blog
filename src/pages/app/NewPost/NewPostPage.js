@@ -9,17 +9,7 @@ const NewPostPage = () => {
         <h3>New Post</h3>
       </header>
 
-      <section
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "2rem",
-          width: "80%",
-          margin: "0 auto",
-        }}
-      >
+      <section className="innerContainer">
         <div className="titleNCategoryContainer">
           <div className="labelInputContainer">
             <label htmlFor="title">POST TITLE</label>

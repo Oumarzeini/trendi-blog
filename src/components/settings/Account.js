@@ -173,6 +173,7 @@ const Footer = styled.div`
 const Account = () => {
   const [name, setName] = useState("Alexander Thompson");
   const [username, setUsername] = useState("Alexander_Thompson9");
+  const [userBio, setUserBio] = useState("");
   const [email, setEmail] = useState("Alexander@gmail.com");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -215,6 +216,14 @@ const Account = () => {
               label="Username"
               value={username}
               setValue={setUsername}
+            />
+            <Input
+              width={width > 768 ? "100%" : "80%"}
+              type="text"
+              label="Bio"
+              value={userBio}
+              setValue={setUserBio}
+              placeholder="Add a bio..."
             />
           </div>
           <div
