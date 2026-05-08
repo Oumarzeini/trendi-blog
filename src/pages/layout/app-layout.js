@@ -3,6 +3,7 @@ import "./app-layout.css";
 import Search from "../../components/ui/search/Search";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FeedbackForm from "../../components/feedback form/feedback-form";
+import Notify from "../../components/ui/notify";
 //ASSETS
 import logo from "../../images/logo.png";
 import OpenSidebar from "../../icons/open-sidebar";
@@ -17,8 +18,8 @@ import SearchResult from "../search result/SearchResult";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import supabase from "../../lib/supabase";
 import getAvatarUrl from "../../utils/getAvatarUrl";
+import getUser from "../../utils/getUser";
 
 const AppLayout = () => {
   const [searchFocus, setSearchFocus] = useState(false);
@@ -27,31 +28,13 @@ const AppLayout = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const getUser = async () => {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
-      if (error) {
-        console.log(error.message);
-        return;
-      }
-
-      const { data: profile, error: profileErr } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id);
-
-      if (profileErr) {
-        console.log("error getting profile", profileErr.message);
-        return;
-      }
-
-      setUser(profile[0]);
+    const getAndSetUser = async () => {
+      const currentUser = await getUser();
+      setUser(currentUser);
     };
 
-    getUser();
-  }, [user]);
+    getAndSetUser();
+  }, []);
 
   const logoRef = useRef();
   const feedbackIconRef = useRef();
@@ -109,6 +92,7 @@ const AppLayout = () => {
           display: overlayOn || feedbackFormOpen ? "block" : "none",
         }}
       ></div>
+      <Notify />
       <main
         className={
           overlayOn || feedbackFormOpen ?
@@ -177,12 +161,6 @@ const AppLayout = () => {
 
             <Link to={"/app/profile"}>
               {" "}
-              {/* <User
-              width={"35"}
-              height={"35"}
-              fillColor={"none"}
-              color={"rgb(55, 136, 250)"}
-            /> */}
               <figure>
                 <img src={getAvatarUrl(user?.avatar)} alt="" />
               </figure>

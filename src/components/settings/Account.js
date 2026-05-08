@@ -1,10 +1,19 @@
 import styled from "styled-components";
+// COMPONENTS AND ICONS
 import SectionHeader from "./SectionHeader";
-import profileImg from "../../images/profileImage.jpg";
 import Input from "./Input";
 import Upload from "../../icons/Upload";
+// HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
-import { useState } from "react";
+import useUploadAvatar from "../../hooks/db/useUploadAvatar";
+import useAlert from "../../hooks/useAlert";
+// REACT
+import { useState, useEffect } from "react";
+// HELPERS
+import getUser from "../../utils/getUser";
+import getAvatarUrl from "../../utils/getAvatarUrl";
+import setUserDetails from "../../utils/setUserDetails";
+import updatePassword from "../../utils/updatePassword";
 
 const Container = styled.section`
   display: flex;
@@ -125,32 +134,22 @@ const Line = styled.div`
 const Footer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: start;
   align-items: center;
-  border-top: 1px solid #ccc;
+
   padding: 10px;
+  padding-top: 0;
   gap: 10px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 
-  & .saveBtn {
-    width: 100px;
-    background-color: rgb(55, 136, 250);
-    display: grid;
-    place-content: center;
-    border: none;
-    border-radius: 5px;
-    padding: 8px;
-    font-size: 1rem;
-    color: white;
-    cursor: pointer;
+  @media (min-width: 768px) {
+    width: 54%;
+    margin-left: auto;
+  }
 
-    &:active {
-      scale: 0.9;
-    }
-    &:hover {
-      background-color: rgba(55, 136, 250, 0.84);
-    }
+  & button {
+    margin-bottom: 10px;
   }
 
   & .cancelBtn {
@@ -170,16 +169,164 @@ const Footer = styled.div`
   }
 `;
 
+const SaveBtn = styled.button`
+  min-width: 100px;
+  background-color: rgb(55, 136, 250);
+  display: grid;
+  place-content: center;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  &:active {
+    scale: 0.9;
+  }
+
+  &:hover {
+    background-color: rgba(55, 136, 250, 0.84);
+  }
+
+  &.disabled {
+    background-color: rgba(55, 136, 250, 0.5);
+    cursor: not-allowed;
+
+    &:active {
+      scale: 1;
+    }
+  }
+`;
+
 const Account = () => {
-  const [name, setName] = useState("Alexander Thompson");
-  const [username, setUsername] = useState("Alexander_Thompson9");
-  const [userBio, setUserBio] = useState("");
-  const [email, setEmail] = useState("Alexander@gmail.com");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("...");
+  const [username, setUsername] = useState("...");
+  const [bio, setBio] = useState("...");
+  const [email, setEmail] = useState("...");
+  const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [initialInfo, setInitialInfo] = useState({});
+  const [saveBtnIsDis, setSaveBtnIsDis] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   const { width } = useWindowSize();
+  const uploadAvatar = useUploadAvatar();
+
+  const alert = useAlert();
+
+  const getAndSetUser = async () => {
+    const currentUser = await getUser();
+    setUser(currentUser);
+    setName(currentUser.full_name);
+    setUsername(currentUser.username);
+    setEmail(currentUser.email);
+    setBio(currentUser?.bio ?? "");
+    setInitialInfo({
+      user: currentUser,
+      email: currentUser.email,
+      name: currentUser.full_name,
+      username: currentUser.username,
+      bio: currentUser?.bio ?? "",
+    });
+  };
+
+  useEffect(() => {
+    getAndSetUser();
+  }, []);
+
+  useEffect(() => {
+    const updatedInof = () => {
+      return (
+        name !== initialInfo.name ||
+        username !== initialInfo.username ||
+        bio !== initialInfo.bio
+      );
+    };
+    setSaveBtnIsDis(updatedInof());
+  }, [
+    name,
+    username,
+    bio,
+    initialInfo.name,
+    initialInfo.username,
+    initialInfo.bio,
+  ]);
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files[0];
+
+    setLoading(true);
+
+    try {
+      const newPath = await uploadAvatar(file, user);
+
+      if (newPath) {
+        setUser((prev) => ({
+          ...prev,
+          avatar: newPath,
+        }));
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSave = (name, username, bio) => {
+    const isUpdated =
+      name !== initialInfo.name ||
+      username !== initialInfo.username ||
+      bio !== initialInfo.bio;
+
+    if (isUpdated) {
+      setSaving(true);
+      try {
+        setUserDetails({ name, username, bio }, initialInfo.user, alert);
+      } catch (err) {
+        console.log(err);
+        alert("err", err, true);
+      } finally {
+        setSaving(false);
+        getAndSetUser();
+      }
+    }
+  };
+
+  const handlePasswordChange = (oldP, newP, confirmedP) => {
+    if (oldP.length < 6 || newP.length < 6 || confirmedP.length < 6) {
+      alert("err", "Min Password length is 6 characters", true);
+      return;
+    }
+
+    if (newP !== confirmedP) {
+      alert("err", "Passwords don't match !", true);
+      return;
+    }
+
+    try {
+      setSaving(true);
+      updatePassword(initialInfo.email, oldP, newP, alert);
+    } catch (err) {
+      alert("err", err, true);
+      console.log(err);
+    } finally {
+      setSaving(false);
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    }
+  };
 
   return (
     <Container>
@@ -193,12 +340,21 @@ const Account = () => {
       <ContentWraper>
         <div className="profile-container">
           <figure>
-            <img src={profileImg} alt="" />
+            <img src={getAvatarUrl(user?.avatar)} alt="" />
           </figure>
-          <label htmlFor="avatarInput">
-            <Upload height={"15px"} width={"15px"} color="gray" /> Upload Avatar
+          <label htmlFor={loading ? "" : "avatarInput"}>
+            <Upload height={"15px"} width={"15px"} color="gray" />
+            {loading ? "uploading..." : "Upload Avatar"}
           </label>
-          <input id="avatarInput" type="file"></input>
+          <input
+            onChange={(e) => {
+              if (loading) return;
+              handleAvatarChange(e);
+            }}
+            id="avatarInput"
+            type="file"
+            accept="image/*"
+          ></input>
         </div>
 
         <div className="inputs-container">
@@ -219,11 +375,12 @@ const Account = () => {
             />
             <Input
               width={width > 768 ? "100%" : "80%"}
-              type="text"
+              inputType="textarea"
               label="Bio"
-              value={userBio}
-              setValue={setUserBio}
-              placeholder="Add a bio..."
+              value={bio}
+              setValue={setBio}
+              placeholder="Tell something about yourself
+              ..."
             />
           </div>
           <div
@@ -244,6 +401,14 @@ const Account = () => {
             <Verified>Verified</Verified>
           </div>
 
+          <SaveBtn
+            onClick={() => handleSave(name, username, bio)}
+            disabled={!saveBtnIsDis}
+            className={!saveBtnIsDis || saving ? "saveBtn disabled" : "saveBtn"}
+          >
+            {saving ? "Saving" : "Save Changes"}
+          </SaveBtn>
+
           <Line />
 
           <h3>Change Password</h3>
@@ -261,8 +426,9 @@ const Account = () => {
             label="Current Password"
             type="password"
             width={width > 768 ? "100%" : "80%"}
-            value={password}
-            setValue={setPassword}
+            value={oldPassword}
+            setValue={setOldPassword}
+            required={true}
           />
           <div className="two-inputs-container">
             <Input
@@ -271,20 +437,43 @@ const Account = () => {
               label={"New Password"}
               value={newPassword}
               setValue={setNewPassword}
+              required={true}
             />
             <Input
               width={width > 768 ? "100%" : "80%"}
               type="password"
               label="Confirm Password"
-              value={ConfirmPassword}
+              value={confirmPassword}
               setValue={setConfirmPassword}
+              required={true}
             />
           </div>
         </div>
       </ContentWraper>
       <Footer>
-        <button className="cancelBtn">Cancel</button>
-        <button className="saveBtn">Save</button>
+        {/* <button className="cancelBtn">Cancel</button> */}
+        <SaveBtn
+          onClick={() =>
+            handlePasswordChange(oldPassword, newPassword, confirmPassword)
+          }
+          disabled={
+            oldPassword === "" || newPassword === "" || confirmPassword === "" ?
+              true
+            : false
+          }
+          className={
+            (
+              oldPassword === "" ||
+              newPassword === "" ||
+              confirmPassword === "" ||
+              saving
+            ) ?
+              "disabled"
+            : ""
+          }
+        >
+          {saving ? "Saving" : "Save Password Changes"}
+        </SaveBtn>
       </Footer>
     </Container>
   );

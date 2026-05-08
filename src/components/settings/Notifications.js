@@ -120,7 +120,12 @@ const Notifications = () => {
         />
       </ContentWraper>
       <Footer>
-        <button className="saveBtn">Save Notification Settings</button>
+        <button
+          title="Notifications will soon be available"
+          className="saveBtn"
+        >
+          Save Notification Settings
+        </button>
       </Footer>
     </Container>
   );

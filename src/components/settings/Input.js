@@ -26,7 +26,43 @@ const StyledInput = styled.input`
   background-color: #e9e9e9a0;
 `;
 
-const Input = ({ type, width, label, value, setValue, placeholder }) => {
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  height: 80px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  background-color: #e9e9e9a0;
+`;
+
+const Input = ({
+  type = "",
+  width,
+  label,
+  value,
+  setValue,
+  placeholder,
+  inputType = "",
+  required = false,
+}) => {
+  if (inputType === "textarea") {
+    return (
+      <Wraper width={width}>
+        <Label>{label}</Label>
+        <TextArea
+          maxLength={150}
+          type={type}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={type === "email" ? true : false}
+          placeholder={placeholder ? placeholder : ""}
+        />
+      </Wraper>
+    );
+  }
+
   return (
     <Wraper width={width}>
       <Label>{label}</Label>
@@ -36,6 +72,7 @@ const Input = ({ type, width, label, value, setValue, placeholder }) => {
         onChange={(e) => setValue(e.target.value)}
         disabled={type === "email" ? true : false}
         placeholder={placeholder ? placeholder : ""}
+        required={required}
       />
     </Wraper>
   );
