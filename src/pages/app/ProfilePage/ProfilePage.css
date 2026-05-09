@@ -127,7 +127,7 @@
   }
 
   & .nameNUsernameContainer {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
     padding: 10px;
@@ -139,6 +139,7 @@
     }
 
     & .username {
+      text-align: center;
       font-size: 1rem;
       letter-spacing: 1px;
       color: rgb(55, 136, 250);

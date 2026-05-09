@@ -293,6 +293,7 @@ const Account = () => {
       setSaving(true);
       try {
         setUserDetails({ name, username, bio }, initialInfo.user, alert);
+        getAndSetUser();
       } catch (err) {
         console.log(err);
         alert("err", err, true);
