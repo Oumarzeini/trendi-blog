@@ -68,7 +68,6 @@ const useUploadAvatar = () => {
     }
 
     try {
-      console.info(`old path before we delete it : ${oldPath}`);
       if (oldPath) {
         await supabase.storage.from("avatars").remove([oldPath]);
       }
@@ -94,6 +93,16 @@ const useUploadAvatar = () => {
       console.error(dbError.message);
       return null;
     }
+
+    setShowNotify(true);
+    setNotifyMsg("Profile Picture Updated.");
+    setNotifyType("success");
+
+    setTimeout(() => {
+      setShowNotify(false);
+      setNotifyMsg("");
+      setNotifyType("");
+    }, 5000);
 
     return filePath;
   };

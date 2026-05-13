@@ -27,6 +27,14 @@ export default createStore({
   setNotifyType: action((state, payload) => {
     state.notifyType = payload;
   }),
+  showPicturePreview: false,
+  setShowPicturePreview: action((state, payload) => {
+    state.showPicturePreview = payload;
+  }),
+  showActions: false,
+  setShowActions: action((state, payload) => {
+    state.showActions = payload;
+  }),
 
   theme: persist({
     darkMode: false,
