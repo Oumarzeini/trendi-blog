@@ -73,7 +73,7 @@
     color: rgb(55, 136, 255);
     font-weight: 700;
     border: none;
-    
+    transition: background .3s linear;
     cursor: pointer;
     opacity: 1;
 }

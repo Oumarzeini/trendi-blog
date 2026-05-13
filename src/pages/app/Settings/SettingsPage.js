@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Account from "../../../components/settings/Account";
 import Notifications from "../../../components/settings/Notifications";
 import DangerZone from "../../../components/settings/DangerZone";
+import LogOut from "../../../components/settings/log-out";
 import DeletePostsModel from "../../../components/settings/DeletePostsModel";
 import DeleteAccountModel from "../../../components/settings/DeleteAccountModel";
 import { useState } from "react";
@@ -55,6 +56,7 @@ const Settings = () => {
         <Wraper>
           <Account />
           <Notifications />
+          <LogOut />
           <DangerZone
             setShowDeletePostsModel={setShowDeletePostsModel}
             setShowDeleteAccountModel={setShowDeleteAccountModel}

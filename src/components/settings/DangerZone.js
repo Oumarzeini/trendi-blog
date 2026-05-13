@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useStoreActions } from "easy-peasy";
+import DeleteIcon from "../../icons/delete-icon";
 
 const Container = styled.section`
   display: flex;
@@ -52,15 +53,19 @@ const ContentWraper = styled.div`
     font-weight: 500;
     cursor: pointer;
     padding: 5px;
+    display: flex !important;
+    justify-content: flex-star;
+    align-items: center;
+    gap: 10px;
   }
 `;
 
-const Line = styled.div`
-  width: 100%;
-  margin-inline: auto;
-  height: 1px;
-  background-color: #ccc;
-`;
+// const Line = styled.div`
+//   width: 100%;
+//   margin-inline: auto;
+//   height: 1px;
+//   background-color: #ccc;
+// `;
 
 const DangerZone = ({ setShowDeletePostsModel, setShowDeleteAccountModel }) => {
   const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
@@ -77,9 +82,10 @@ const DangerZone = ({ setShowDeletePostsModel, setShowDeleteAccountModel }) => {
             setOverlayOn(true);
           }}
         >
+          <DeleteIcon height={"15px"} width={"15px"} color={"red"} />
           Delete All Posts
         </button>
-        <Line />
+        {/* <Line />
         <button
           onClick={() => {
             setShowDeleteAccountModel(true);
@@ -87,7 +93,7 @@ const DangerZone = ({ setShowDeletePostsModel, setShowDeleteAccountModel }) => {
           }}
         >
           Delete Account
-        </button>
+        </button> */}
       </ContentWraper>
     </Container>
   );

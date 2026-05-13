@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useLocation, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const StyledSection = styled.section`
   width: 100%;
@@ -11,9 +13,30 @@ const StyledSection = styled.section`
 `;
 
 function Missing() {
+  const [isApp, setIsApp] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.includes("app")) {
+      setIsApp(true);
+    } else {
+      setIsApp(false);
+    }
+  }, [location]);
+
   return (
     <StyledSection>
-      <p>Ops! Page not found or not implemented yet!...</p>
+      <p style={{ margin: "auto", marginTop: "3rem", fontSize: "2rem" }}>
+        Ops! Page not found !{" "}
+        {!isApp && (
+          <Link to={"/"}>
+            {" "}
+            <span style={{ color: `var(--primary)`, fontWeight: "500" }}>
+              Go Home
+            </span>
+          </Link>
+        )}
+      </p>
     </StyledSection>
   );
 }

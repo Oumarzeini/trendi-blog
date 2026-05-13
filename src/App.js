@@ -37,6 +37,7 @@ function App() {
         <Route path="trending" element={<TrendingPage />} />
         <Route path="*" element={<Missing />} />
       </Route>
+      <Route path="*" element={<Missing />}></Route>
     </Routes>
   );
 }

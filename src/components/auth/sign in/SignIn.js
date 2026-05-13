@@ -68,6 +68,17 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
         return;
       }
 
+      const { data: existingEmail } = await supabase
+        .from("profiles")
+        .select("email")
+        .eq("email", email)
+        .single();
+
+      if (!existingEmail) {
+        setError("This email is not linked to any account, Please sign up.");
+        return;
+      }
+
       setLoading(true);
 
       const { error } = await supabase.auth.signInWithPassword({
@@ -92,9 +103,9 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
             .eq("id", user.id)
             .single();
 
-            if (error) {
-              console.log(`error getting full name: ${error.message}`)
-            }
+          if (error) {
+            console.log(`error getting full name: ${error.message}`);
+          }
 
           if (!data?.full_name) {
             setShowSetName(true);

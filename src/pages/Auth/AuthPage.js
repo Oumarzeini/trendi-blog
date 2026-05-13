@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import RecoverPassword from "../../components/auth/recover-password";
 import SetName from "../../components/auth/set-name";
+import Notify from "../../components/ui/notify";
 
 const AuthPage = () => {
   const [authOption, setAuthOption] = useState("signin");
@@ -13,6 +14,7 @@ const AuthPage = () => {
 
   return (
     <main className="authPageMain">
+      <Notify />
       <section className="logoSection">
         <figure>
           <img src={logo} alt="" />

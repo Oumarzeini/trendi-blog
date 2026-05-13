@@ -52,6 +52,7 @@
   }
 
   & .forgotPasswordP {
+    width: fit-content;
     color: gray;
     font-weight: 500;
     cursor: pointer;
@@ -208,9 +209,9 @@
 }
 
 .errMsg {
-  color: rgb(113, 0, 0);
+  color: var(--err-color);
   text-align: center;
-  background-color: rgba(255, 0, 0, 0.187);
+  background-color: var(--err-bg);
   padding: 10px;
   border: 1px solid red;
   border-radius: 8px;

@@ -7,6 +7,7 @@ const getUser = async () => {
   } = await supabase.auth.getUser();
   if (error) {
     console.log(error.message);
+
     return;
   }
 

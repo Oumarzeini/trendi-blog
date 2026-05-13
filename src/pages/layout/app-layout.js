@@ -12,20 +12,25 @@ import Feedback from "../../icons/feedback";
 //import User from "../../icons/User";
 //HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
+import useAlert from "../../hooks/useAlert";
 //PAGES
 import SearchResult from "../search result/SearchResult";
-//FROM REACT AND EXTERNAL LIBRARIES
-import { Link, Outlet, useLocation } from "react-router-dom";
+// REACT AND OTHER
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import getAvatarUrl from "../../utils/getAvatarUrl";
 import getUser from "../../utils/getUser";
+import supabase from "../../lib/supabase";
 
 const AppLayout = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [showSearch, setShowSearch] = useState(true);
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
+  const alert = useAlert();
 
   useEffect(() => {
     const getAndSetUser = async () => {
@@ -35,6 +40,21 @@ const AppLayout = () => {
 
     getAndSetUser();
   }, []);
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_OUT") {
+        navigate("/auth", { replace: true });
+        alert("err", "Session expired, Please sign in", true);
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [navigate, alert]);
 
   const logoRef = useRef();
   const feedbackIconRef = useRef();

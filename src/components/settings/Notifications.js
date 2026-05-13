@@ -60,6 +60,15 @@ const Footer = styled.div`
     &:hover {
       background-color: rgba(55, 136, 250, 0.84);
     }
+
+    &.disabled {
+      background-color: rgba(55, 136, 250, 0.5);
+      cursor: not-allowed;
+
+      &:active {
+        scale: 1;
+      }
+    }
   }
 `;
 
@@ -67,7 +76,7 @@ const Line = styled.div`
   width: 100%;
   margin-inline: auto;
   height: 1px;
-  background-color: gray;
+  background-color: #9a9a9a00;
 `;
 
 const Notifications = () => {
@@ -122,9 +131,9 @@ const Notifications = () => {
       <Footer>
         <button
           title="Notifications will soon be available"
-          className="saveBtn"
+          className="saveBtn disabled"
         >
-          Save Notification Settings
+          Notifications will be available soon
         </button>
       </Footer>
     </Container>
