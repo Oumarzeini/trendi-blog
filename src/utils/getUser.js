@@ -1,5 +1,7 @@
 import supabase from "../lib/supabase";
 
+// RETURNS USER OBJECT
+
 const getUser = async () => {
   const {
     data: { user },

@@ -88,10 +88,11 @@
 
 .addImageContainer {
   display: flex;
+  height: 200px;
 
   & label {
     width: 100%;
-    height: 150px;
+    height: 100%;
     margin-inline: auto;
     border: dashed 1px gray;
     border-radius: 10px;
@@ -125,6 +126,11 @@
 
   & button:active {
     scale: 0.9;
+  }
+
+  & button.btn-loading {
+    opacity: .5;
+    scale: .9;
   }
 
   & .draftBtn {
