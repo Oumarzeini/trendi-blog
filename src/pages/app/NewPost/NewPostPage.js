@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import useCreateBlog from "../../../hooks/db/useCreateBlog";
 import getUser from "../../../utils/getUser";
 import useAlert from "../../../hooks/useAlert";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 const NewPostPage = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -17,6 +18,11 @@ const NewPostPage = () => {
   const [category, setCategory] = useState("");
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
+  const [draftLoading, setDraftLoading] = useState(false);
+  const draftPosts = useStoreState((state) => state.drafts.draftPosts);
+  const setDraftPosts = useStoreActions(
+    (actions) => actions.drafts.setDraftPosts,
+  );
 
   const alert = useAlert();
 
@@ -51,7 +57,6 @@ const NewPostPage = () => {
     }
 
     if (category === "") setCategory("uncategorized");
-    console.log(postImage);
 
     // alert(
     //   "success",
@@ -76,10 +81,83 @@ const NewPostPage = () => {
     }
   };
 
+  const handleDraft = async () => {
+    if (!title || !body || title === "" || body === "") {
+      alert("err", "Please fill the title and content fields", true);
+      console.log("Please fill the title and content fields");
+      return;
+    }
+
+    const returnUser = async () => {
+      const currentUser = await getUser();
+      return currentUser;
+    };
+
+    const user = await returnUser();
+
+    const toBase64 = (file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      });
+    };
+
+    const imageData = postImage ? await toBase64(postImage) : "";
+
+    const post = {
+      id: draftPosts.length ? draftPosts[draftPosts.length - 1] + 1 : 1,
+      title,
+      category: category ? category : "uncategorized",
+      body,
+      image: imageData,
+      author: user.full_name,
+      authorImage: user.avatar,
+      authorUsername: user.username,
+    };
+
+    setDraftLoading(true);
+    try {
+      setDraftPosts(post);
+      alert("success", "Post added to drafts successfully", true);
+      setTitle("");
+      setCategory("");
+      setBody("");
+      setPostImage(null);
+      setPreviewImg(null);
+      setShowPreviewImg(false);
+    } catch (err) {
+      alert("err", err, true);
+    } finally {
+      setDraftLoading(false);
+    }
+  };
+
+  // const log = async () => {
+  //   const username = await user.username;
+  //   console.log(user.username);
+  // };
+
+  // log();
+
+  // const toBase64 = (file) => {
+  //   return new Promise((resolve) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
+
+  // const log = async () => {
+  //   const str = await toBase64(postImage);
+  //   console.log(str);
+  // };
+  // log();
+
   return (
     <main className="newPostMain">
       <header className="newPostHeader">
-        <h3>{JSON.stringify(postImage)}</h3>
+        <h3>New Post</h3>
       </header>
 
       <section className="innerContainer">
@@ -87,7 +165,7 @@ const NewPostPage = () => {
           <div className="labelInputContainer">
             <label htmlFor="title">POST TITLE</label>
             <input
-              placeholder="Enter title"
+              placeholder="Enter title..."
               id="title"
               type="text"
               value={title}
@@ -98,7 +176,7 @@ const NewPostPage = () => {
           <div className="labelInputContainer">
             <label htmlFor="category">POST CATEGORY</label>
             <input
-              placeholder="Enter category"
+              placeholder="Enter category..."
               id="category"
               type="text"
               maxLength={"16"}
@@ -113,7 +191,7 @@ const NewPostPage = () => {
           <textarea
             name="content"
             id="content"
-            placeholder="Enter content"
+            placeholder="Enter content..."
             value={body}
             onChange={(e) => setBody(e.target.value)}
           ></textarea>
@@ -179,7 +257,10 @@ const NewPostPage = () => {
         }
 
         <div className="buttonsContainer">
-          <button className="draftBtn">Draft</button>
+          <button onClick={handleDraft} className="draftBtn">
+            {" "}
+            {draftLoading ? "Adding to drafts..." : "Draft"}{" "}
+          </button>
           <button
             onClick={() => {
               if (loading) return;

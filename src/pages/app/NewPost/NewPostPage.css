@@ -47,7 +47,7 @@
       height: 40px;
       border: none;
       outline: none;
-      font-size: 1.2rem;
+      font-size: 1rem;
       background-color: var(--bg);
       color: var(--text);
     }
@@ -55,7 +55,7 @@
 }
 
 .line {
-  width: 95%;
+  width: 100%;
   height: 1px;
   background-color: gray;
   border-radius: 10px;
@@ -150,6 +150,10 @@
     background-color: rgb(55, 136, 250);
     border: none;
     color: white;
+  }
+
+  & .publishBtn:hover {
+    background-color: rgb(55, 136, 250, .8);
   }
 }
 

@@ -23,14 +23,51 @@ import feedPreview from "../../images/feed-preview.png";
 import useWindowSize from "../../hooks/useWindowSize";
 import useDarkMode from "../../hooks/useDarkMode";
 // REACT & OTHER
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 const LandingPage = () => {
   const [menuIcon, setMenuIcon] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [visibleElements, setVisibleElements] = useState({});
+  const elementRefs = useRef({});
+
   const { width } = useWindowSize();
+
+  useEffect(() => {
+    const callback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisibleElements((prev) => ({
+            ...prev,
+            [entry.target.dataset.id]: true,
+          }));
+        }
+      });
+    };
+
+    const options = {
+      root: null, // defaults to the browser viewport
+      rootMargin: "0px",
+      threshold: 0.1, // triggers when 10% of the element is visible
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
+    const currentElements = Object.values(elementRefs.current);
+
+    currentElements.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      // Use the variable instead of elementRefs.current
+      currentElements.forEach((el) => {
+        if (el) observer.unobserve(el);
+      });
+    };
+  }, []);
 
   const darkMode = useStoreState((state) => state.theme.darkMode);
   const setDarkMode = useStoreActions((actions) => actions.theme.setDarkMode);
@@ -260,7 +297,19 @@ const LandingPage = () => {
 
           <div className="storiesContainer">
             {posts.map((post) => (
-              <Post variant="compact" post={post} key={post.id} />
+              <div
+                ref={(el) => (elementRefs.current[`post-${post.id}`] = el)}
+                data-id={`post-${post.id}`}
+                className={
+                  visibleElements[`post-${post.id}`] ?
+                    "fading-elements visible"
+                  : "fading-elements"
+                }
+                key={post.id}
+              >
+                {" "}
+                <Post variant="compact" post={post} />
+              </div>
             ))}
           </div>
         </section>
@@ -273,52 +322,82 @@ const LandingPage = () => {
           </p>
 
           <div className="stepsContainer">
-            <div className="step">
-              <span className="iconContainer">
-                <span className="stepCount">1</span>
-                <AccountAdd
-                  height={"30px"}
-                  width={"30px"}
-                  color={"rgb(55, 136, 250)"}
-                />
-              </span>
-              <p className="stepName">Create Account</p>
-              <p className="stepDescription">
-                Sign up in seconds and customize your profile to reflect your
-                unique writing style and personality.
-              </p>
+            <div
+              ref={(el) => (elementRefs.current["step-1"] = el)}
+              data-id="step-1"
+              className={
+                visibleElements["step-1"] ?
+                  "fading-elements visible"
+                : "fading-elements"
+              }
+            >
+              <div className="step">
+                <span className="iconContainer">
+                  <span className="stepCount">1</span>
+                  <AccountAdd
+                    height={"30px"}
+                    width={"30px"}
+                    color={"rgb(55, 136, 250)"}
+                  />
+                </span>
+                <p className="stepName">Create Account</p>
+                <p className="stepDescription">
+                  Sign up in seconds and customize your profile to reflect your
+                  unique writing style and personality.
+                </p>
+              </div>
             </div>
 
-            <div className="step">
-              <span className="iconContainer">
-                <span className="stepCount">2</span>
-                <Pen
-                  height={"30px"}
-                  width={"30px"}
-                  color={"rgb(55, 136, 250)"}
-                />
-              </span>
-              <p className="stepName">Write & Publish</p>
-              <p className="stepDescription">
-                Our clean editor lets you focus on your words. Add images,
-                formatting, and tags with effortless ease.
-              </p>
+            <div
+              ref={(el) => (elementRefs.current["step-2"] = el)}
+              data-id="step-2"
+              className={
+                visibleElements["step-2"] ?
+                  "fading-elements visible"
+                : "fading-elements"
+              }
+            >
+              <div className="step">
+                <span className="iconContainer">
+                  <span className="stepCount">2</span>
+                  <Pen
+                    height={"30px"}
+                    width={"30px"}
+                    color={"rgb(55, 136, 250)"}
+                  />
+                </span>
+                <p className="stepName">Write & Publish</p>
+                <p className="stepDescription">
+                  Our clean editor lets you focus on your words. Add images,
+                  formatting, and tags with effortless ease.
+                </p>
+              </div>
             </div>
 
-            <div className="step">
-              <span className="iconContainer">
-                <span className="stepCount">3</span>
-                <Community
-                  height={"30px"}
-                  width={"30px"}
-                  color={"rgb(55, 136, 250)"}
-                />
-              </span>
-              <p className="stepName">Grow Community</p>
-              <p className="stepDescription">
-                Interact with readers through likes and comments, and see your
-                influence grow across the platform.
-              </p>
+            <div
+              ref={(el) => (elementRefs.current["step-3"] = el)}
+              data-id="step-3"
+              className={
+                visibleElements["step-3"] ?
+                  "fading-elements visible"
+                : "fading-elements"
+              }
+            >
+              <div className="step">
+                <span className="iconContainer">
+                  <span className="stepCount">3</span>
+                  <Community
+                    height={"30px"}
+                    width={"30px"}
+                    color={"rgb(55, 136, 250)"}
+                  />
+                </span>
+                <p className="stepName">Grow Community</p>
+                <p className="stepDescription">
+                  Interact with readers through likes and comments, and see your
+                  influence grow across the platform.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -327,7 +406,15 @@ const LandingPage = () => {
           <h3>What the World is Saying</h3>
 
           <div className="opinionsContainer">
-            <div className="opinionContainer">
+            <div
+              ref={(el) => (elementRefs.current["opinion-1"] = el)}
+              data-id="opinion-1"
+              className={
+                visibleElements["opinion-1"] ?
+                  "opinionContainer fading-elements visible"
+                : "opinionContainer fading-elements"
+              }
+            >
               <div className="flashIconsContainer">
                 <Flash height={"20px"} width={"20px"} color={"gold"} />
                 <Flash height={"20px"} width={"20px"} color={"gold"} />
@@ -353,7 +440,15 @@ const LandingPage = () => {
               </div>
             </div>
 
-            <div className="opinionContainer">
+            <div
+              ref={(el) => (elementRefs.current["opinion-2"] = el)}
+              data-id="opinion-2"
+              className={
+                visibleElements["opinion-2"] ?
+                  "opinionContainer fading-elements visible"
+                : "opinionContainer fading-elements"
+              }
+            >
               <div className="flashIconsContainer">
                 <Flash height={"20px"} width={"20px"} color={"gold"} />
                 <Flash height={"20px"} width={"20px"} color={"gold"} />
@@ -378,7 +473,15 @@ const LandingPage = () => {
                 </div>
               </div>
             </div>
-            <div className="opinionContainer">
+            <div
+              ref={(el) => (elementRefs.current["opinion-3"] = el)}
+              data-id="opinion-3"
+              className={
+                visibleElements["opinion-3"] ?
+                  "opinionContainer fading-elements visible"
+                : "opinionContainer fading-elements"
+              }
+            >
               <div className="flashIconsContainer">
                 <Flash height={"20px"} width={"20px"} color={"gold"} />
                 <Flash height={"20px"} width={"20px"} color={"gold"} />

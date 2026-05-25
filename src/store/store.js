@@ -141,4 +141,11 @@ export default createStore({
       comments: 312,
     },
   ],
+
+  drafts: persist({
+    draftPosts: [],
+    setDraftPosts: action((state, payload) => {
+      state.draftPosts.push(payload);
+    }),
+  }),
 });

@@ -4,6 +4,8 @@ import Heart from "../../icons/Heart";
 import GlobalBookmark from "../../icons/global-bookmark";
 import FilledBookmark from "../../icons/filled-global-bookmark";
 import { useStoreState } from "easy-peasy";
+import getAvatarUrl from "../../utils/getAvatarUrl";
+import profilePlaceholder from "../../images/profile-placeholder.png";
 
 const Post = ({ variant = "full", post }) => {
   const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
@@ -58,7 +60,16 @@ const Post = ({ variant = "full", post }) => {
         <div className="bottomContainer">
           <div className="userContainer">
             <figure className="profileImgFigure">
-              <img src={post.authorImage} alt="" />
+              <img
+                src={
+                  post.authorImage ?
+                    toString(post.authorImage).includes("supabase") ?
+                      getAvatarUrl(post.authorImage)
+                    : post.authorImage
+                  : profilePlaceholder
+                }
+                alt=""
+              />
             </figure>
 
             <div className="nameNUsernameContainer">

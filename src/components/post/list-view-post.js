@@ -5,6 +5,8 @@ import GlobalBookmark from "../../icons/global-bookmark";
 import FilledBookmark from "../../icons/filled-global-bookmark";
 import { useStoreState } from "easy-peasy";
 import { useEffect, useState } from "react";
+import getAvatarUrl from "../../utils/getAvatarUrl";
+import profilePlaceholder from "../../images/profile-placeholder.png";
 
 const ListViewPost = ({ variant = "full", post }) => {
   const [imgExists, setImgExists] = useState(false);
@@ -44,18 +46,16 @@ const ListViewPost = ({ variant = "full", post }) => {
           className={imgExists ? "LSupper-layer" : "LSupper-layer-no-img"}
         >
           {post.image && (
-            <section className="LSimg-section">
-              <figure className="LSimageFigure">
-                <img
-                  className="LSpost-image"
-                  height={"100px"}
-                  width={"100px"}
-                  src={post.image}
-                  alt=""
-                  loading="lazy"
-                />
-              </figure>
-            </section>
+            <figure className="LSimageFigure">
+              <img
+                className="post-image"
+                height={"100px"}
+                width={"100px"}
+                src={post.image}
+                alt=""
+                loading="lazy"
+              />
+            </figure>
           )}
 
           <section className="LStext-section">
@@ -72,7 +72,10 @@ const ListViewPost = ({ variant = "full", post }) => {
         <div className="LSbottomContainer">
           <div className="LSuserContainer">
             <figure className="LSprofileImgFigure">
-              <img src={post.authorImage} alt="" />
+              <img
+                src={getAvatarUrl(post.authorImage) || profilePlaceholder}
+                alt=""
+              />
             </figure>
 
             <div className="LSnameNUsernameContainer">
