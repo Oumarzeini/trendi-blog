@@ -142,11 +142,14 @@ const ActionsBar = styled.div`
 
 const PostsContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 20px;
   padding: 10px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 const BookmarksPage = () => {

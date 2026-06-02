@@ -1,9 +1,8 @@
 import { useStoreState } from "easy-peasy";
 import styled from "styled-components";
 import useWindowSize from "../../../hooks/useWindowSize";
-import { Link } from "react-router-dom";
 import ListViewPost from "../../../components/post/list-view-post";
-import Post from "../../../components/post/Post";
+import Post from "../../../components/post/drafts-post";
 
 const Main = styled.main`
   width: 100%;
@@ -66,18 +65,8 @@ const DraftsPage = () => {
         )}
         {draftPosts.map((post) =>
           width <= 500 ?
-            <Link
-              style={{ width: width < 500 && "100%" }}
-              to={`/app/post/${post.id}`}
-            >
-              <ListViewPost variant="compact" post={post} key={post.id} />{" "}
-            </Link>
-          : <Link
-              style={{ width: width < 500 && "100%" }}
-              to={`/app/post/${post.id}`}
-            >
-              <Post variant="compact" post={post} key={post.id} />
-            </Link>,
+            <ListViewPost variant="compact" post={post} key={post.id} />
+          : <Post variant="compact" post={post} key={post.id} />,
         )}
       </PostsContainer>
     </Main>
