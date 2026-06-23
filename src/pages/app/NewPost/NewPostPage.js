@@ -133,27 +133,6 @@ const NewPostPage = () => {
     }
   };
 
-  // const log = async () => {
-  //   const username = await user.username;
-  //   console.log(user.username);
-  // };
-
-  // log();
-
-  // const toBase64 = (file) => {
-  //   return new Promise((resolve) => {
-  //     const reader = new FileReader();
-  //     reader.onload = () => resolve(reader.result);
-  //     reader.readAsDataURL(file);
-  //   });
-  // };
-
-  // const log = async () => {
-  //   const str = await toBase64(postImage);
-  //   console.log(str);
-  // };
-  // log();
-
   return (
     <main className="newPostMain">
       <header className="newPostHeader">

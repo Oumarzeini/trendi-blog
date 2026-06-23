@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Post from "../../../components/post/Post";
 import { Link } from "react-router-dom";
-import { useStoreState } from "easy-peasy";
+import useFeed from "../../../hooks/db/useFeed";
+import { useCallback, useRef } from "react";
 
 const StyledMain = styled.main`
   display: flex;
@@ -37,14 +38,45 @@ const PostsContainer = styled.div`
 `;
 
 const Feed = () => {
-  const posts = useStoreState((state) => state.posts);
+  const { loading, blogs, fetchBlogs, hasMore } = useFeed();
+
+  const observer = useRef();
+
+  const lastPostRef = useCallback(
+    (node) => {
+      if (loading) return;
+
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          fetchBlogs();
+          console.log("reaching the last post");
+        }
+      });
+
+      if (node) {
+        observer.current.observe(node);
+      }
+    },
+    [loading, fetchBlogs, hasMore],
+  );
+
+  //const posts = useStoreState((state) => state.posts);
+
   return (
     <StyledMain>
       <h2 className="latestUpdates">Latest Updates</h2>
       <PostsContainer>
-        {posts.map((post) => (
+        {blogs.map((post, index) => (
           <Link to={`/app/post/${post.id}`} key={post.id}>
-            <Post post={post} key={post.id} />
+            <Post
+              post={post}
+              key={post.id}
+              ref={index === blogs.length - 1 ? lastPostRef : null}
+            />
           </Link>
         ))}
       </PostsContainer>

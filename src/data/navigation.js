@@ -7,7 +7,7 @@ import Categories from "../icons/NavIcons/Categories";
 import Hashtag from "../icons/NavIcons/Hashtag";
 // import People from "../icons/NavIcons/People";
 // import Following from "../icons/NavIcons/Following";
-import Draft from "../icons/NavIcons/Draft";
+//import Draft from "../icons/NavIcons/Draft";
 import Stats from "../icons/NavIcons/Stats";
 import ProfileIcon from "../icons/NavIcons/ProfileIcon";
 import Settings from "../icons/NavIcons/Settings";
@@ -74,11 +74,11 @@ const navItems = [
       //   label: "Following",
       //   path: "following",
       // },
-      {
-        icon: Draft,
-        label: "Drafts",
-        path: "drafts",
-      },
+      // {
+      //   icon: Draft,
+      //   label: "Drafts",
+      //   path: "drafts",
+      // },
       {
         icon: Stats,
         label: "My Stats",

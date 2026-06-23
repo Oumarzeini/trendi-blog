@@ -6,8 +6,11 @@ import FilledBookmark from "../../icons/filled-global-bookmark";
 import { useStoreState } from "easy-peasy";
 import getAvatarUrl from "../../utils/getAvatarUrl";
 import profilePlaceholder from "../../images/profile-placeholder.png";
+import React from "react";
+import "react-time-ago/locale/en";
+import ReactTimeAgo from "react-time-ago";
 
-const Post = ({ variant = "full", post }) => {
+const Post = React.forwardRef(({ variant = "full", post }, ref) => {
   const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
@@ -30,14 +33,14 @@ const Post = ({ variant = "full", post }) => {
 
   return (
     <>
-      <div className={`postContainer ${variant}--postContainer`}>
-        {post.image && (
+      <div ref={ref} className={`postContainer ${variant}--postContainer`}>
+        {post.image_url && (
           <figure className="imageFigure">
             <img
               className="post-image"
               height={"100px"}
               width={"100px"}
-              src={post.image}
+              src={post.image_url}
               alt=""
               loading="lazy"
             />
@@ -52,7 +55,9 @@ const Post = ({ variant = "full", post }) => {
           <div className="detailsContainer">
             <p className="category--date">
               <span className="category">{post.category}</span> &bull;{" "}
-              <span className="date">{post.date}</span>
+              <span className="date">
+                <ReactTimeAgo date={post.created_at} locale="en" />{" "}
+              </span>
             </p>
           </div>
         </div>
@@ -62,10 +67,13 @@ const Post = ({ variant = "full", post }) => {
             <figure className="profileImgFigure">
               <img
                 src={
-                  post.authorImage ?
-                    toString(post.authorImage).includes("supabase") ?
-                      getAvatarUrl(post.authorImage)
-                    : post.authorImage
+                  // post.profiles.avatar ?
+                  //   toString(post.profiles.avatar).includes("supabase") ?
+                  //     getAvatarUrl(post.profiles.avatar)
+                  //   : post.authorImage
+                  // : profilePlaceholder
+                  post.profiles.avatar ?
+                    getAvatarUrl(post.profiles.avatar)
                   : profilePlaceholder
                 }
                 alt=""
@@ -73,8 +81,8 @@ const Post = ({ variant = "full", post }) => {
             </figure>
 
             <div className="nameNUsernameContainer">
-              <p className="name">{post.author}</p>
-              <p className="username">{post.authorUsername}</p>
+              <p className="name">{post.profiles.full_name}</p>
+              <p className="username">{post.profiles.username}</p>
             </div>
           </div>
 
@@ -116,6 +124,6 @@ const Post = ({ variant = "full", post }) => {
       </div>
     </>
   );
-};
+});
 
 export default Post;

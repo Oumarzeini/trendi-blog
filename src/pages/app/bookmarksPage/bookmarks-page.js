@@ -146,6 +146,12 @@ const PostsContainer = styled.div`
   gap: 20px;
   padding: 10px;
 
+  & .fallback-text {
+    @media (min-width: 768px) {
+      margin-left: 3rem;
+    }
+  }
+
   @media (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
@@ -215,8 +221,8 @@ const BookmarksPage = () => {
       <PostsContainer>
         {!bookmarked.length && (
           <p
+            className="fallback-text"
             style={{
-              marginLeft: "3rem",
               textAlign: "center",
               fontWeight: "600",
             }}

@@ -64,7 +64,7 @@ const DraftsPage = () => {
           <p style={{ fontWeight: "600" }}>You have no drafted posts.</p>
         )}
         {draftPosts.map((post) =>
-          width <= 500 ?
+          width < 500 ?
             <ListViewPost variant="compact" post={post} key={post.id} />
           : <Post variant="compact" post={post} key={post.id} />,
         )}

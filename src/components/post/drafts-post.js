@@ -1,11 +1,4 @@
 import "./Post.css";
-// import Comment from "../../icons/Comment";
-// import Heart from "../../icons/Heart";
-// import GlobalBookmark from "../../icons/global-bookmark";
-// import FilledBookmark from "../../icons/filled-global-bookmark";
-// import { useStoreState } from "easy-peasy";
-// import getAvatarUrl from "../../utils/getAvatarUrl";
-// import profilePlaceholder from "../../images/profile-placeholder.png";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
@@ -23,6 +16,7 @@ const ActionsContainer = styled.div`
   align-items: center;
   gap: 10px;
   padding: 10px;
+  z-index: 100;
 
   & button {
     padding: 5px;
@@ -51,8 +45,6 @@ const Post = ({ variant = "full", post }) => {
     }
   }, [post]);
 
-  // const isBookmarked = bookmarked.some((item) => item.id === post.id);
-
   if (!post) {
     return (
       <p
@@ -76,6 +68,7 @@ const Post = ({ variant = "full", post }) => {
         style={{
           height: isImage ? "400px" : "fit-content",
           cursor: "auto",
+          position: "relative",
         }}
       >
         <ActionsContainer>
