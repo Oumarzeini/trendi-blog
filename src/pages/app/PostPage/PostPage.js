@@ -10,15 +10,23 @@ import Heart from "../../../icons/Heart";
 import Share from "../../../icons/Share";
 import GlobalBookmark from "../../../icons/global-bookmark";
 import FilledBookmark from "../../../icons/filled-global-bookmark";
+import profilePlaceholder from "../../../images/profile-placeholder.png";
 //  OTHER
 import { useEffect, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useParams, Link } from "react-router-dom";
+import supabase from "../../../lib/supabase";
+import Loader from "../../../components/ui/loader";
+import ReactTimeAgo from "react-time-ago";
+import "react-time-ago/locale/en";
+import getAvatarUrl from "../../../utils/getAvatarUrl";
 
 const PostPage = () => {
   const [heartColor, setHeartColor] = useState(false);
   const [comment, setComment] = useState("");
-
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [author, setAuthor] = useState(undefined);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -28,13 +36,52 @@ const PostPage = () => {
     (actions) => actions.bookmarks.toggleBookmark,
   );
 
-  const posts = useStoreState((state) => state.posts);
+  //const posts = useStoreState((state) => state.posts);
 
-  const id = Number(useParams().id);
-  //const id = 6;
-  const postObj = posts.filter((post) => (post.id === id ? post : ""));
+  //const id = Number(useParams().id);
 
-  const post = postObj[0] || [];
+  const { id: slugWithId } = useParams();
+
+  const slugParts = slugWithId.split("-");
+  const postId = slugParts[slugParts.length - 1];
+
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from("blogs")
+          .select(`*`)
+          .eq("id", postId)
+          .single();
+
+        const { data: author, authorErr } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", data.user_id)
+          .single();
+
+        if (error || authorErr) {
+          console.log(
+            "error getting post or author:",
+            error.message || authorErr,
+          );
+          return;
+        }
+        setPost(data);
+        setAuthor(author);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getPost();
+  }, [slugWithId, postId]);
+
+  console.log(post);
+  console.log(author);
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
 
@@ -46,23 +93,23 @@ const PostPage = () => {
     e.target.setCustomValidity("");
   };
 
-  if (!post) return <p>Loading...</p>;
-  if (!post.id)
+  if (loading) return <Loader />;
+  if (!post || !author)
     return (
       <p>
         Ops post not found !{" "}
         <Link style={{ color: `var(--primary)` }} to="/app/feed">
           {" "}
-          go back{" "}
+          Go back{" "}
         </Link>
       </p>
     );
 
   return (
     <section className="postPageSection">
-      {post.image && (
+      {post.image_url && (
         <figure className="postImgFigure">
-          <img src={post.image} alt="" />
+          <img src={post.image_url} alt="" />
         </figure>
       )}
 
@@ -71,17 +118,25 @@ const PostPage = () => {
       <div className="categoryContainer">
         <span className="category">{post.category}</span>{" "}
         <span className="bullet">&bull;</span>{" "}
-        <span className="date"> {post.date} </span>
+        <span className="date">
+          {" "}
+          <ReactTimeAgo date={post.created_at} locale="en" />{" "}
+        </span>
       </div>
 
       <div className="userContainer">
         <figure className="profileImgFigure">
-          <img src={post.authorImage} alt="" />
+          <img
+            src={
+              author?.avatar ? getAvatarUrl(author.avatar) : profilePlaceholder
+            }
+            alt=""
+          />
         </figure>
 
         <div className="nameNUsernameContainer">
-          <p className="name">{post.author}</p>
-          <p className="username">{post.authorUsername}</p>
+          <p className="name">{author.full_name}</p>
+          <p className="username">{author.username}</p>
         </div>
       </div>
 
@@ -104,12 +159,12 @@ const PostPage = () => {
             onClick={() => setHeartColor(!heartColor)}
           >
             <Heart width={"25px"} height={"25px"} color={`var(--text)`} />
-            {post.likes}
+            498
           </span>
 
           <span className="comments">
             <Comment width={"25px"} height={"25px"} color={"black"} />
-            {post.comments}
+            67
           </span>
 
           <span
@@ -146,6 +201,39 @@ const PostPage = () => {
       </div>
 
       <div className="commentsContainer">
+        {/* {!post.comments.length ? <p>No comments yet, Be the first to comment!</p>:
+             post.comments.map((comment) => (
+              <div className="commentContainer">
+          <figure className="CommentProfileImgFigure">
+            <img src={ronaldoImg} alt="" />
+          </figure>
+
+          <div className="nameAndCommentContainer">
+            <div className="nameAndDateContainer">
+              <p className="name">C Ronaldo</p>
+              <p className="date">jan 27, 2026</p>
+            </div>
+
+            <p className="commentContent">
+              yeah man, totally agree designers and frontenders need to pay
+              attention for these details too often, yet the great majority
+              don't. yeah man, totally agree designers and frontenders need to
+              pay attention for these details too often, yet the great majority
+              don't.
+            </p>
+
+            <span
+              className="commentHeart"
+              onClick={() => setHeartColor(!heartColor)}
+            >
+              <Heart width={"20px"} height={"20px"} color={"red"} />
+              233
+            </span>
+          </div>
+        </div>
+             ))
+             } */}
+
         <div className="commentContainer">
           <figure className="CommentProfileImgFigure">
             <img src={ronaldoImg} alt="" />
@@ -174,6 +262,7 @@ const PostPage = () => {
             </span>
           </div>
         </div>
+
         <div className="commentContainer">
           <figure className="CommentProfileImgFigure">
             <img src={neymarImg} alt="" />

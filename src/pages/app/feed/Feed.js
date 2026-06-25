@@ -66,7 +66,12 @@ const Feed = () => {
   );
 
   //const posts = useStoreState((state) => state.posts);
-  console.log(blogs);
+
+  const slugify = (text) =>
+    text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
 
   return (
     <StyledMain>
@@ -75,7 +80,10 @@ const Feed = () => {
         {!blogs.length ?
           <Loader />
         : blogs.map((post, index) => (
-            <Link to={`/app/post/${post.id}`} key={post.id}>
+            <Link
+              to={`/app/post/${slugify(post.title)}-${post.id}`}
+              key={post.id}
+            >
               <Post
                 post={post}
                 key={post.id}
