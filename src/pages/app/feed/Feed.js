@@ -3,6 +3,7 @@ import Post from "../../../components/post/Post";
 import { Link } from "react-router-dom";
 import useFeed from "../../../hooks/db/useFeed";
 import { useCallback, useRef } from "react";
+import Loader from "../../../components/ui/loader";
 
 const StyledMain = styled.main`
   display: flex;
@@ -65,20 +66,24 @@ const Feed = () => {
   );
 
   //const posts = useStoreState((state) => state.posts);
+  console.log(blogs);
 
   return (
     <StyledMain>
       <h2 className="latestUpdates">Latest Updates</h2>
       <PostsContainer>
-        {blogs.map((post, index) => (
-          <Link to={`/app/post/${post.id}`} key={post.id}>
-            <Post
-              post={post}
-              key={post.id}
-              ref={index === blogs.length - 1 ? lastPostRef : null}
-            />
-          </Link>
-        ))}
+        {!blogs.length ?
+          <Loader />
+        : blogs.map((post, index) => (
+            <Link to={`/app/post/${post.id}`} key={post.id}>
+              <Post
+                post={post}
+                key={post.id}
+                ref={index === blogs.length - 1 ? lastPostRef : null}
+              />
+            </Link>
+          ))
+        }
       </PostsContainer>
     </StyledMain>
   );

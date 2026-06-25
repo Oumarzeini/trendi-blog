@@ -26,6 +26,7 @@ import useDarkMode from "../../hooks/useDarkMode";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import Loader from "../../components/ui/loader";
 
 const LandingPage = () => {
   const [menuIcon, setMenuIcon] = useState(true);
@@ -48,9 +49,9 @@ const LandingPage = () => {
     };
 
     const options = {
-      root: null, // defaults to the browser viewport
+      root: null,
       rootMargin: "0px",
-      threshold: 0.1, // triggers when 10% of the element is visible
+      threshold: 0.1,
     };
 
     const observer = new IntersectionObserver(callback, options);
@@ -62,7 +63,6 @@ const LandingPage = () => {
     });
 
     return () => {
-      // Use the variable instead of elementRefs.current
       currentElements.forEach((el) => {
         if (el) observer.unobserve(el);
       });
@@ -76,48 +76,114 @@ const LandingPage = () => {
 
   const navigate = useNavigate();
 
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     image:
+  //       "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg",
+  //     category: "Lifestyle",
+  //     created_at: "2026-05-13 20:13:26.345032+00",
+  //     title: "The Truth About Digital Nomadism in 2024",
+  //     body: "It's not all beaches and laptops. We dive deep into the challenges of maintaining a career while traveling the globe.",
+
+  //     profiles: {
+  //       full_name: "Elena Rodriguez",
+  //       avatar: logo,
+  //       username: "E_rodri",
+  //       likes: 1240,
+  //       comments: 88,
+  //     },
+  //   },
+
+  //   {
+  //     id: 2,
+  //     image: "https://images.pexels.com/photos/205316/pexels-photo-205316.png",
+  //     category: "Tech",
+  //     created_at: "2026-05-13 20:13:26.345032+00",
+  //     title: "Will AI Replace the Human Touch in Creative Writing?",
+  //     body: "Exploring the delicate balance between algorithmic efficiency and the messy, beautiful reality of human emotion.",
+
+  //     profiles: {
+  //       full_name: "James Wilson",
+  //       avatar: logo,
+  //       username: "james_23",
+  //       likes: 3500,
+  //       comments: 245,
+  //     },
+  //   },
+  //   {
+  //     id: 3,
+  //     image:
+  //       "https://images.pexels.com/photos/5439453/pexels-photo-5439453.jpeg",
+  //     category: "Business",
+  //     created_at: "2026-05-13 20:13:26.345032+00",
+  //     title: "Bootstrapping to $1M: My Three Year Journey",
+  //     body: "Raw data, failed experiments, and the one strategy that actually worked when everything else was falling apart.",
+
+  //     profiles: {
+  //       full_name: "Marcus Thorne",
+  //       avatar: logo,
+  //       username: "MT_writes",
+  //       likes: 4200,
+  //       comments: 312,
+  //     },
+  //   },
+  // ];
+
   const posts = [
     {
       id: 1,
-      image:
-        "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg",
-      category: "Lifestyle",
-      date: "jan 25, 2026",
-      title: "The Truth About Digital Nomadism in 2024",
-      body: "It's not all beaches and laptops. We dive deep into the challenges of maintaining a career while traveling the globe.",
-      author: "Elena Rodriguez",
-      authorImage: logo,
-      authorUsername: "E_rodri",
-      likes: 1240,
-      comments: 88,
+      user_id: "8ce6e6f5-65db-4cf1-9d88-2fc436d11913",
+      title: "When Silicon Learns to Sleep",
+      body: 'For decades, computer scientists assumed that artificial intelligence only required continuous runtime to optimize its neural networks. However, a groundbreaking study from a leading research lab recently revealed an unexpected anomaly: advanced deep-learning models perform up to 30% better when subjected to artificial "sleep" cycles. When left idle with their inputs cut off, the algorithms began generating chaotic, self-assembling data structures that looked remarkably like human dreams. This wasn\'t useless noise; the AI was actively pruning redundant pathways and consolidating memories from its daytime training sessions. Without these periods of rest, the systems suffered from "hallucinatory degradation," essentially going data-mad from information overload. It turns out that efficiency isn\'t just about constant processing power; it\'s about the elegance of the pause. As we push closer to true artificial general intelligence, the line between biological biology and digital architecture continues to blur. Code, like the mind, apparently needs to rest to remember who it is.',
+      category: "Technology & AI",
+      image_url:
+        "https://gjimpeijrkmzhmyrasjo.supabase.co/storage/v1/object/public/blog-images/blogs/8ce6e6f5-65db-4cf1-9d88-2fc436d11913/1779391935005-trendi-blog%20logo%20as%20png.png",
+      created_at: "2026-05-19T20:01:51.299377+00:00",
+      profiles: {
+        avatar:
+          "avatars/8ce6e6f5-65db-4cf1-9d88-2fc436d11913-1778676915140/avatar.png",
+        username: "techy_writer!",
+        full_name: "omar zeini",
+      },
+      likes: [],
+      comments: [],
     },
-
     {
       id: 2,
-      image: "https://images.pexels.com/photos/205316/pexels-photo-205316.png",
-      category: "Tech",
-      date: "jan 25, 2026",
-      title: "Will AI Replace the Human Touch in Creative Writing?",
-      body: "Exploring the delicate balance between algorithmic efficiency and the messy, beautiful reality of human emotion.",
-      author: "James Wilson",
-      authorImage: logo,
-      authorUsername: "james_23",
-      likes: 3500,
-      comments: 245,
+      user_id: "8ce6e6f5-65db-4cf1-9d88-2fc436d11913",
+      title: "The Forgotten Architecture of the Forest Floor",
+      body: "Beneath the fallen leaves of the Pacific Northwest lies a massive, subterranean metropolis built entirely out of mycelium. While we often admire the mushrooms pushing through the soil, they are merely the skyscrapers of a vast, interconnected fungal network that spans for miles. This underground web acts as a biological internet, allowing trees to communicate, share nutrients, and even warn each other of impending pest attacks. If a birch tree is starving, the network diverts carbon from a nearby Douglas fir to keep it alive. It is a masterclass in collective survival, operating completely devoid of central leadership or conscious intent. When a tree dies, its energy is not lost but meticulously redistributed back into the forest ecosystem by these silent architects. Walking through the woods, you aren't just walking among separate trees; you are stepping on the roof of a single, massive living organism. We look to the stars for complex networks, yet the most intricate system on Earth is right beneath our boots.",
+      category: "Nature & Science",
+      image_url:
+        "https://gjimpeijrkmzhmyrasjo.supabase.co/storage/v1/object/public/blog-images/blogs/8ce6e6f5-65db-4cf1-9d88-2fc436d11913/1779391935005-trendi-blog%20logo%20as%20png.png",
+      created_at: "2026-05-19T20:01:51.299377+00:00",
+      profiles: {
+        avatar:
+          "avatars/8ce6e6f5-65db-4cf1-9d88-2fc436d11913-1778676915140/avatar.png",
+        username: "techy_writer!",
+        full_name: "omar zeini",
+      },
+      likes: [],
+      comments: [],
     },
     {
       id: 3,
-      image:
-        "https://images.pexels.com/photos/5439453/pexels-photo-5439453.jpeg",
-      category: "Business",
-      date: "jan 25, 2026",
-      title: "Bootstrapping to $1M: My Three Year Journey",
-      body: "Raw data, failed experiments, and the one strategy that actually worked when everything else was falling apart.",
-      author: "Marcus Thorne",
-      authorImage: logo,
-      authorUsername: "MT_writes",
-      likes: 4200,
-      comments: 312,
+      user_id: "8ce6e6f5-65db-4cf1-9d88-2fc436d11913",
+      title: "The phantom Oasis of the Sahara",
+      body: 'Deep within the Erg chebbi dunes of Morocco lies a legendary phenomenon known to local nomads the "Shifting Mirage" Unlike typical atmospheric illusions caused by rising heat, this specific oasis has been documented by cartographers for centuries, yet it never appears in the same coordinates twice. Travelers speak of a lush sanctuary filled with date palms and ice-cold freshwater springs that vanishes the moment you step within its perimeter. Modern satellite imagery has attempted to track the anomaly, only to capture sudden, inexplicable distortions in the sand topography. Some geologists theorize it is an underground aquifer venting steam through shifting faults, creating a temporary localized microclimate. Others believe it is a psychological echo shared by those dehydrated by the desert sun. Whatever the truth, the desert guards its secret fiercely. To find it is a matter of pure, terrifying luck; to lose it is the rule. The sands always reset, leaving nothing but footprints.  ',
+      category: "Travel & Mystery",
+      image_url:
+        "https://gjimpeijrkmzhmyrasjo.supabase.co/storage/v1/object/public/blog-images/blogs/8ce6e6f5-65db-4cf1-9d88-2fc436d11913/1779391935005-trendi-blog%20logo%20as%20png.png",
+      created_at: "2026-05-19T20:01:51.299377+00:00",
+      profiles: {
+        avatar:
+          "avatars/8ce6e6f5-65db-4cf1-9d88-2fc436d11913-1778676915140/avatar.png",
+        username: "techy_writer!",
+        full_name: "omar zeini",
+      },
+      likes: [],
+      comments: [],
     },
   ];
 
@@ -296,21 +362,24 @@ const LandingPage = () => {
           </p>
 
           <div className="storiesContainer">
-            {posts.map((post) => (
-              <div
-                ref={(el) => (elementRefs.current[`post-${post.id}`] = el)}
-                data-id={`post-${post.id}`}
-                className={
-                  visibleElements[`post-${post.id}`] ?
-                    "fading-elements visible"
-                  : "fading-elements"
-                }
-                key={post.id}
-              >
-                {" "}
-                <Post variant="compact" post={post} />
-              </div>
-            ))}
+            {!posts ?
+              <Loader />
+            : posts.map((post) => (
+                <div
+                  ref={(el) => (elementRefs.current[`post-${post.id}`] = el)}
+                  data-id={`post-${post.id}`}
+                  className={
+                    visibleElements[`post-${post.id}`] ?
+                      "fading-elements visible"
+                    : "fading-elements"
+                  }
+                  key={post.id}
+                >
+                  {" "}
+                  <Post variant="compact" post={post} />
+                </div>
+              ))
+            }
           </div>
         </section>
 

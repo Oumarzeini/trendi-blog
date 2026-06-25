@@ -15,7 +15,7 @@ const Post = React.forwardRef(({ variant = "full", post }, ref) => {
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
 
-  if (!post) {
+  if (!post || post === null) {
     return (
       <p
         style={{
@@ -32,6 +32,7 @@ const Post = React.forwardRef(({ variant = "full", post }, ref) => {
   }
 
   return (
+    // <p>Hello world</p>
     <>
       <div ref={ref} className={`postContainer ${variant}--postContainer`}>
         {post.image_url && (
@@ -72,7 +73,7 @@ const Post = React.forwardRef(({ variant = "full", post }, ref) => {
                   //     getAvatarUrl(post.profiles.avatar)
                   //   : post.authorImage
                   // : profilePlaceholder
-                  post.profiles.avatar ?
+                  post?.profiles?.avatar ?
                     getAvatarUrl(post.profiles.avatar)
                   : profilePlaceholder
                 }
