@@ -14,6 +14,8 @@ const Post = React.forwardRef(({ variant = "full", post }, ref) => {
   const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
+  const likeCount = Array.isArray(post?.likes) ? post.likes.length : 0;
+  const commentCount = Array.isArray(post?.comments) ? post.comments.length : 0;
 
   if (!post || post === null) {
     return (
@@ -94,7 +96,7 @@ const Post = React.forwardRef(({ variant = "full", post }, ref) => {
                 height={variant === "full" ? "25px" : "10"}
                 color={"black"}
               />
-              {post.likes}
+              {likeCount}
             </span>
 
             <span className="comments">
@@ -103,7 +105,7 @@ const Post = React.forwardRef(({ variant = "full", post }, ref) => {
                 height={variant === "full" ? "25px" : "10"}
                 color={"black"}
               />
-              {post.comments}
+              {commentCount}
             </span>
 
             <span className="bookmark">

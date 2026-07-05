@@ -27,6 +27,8 @@ const PostPage = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
   const [author, setAuthor] = useState(undefined);
+  const [comments, setComments] = useState(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -51,7 +53,7 @@ const PostPage = () => {
         setLoading(true);
         const { data, error } = await supabase
           .from("blogs")
-          .select(`*`)
+          .select(`*, likes(id)`)
           .eq("id", postId)
           .single();
 
@@ -61,15 +63,21 @@ const PostPage = () => {
           .eq("id", data.user_id)
           .single();
 
-        if (error || authorErr) {
+        const { data: comments, commentsErr } = await supabase
+          .from("comments")
+          .select("*, profiles(username, avatar), likes(id)")
+          .eq("blog_id", data.id);
+
+        if (error || authorErr || commentsErr) {
           console.log(
             "error getting post or author:",
-            error.message || authorErr,
+            error.message || authorErr || commentsErr,
           );
           return;
         }
         setPost(data);
         setAuthor(author);
+        setComments(comments ? comments : null);
       } catch (err) {
         console.log(err);
       } finally {
@@ -81,7 +89,15 @@ const PostPage = () => {
   }, [slugWithId, postId]);
 
   console.log(post);
-  console.log(author);
+
+  const getCommentMaker = async (userId) => {
+    const commentMaker = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .single();
+    return commentMaker;
+  };
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
 
@@ -145,7 +161,7 @@ const PostPage = () => {
       <article className="postContent">{post.body}</article>
 
       <div className="commentsAndLikesContainer">
-        <h2>Comments</h2>
+        <h2>Comments ({comments ? comments.length : 0})</h2>
 
         <div className="iconsContainer">
           <span
@@ -159,12 +175,12 @@ const PostPage = () => {
             onClick={() => setHeartColor(!heartColor)}
           >
             <Heart width={"25px"} height={"25px"} color={`var(--text)`} />
-            498
+            {post.likes.length}
           </span>
 
           <span className="comments">
             <Comment width={"25px"} height={"25px"} color={"black"} />
-            67
+            {comments ? comments.length : 0}
           </span>
 
           <span
@@ -201,40 +217,43 @@ const PostPage = () => {
       </div>
 
       <div className="commentsContainer">
-        {/* {!post.comments.length ? <p>No comments yet, Be the first to comment!</p>:
-             post.comments.map((comment) => (
-              <div className="commentContainer">
-          <figure className="CommentProfileImgFigure">
-            <img src={ronaldoImg} alt="" />
-          </figure>
+        {!comments || !comments.length ?
+          <p>No comments yet, Be the first to comment!</p>
+        : comments.map((comment) => (
+            <div className="commentContainer" key={comment.id}>
+              <figure className="CommentProfileImgFigure">
+                <img
+                  src={
+                    getAvatarUrl(comment.profiles.avatar) || profilePlaceholder
+                  }
+                  alt=""
+                />
+              </figure>
 
-          <div className="nameAndCommentContainer">
-            <div className="nameAndDateContainer">
-              <p className="name">C Ronaldo</p>
-              <p className="date">jan 27, 2026</p>
+              <div className="nameAndCommentContainer">
+                <div className="nameAndDateContainer">
+                  <p className="name">{comment.profiles.username}</p>
+                  <p className="date">
+                    <ReactTimeAgo date={comment.created_at} local={"en"} />
+                  </p>
+                </div>
+
+                <p className="commentContent">{comment.content}</p>
+
+                {/* <span
+                  className="commentHeart"
+                  onClick={() => setHeartColor(!heartColor)}
+                >
+                  <Heart width={"20px"} height={"20px"} color={"red"} />
+                  233
+                </span> */}
+              </div>
             </div>
+          ))
+        }
+      </div>
 
-            <p className="commentContent">
-              yeah man, totally agree designers and frontenders need to pay
-              attention for these details too often, yet the great majority
-              don't. yeah man, totally agree designers and frontenders need to
-              pay attention for these details too often, yet the great majority
-              don't.
-            </p>
-
-            <span
-              className="commentHeart"
-              onClick={() => setHeartColor(!heartColor)}
-            >
-              <Heart width={"20px"} height={"20px"} color={"red"} />
-              233
-            </span>
-          </div>
-        </div>
-             ))
-             } */}
-
-        <div className="commentContainer">
+      {/* <div className="commentContainer">
           <figure className="CommentProfileImgFigure">
             <img src={ronaldoImg} alt="" />
           </figure>
@@ -308,7 +327,7 @@ const PostPage = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="commentFormContainer">
         <form className="commentForm" onSubmit={(e) => e.preventDefault()}>
