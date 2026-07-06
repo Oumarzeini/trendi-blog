@@ -1,9 +1,5 @@
 // files
 import "./PostPage.css";
-
-import ronaldoImg from "../../../images/ronaldo smiling.avif";
-import neymarImg from "../../../images/neymar smiling.webp";
-import messiImg from "../../../images/messi smiling.webp";
 //icons
 import Comment from "../../../icons/Comment";
 import Heart from "../../../icons/Heart";
@@ -87,17 +83,6 @@ const PostPage = () => {
 
     getPost();
   }, [slugWithId, postId]);
-
-  console.log(post);
-
-  const getCommentMaker = async (userId) => {
-    const commentMaker = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
-    return commentMaker;
-  };
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
 
