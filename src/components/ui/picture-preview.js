@@ -67,7 +67,7 @@ const PicturePreview = ({ src = "", onCancel, onAdd }) => {
         className="iconSpan"
       >
         {" "}
-        <Close height={"20px"} width={"20px"} color={`var(--text)`} />{" "}
+        <Close height={"20px"} width={"20px"} color={`white`} />{" "}
       </span>
       <Frame>
         <img src={src} alt="" />

@@ -4,9 +4,12 @@ import ImageIcon from "../../../icons/ImageIcon";
 import Eye from "../../../icons/Eye";
 import { useEffect, useState } from "react";
 import useCreateBlog from "../../../hooks/db/useCreateBlog";
+import useBlogActions from "../../../hooks/db/useBlogActions";
 import getUser from "../../../utils/getUser";
 import useAlert from "../../../hooks/useAlert";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useParams, useNavigate } from "react-router-dom";
+import supabase from "../../../lib/supabase";
+import getAvatarUrl from "../../../utils/getAvatarUrl";
 
 const NewPostPage = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -18,34 +21,86 @@ const NewPostPage = () => {
   const [category, setCategory] = useState("");
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
-  const [draftLoading, setDraftLoading] = useState(false);
-  const draftPosts = useStoreState((state) => state.drafts.draftPosts);
-  const setDraftPosts = useStoreActions(
-    (actions) => actions.drafts.setDraftPosts,
-  );
+  const [editedBlogId, setEditedBlogId] = useState(null);
+
+  // const [draftLoading, setDraftLoading] = useState(false);
+  // const draftPosts = useStoreState((state) => state.drafts.draftPosts);
+  // const setDraftPosts = useStoreActions(
+  //   (actions) => actions.drafts.setDraftPosts,
+  // );
+
+  const { updateBlog } = useBlogActions();
 
   const alert = useAlert();
+  const navigate = useNavigate();
+
+  const { postId } = useParams();
+  const isEditMode = Boolean(postId);
 
   useEffect(() => {
     const getAndSetUser = async () => {
       const currentUser = await getUser();
       setUser(currentUser);
     };
-
     getAndSetUser();
   }, []);
 
   useEffect(() => {
+    if (!isEditMode || !user) return;
+
+    const fetchPostForEditing = async () => {
+      const { data: post, error } = await supabase
+        .from("blogs")
+        .select("*")
+        .eq("id", postId)
+        .single();
+
+      if (error || !post) {
+        alert("err", error.message || error || "Post not found", true);
+        console.log("error fetching editing post", error);
+        navigate("/write");
+        return;
+      }
+
+      if (post.user_id !== user.id) {
+        alert("err", "UNAUTHORIZED! You do not own this Post", true);
+        console.log("UNAUTHORIZED");
+        navigate("/write");
+        return;
+      }
+
+      setEditedBlogId(post.id);
+
+      setTitle(post.title);
+      setCategory(post?.category || "uncategorized");
+      setBody(post.body);
+
+      if (post.image_url) {
+        const imageURL = await getAvatarUrl(post.image_url);
+        setPostImage(imageURL);
+      } else {
+        setPostImage(null);
+      }
+    };
+
+    fetchPostForEditing();
+  }, [postId, isEditMode, user, navigate, alert]);
+
+  useEffect(() => {
     if (postImage) {
       setShowPreviewImg(true);
-      const previewUrl = URL.createObjectURL(postImage);
-      setPreviewImg(previewUrl);
+      if (isEditMode) {
+        setPreviewImg(postImage);
+      } else {
+        const previewUrl = URL.createObjectURL(postImage);
+        setPreviewImg(previewUrl);
 
-      return () => URL.revokeObjectURL(previewUrl);
+        return () => URL.revokeObjectURL(previewUrl);
+      }
     } else {
       setShowPreviewImg(false);
     }
-  }, [postImage]);
+  }, [postImage, isEditMode]);
 
   const { createBlog } = useCreateBlog(user);
 
@@ -56,7 +111,9 @@ const NewPostPage = () => {
       return;
     }
 
-    if (category === "") setCategory("uncategorized");
+    if (category === "") {
+      setCategory("uncategorized");
+    }
 
     // alert(
     //   "success",
@@ -67,13 +124,26 @@ const NewPostPage = () => {
     setLoading(true);
 
     try {
-      await createBlog({ title, body, category, file: postImage });
-      setTitle("");
-      setCategory("");
-      setBody("");
-      setPostImage(null);
-      setPreviewImg(null);
-      setShowPreviewImg(false);
+      if (isEditMode) {
+        const updates = { title, category, body, image_url: postImage };
+        await updateBlog(editedBlogId, updates);
+        setTitle("");
+        setCategory("");
+        setBody("");
+        setPostImage(null);
+        setPreviewImg(null);
+        setShowPreviewImg(false);
+        navigate(`/app/profile/${user?.username}`);
+      } else {
+        await createBlog({ title, body, category, file: postImage });
+        setTitle("");
+        setCategory("");
+        setBody("");
+        setPostImage(null);
+        setPreviewImg(null);
+        setShowPreviewImg(false);
+        navigate("/app/feed");
+      }
     } catch (err) {
       alert("err", err, true);
     } finally {
@@ -81,62 +151,62 @@ const NewPostPage = () => {
     }
   };
 
-  const handleDraft = async () => {
-    if (!title || !body || title === "" || body === "") {
-      alert("err", "Please fill the title and content fields", true);
-      console.log("Please fill the title and content fields");
-      return;
-    }
+  // const handleDraft = async () => {
+  //   if (!title || !body || title === "" || body === "") {
+  //     alert("err", "Please fill the title and content fields", true);
+  //     console.log("Please fill the title and content fields");
+  //     return;
+  //   }
 
-    const returnUser = async () => {
-      const currentUser = await getUser();
-      return currentUser;
-    };
+  //   const returnUser = async () => {
+  //     const currentUser = await getUser();
+  //     return currentUser;
+  //   };
 
-    const user = await returnUser();
+  //   const user = await returnUser();
 
-    const toBase64 = (file) => {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.readAsDataURL(file);
-      });
-    };
+  //   const toBase64 = (file) => {
+  //     return new Promise((resolve) => {
+  //       const reader = new FileReader();
+  //       reader.onload = () => resolve(reader.result);
+  //       reader.readAsDataURL(file);
+  //     });
+  //   };
 
-    const imageData = postImage ? await toBase64(postImage) : "";
+  //   const imageData = postImage ? await toBase64(postImage) : "";
 
-    const post = {
-      id: draftPosts.length ? draftPosts[draftPosts.length - 1] + 1 : 1,
-      title,
-      category: category ? category : "uncategorized",
-      body,
-      image: imageData,
-      author: user.full_name,
-      authorImage: user.avatar,
-      authorUsername: user.username,
-    };
+  //   const post = {
+  //     id: draftPosts.length ? draftPosts[draftPosts.length - 1] + 1 : 1,
+  //     title,
+  //     category: category ? category : "uncategorized",
+  //     body,
+  //     image: imageData,
+  //     author: user.full_name,
+  //     authorImage: user.avatar,
+  //     authorUsername: user.username,
+  //   };
 
-    setDraftLoading(true);
-    try {
-      setDraftPosts(post);
-      alert("success", "Post added to drafts successfully", true);
-      setTitle("");
-      setCategory("");
-      setBody("");
-      setPostImage(null);
-      setPreviewImg(null);
-      setShowPreviewImg(false);
-    } catch (err) {
-      alert("err", err, true);
-    } finally {
-      setDraftLoading(false);
-    }
-  };
+  //   setDraftLoading(true);
+  //   try {
+  //     setDraftPosts(post);
+  //     alert("success", "Post added to drafts successfully", true);
+  //     setTitle("");
+  //     setCategory("");
+  //     setBody("");
+  //     setPostImage(null);
+  //     setPreviewImg(null);
+  //     setShowPreviewImg(false);
+  //   } catch (err) {
+  //     alert("err", err, true);
+  //   } finally {
+  //     setDraftLoading(false);
+  //   }
+  // };
 
   return (
     <main className="newPostMain">
       <header className="newPostHeader">
-        <h3>New Post</h3>
+        <h3>{isEditMode ? "Edit Your Post" : "New Post"}</h3>
       </header>
 
       <section className="innerContainer">
@@ -236,9 +306,20 @@ const NewPostPage = () => {
         }
 
         <div className="buttonsContainer">
-          <button onClick={handleDraft} className="draftBtn">
+          <button
+            onClick={() => {
+              setTitle("");
+              setBody("");
+              setCategory("");
+              setPostImage(null);
+              setPreviewImg(null);
+              setShowPreviewImg(false);
+              navigate("/app/write");
+            }}
+            className="draftBtn"
+          >
             {" "}
-            {draftLoading ? "Adding to drafts..." : "Draft"}{" "}
+            Clear
           </button>
           <button
             onClick={() => {
@@ -249,7 +330,13 @@ const NewPostPage = () => {
           >
             {" "}
             <Eye height={"25px"} width={"25px"} color="white" />
-            {loading ? "Publishing..." : "Publish"}
+            {loading && !isEditMode ?
+              "Publishing..."
+            : loading && isEditMode ?
+              "Updating..."
+            : !isEditMode ?
+              "Publish"
+            : "Update"}
           </button>
         </div>
       </section>

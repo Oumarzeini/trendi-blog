@@ -192,9 +192,18 @@
 .recentStoriesSection {
   padding: 10px;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column ;
+  
+  gap: 30px;
+  width: 100%;
 
-  & p {
-    margin-top: 2rem;
-    text-align: center;
+ 
+  .postsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+  align-items: center;
   }
 }

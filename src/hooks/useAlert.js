@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useStoreActions } from "easy-peasy";
 
 const useAlert = () => {
@@ -5,18 +6,21 @@ const useAlert = () => {
   const setNotifyMsg = useStoreActions((actions) => actions.setNotifyMsg);
   const setNotifyType = useStoreActions((actions) => actions.setNotifyType);
 
-  const errFunc = (type, msg, visibility) => {
-    setNotifyType(type);
-    setNotifyMsg(msg);
-    setShowNotify(visibility);
+  const display = useCallback(
+    (type, msg, visibility) => {
+      setNotifyType(type);
+      setNotifyMsg(msg);
+      setShowNotify(visibility);
 
-    setTimeout(() => {
-      setShowNotify(false);
-      setNotifyMsg("");
-    }, 5000);
-  };
+      setTimeout(() => {
+        setShowNotify(false);
+        setNotifyMsg("");
+      }, 5000);
+    },
+    [setNotifyType, setNotifyMsg, setShowNotify],
+  );
 
-  return errFunc;
+  return display;
 };
 
 export default useAlert;

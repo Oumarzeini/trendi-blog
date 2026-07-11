@@ -26,9 +26,9 @@ function App() {
         <Route index element={<Feed />} />
         <Route path="feed" element={<Feed />} />
         <Route path="post/:id" element={<PostPage />} />
-        <Route path="profile" element={<ProfilePage />} />
+        <Route path="profile/:username" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
-        <Route path="new-post" element={<NewPostPage />} />
+        <Route path="write/:postId?" element={<NewPostPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="drafts" element={<DraftsPage />} />

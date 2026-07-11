@@ -41,7 +41,7 @@ const navItems = [
       {
         icon: Add,
         label: "Create Post",
-        path: "new-post",
+        path: "write",
         isPrimary: true,
       },
     ],

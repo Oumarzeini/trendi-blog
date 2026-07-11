@@ -40,7 +40,7 @@ const useCreateBlog = (user) => {
           {
             title,
             body,
-            category,
+            category: category ? category : "uncategorized",
             image_url,
             user_id: user.id,
           },

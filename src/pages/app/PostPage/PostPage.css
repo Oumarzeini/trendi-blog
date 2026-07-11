@@ -1,7 +1,10 @@
 .postPageSection {
   width: 100%;
-  height: fit-content;
+  min-height: 100vh;
   padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  
 
   & .postImgFigure {
   min-width: 100%;
@@ -20,6 +23,9 @@
 }
 }
 
+.content-section {
+  flex-grow: 1;
+}
 
 .title {
   font-size: 1.8rem;
@@ -120,6 +126,26 @@ hr {
   gap: 10px;
 }
 
+.post-page-likes, .post-page-comments {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.post-page-comments {
+  fill: #3788fa;
+  & path {
+    fill: var(--text);
+  }
+}
+.post-page-comments:hover {
+  fill: #3788fa;
+  & path {
+    fill: #3788fa;
+  }
+}
+
 .commentContainer {
   display: grid;
   grid-template-columns: 30px 1fr;
@@ -176,6 +202,16 @@ hr {
 
  
 }
+
+/* .commentFormContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 97%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+} */
 
 .commentContent {
   width: 100%;

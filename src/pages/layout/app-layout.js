@@ -45,7 +45,7 @@ const AppLayout = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_OUT") {
+      if (event === "SIGNED_OUT" || event === "TOKEN_IS_EXPIRED") {
         navigate("/auth", { replace: true });
         alert("err", "Session expired, Please sign in", true);
       }
@@ -179,7 +179,7 @@ const AppLayout = () => {
               />
             </span>
 
-            <Link to={"/app/profile"}>
+            <Link to={`/app/profile/${user?.username}`}>
               {" "}
               <figure>
                 <img src={getAvatarUrl(user?.avatar)} alt="" />

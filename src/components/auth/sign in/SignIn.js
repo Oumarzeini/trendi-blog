@@ -68,6 +68,8 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
         return;
       }
 
+      setLoading(true);
+
       const { data: existingEmail } = await supabase
         .from("profiles")
         .select("email")
@@ -78,8 +80,6 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
         setError("This email is not linked to any account, Please sign up.");
         return;
       }
-
-      setLoading(true);
 
       const { error } = await supabase.auth.signInWithPassword({
         email,

@@ -4,13 +4,13 @@ import supabase from "../../lib/supabase";
 const useLikes = (blogId, user) => {
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [likesLoading, setLikesLoading] = useState(true);
 
   const fetchLikesData = useCallback(async () => {
     if (!blogId) return;
 
     try {
-      setLoading(true);
+      setLikesLoading(true);
 
       const [{ count }, likedResult] = await Promise.all([
         supabase
@@ -33,7 +33,7 @@ const useLikes = (blogId, user) => {
     } catch (err) {
       console.log("error fetching likes:", err);
     } finally {
-      setLoading(false);
+      setLikesLoading(false);
     }
   }, [blogId, user]);
 
@@ -79,7 +79,7 @@ const useLikes = (blogId, user) => {
   return {
     liked,
     likesCount,
-    loading,
+    likesLoading,
     toggleLike,
     refreshLikes: fetchLikesData,
   };
