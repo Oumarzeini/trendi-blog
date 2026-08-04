@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import statsData from "../../../data/stats";
+//import statsData from "../../../data/stats";
+import useStats from "../../../hooks/db/useStats";
+import getUser from "../../../utils/getUser";
+import { useEffect, useState } from "react";
+//ICONS
+import Eye from "../../../icons/stats-icons/Eye";
+import Book from "../../../icons/stats-icons/book";
+import Like from "../../../icons/stats-icons/like";
+import Comment from "../../../icons/stats-icons/Comment";
 
 const Main = styled.main`
   width: 100%;
@@ -70,6 +78,24 @@ const StyledStat = styled.div`
 `;
 
 const StatsPage = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const assignUser = async () => {
+      try {
+        const current = await getUser();
+        setUser(current);
+      } catch (err) {
+        console.log("couldn't get user :", err.message || err);
+      }
+    };
+
+    assignUser();
+  }, []);
+
+  const { likes, comments, views, reads, loading } = useStats(user?.id);
+  console.log(likes, comments, views, reads);
+
   return (
     <Main>
       <Header>
@@ -78,29 +104,70 @@ const StatsPage = () => {
       </Header>
 
       <StatsContainer>
-        {statsData.map((stat) => (
-          <Stat key={stat.label} stat={stat}></Stat>
-        ))}
+        <StyledStat>
+          <div className="icon-container">
+            <span>
+              <Eye />
+            </span>
+          </div>
+
+          <p className="stat-number">{loading ? "loading..." : `${views}`}</p>
+
+          <p className="stat-label">Total Views</p>
+        </StyledStat>
+        <StyledStat>
+          <div className="icon-container">
+            <span>
+              <Book />
+            </span>
+          </div>
+
+          <p className="stat-number">{loading ? "loading..." : `${reads}`}</p>
+
+          <p className="stat-label">Total Reads</p>
+        </StyledStat>
+        <StyledStat>
+          <div className="icon-container">
+            <span>
+              <Like />
+            </span>
+          </div>
+
+          <p className="stat-number">{loading ? "loading..." : `${likes}`}</p>
+
+          <p className="stat-label">Total Likes</p>
+        </StyledStat>
+        <StyledStat>
+          <div className="icon-container">
+            <span>
+              <Comment />
+            </span>
+          </div>
+
+          <p className="stat-number">{comments}</p>
+
+          <p className="stat-label">Total Comments</p>
+        </StyledStat>
       </StatsContainer>
     </Main>
   );
 };
 
-const Stat = ({ stat }) => {
-  const Icon = stat.icon;
-  return (
-    <StyledStat>
-      <div className="icon-container">
-        <span>
-          <Icon />
-        </span>
-      </div>
+// const Stat = ({ label, count }) => {
+//   const Icon = stat.icon;
+//   return (
+//     <StyledStat>
+//       <div className="icon-container">
+//         <span>
+//           <Icon />
+//         </span>
+//       </div>
 
-      <p className="stat-number">{stat.statNumber}</p>
+//       <p className="stat-number">{count}</p>
 
-      <p className="stat-label">{stat.label}</p>
-    </StyledStat>
-  );
-};
+//       <p className="stat-label">{label}</p>
+//     </StyledStat>
+//   );
+// };
 
 export default StatsPage;

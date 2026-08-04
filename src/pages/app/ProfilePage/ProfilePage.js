@@ -284,7 +284,7 @@ function ProfilePage() {
         </div>
         <div className="nameNUsernameContainer">
           <p className="fullname">{user?.full_name ?? "Undefined"}</p>
-          <p className="username">{user?.username ?? "Undefined"}</p>
+          <p className="username">{`@${user?.username}` ?? "Undefined"}</p>
         </div>
         <div className="descriptionContainer">
           <p className="descriptionText">

@@ -23,6 +23,15 @@ const ListViewPost = ({ variant = "full", post }) => {
 
   const isBookmarked = bookmarked.some((item) => item.id === post.id);
 
+  const likesCount =
+    Array.isArray(post?.likes) ? post.likes.length
+    : typeof post?.likes === "number" ? post.likes
+    : 0;
+  const commentsCount =
+    Array.isArray(post?.comments) ? post.comments.length
+    : typeof post?.comments === "number" ? post.comments
+    : 0;
+
   if (!post) {
     return (
       <p
@@ -73,7 +82,11 @@ const ListViewPost = ({ variant = "full", post }) => {
           <div className="LSuserContainer">
             <figure className="LSprofileImgFigure">
               <img
-                src={getAvatarUrl(post.authorImage) || profilePlaceholder}
+                src={
+                  post?.profiles?.avatar ?
+                    getAvatarUrl(post.profiles.avatar)
+                  : profilePlaceholder
+                }
                 alt=""
               />
             </figure>
@@ -91,7 +104,7 @@ const ListViewPost = ({ variant = "full", post }) => {
                 height={variant === "full" ? "25px" : "10"}
                 color={"black"}
               />
-              {post.likes}
+              {likesCount}
             </span>
 
             <span className="LScomments">
@@ -100,7 +113,7 @@ const ListViewPost = ({ variant = "full", post }) => {
                 height={variant === "full" ? "25px" : "10"}
                 color={"black"}
               />
-              {post.comments}
+              {commentsCount}
             </span>
 
             <span className="LSbookmark">

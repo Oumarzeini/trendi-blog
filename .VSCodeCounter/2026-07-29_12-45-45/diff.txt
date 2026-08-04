@@ -1,0 +1,219 @@
+Date : 2026-07-29 12:45:45
+Directory : c:\Users\HP\Documents\Courses\react.js\trendy-blog\src
+Total : 147 files,  10257 codes, 444 comments, 1356 blanks, all 12057 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |        132 |      7,721 |        368 |        931 |      9,020 |
+| PostCSS    |         14 |      2,535 |         76 |        425 |      3,036 |
+| XML        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                      | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                         |        147 |     10,257 |        444 |      1,356 |     12,057 |
+| . (Files)                                                                                                 |          5 |        136 |          5 |         20 |        161 |
+| components                                                                                                |         38 |      4,420 |        251 |        515 |      5,186 |
+| components\auth                                                                                           |          4 |        719 |        149 |        106 |        974 |
+| components\auth (Files)                                                                                   |          2 |        335 |          1 |         37 |        373 |
+| components\auth\sign in                                                                                   |          2 |        384 |        148 |         69 |        601 |
+| components\feedback form                                                                                  |          1 |        411 |          0 |         22 |        433 |
+| components\navbar                                                                                         |          2 |         72 |          0 |         13 |         85 |
+| components\notifications                                                                                  |          2 |        118 |          0 |         16 |        134 |
+| components\onboarding                                                                                     |          1 |         23 |          0 |          6 |         29 |
+| components\post                                                                                           |          5 |      1,117 |         55 |        165 |      1,337 |
+| components\settings                                                                                       |          9 |      1,236 |         23 |        105 |      1,364 |
+| components\sidebar                                                                                        |          4 |        179 |          0 |         23 |        202 |
+| components\ui                                                                                             |         10 |        545 |         24 |         59 |        628 |
+| components\ui (Files)                                                                                     |          5 |        292 |         24 |         31 |        347 |
+| components\ui\primary                                                                                     |          1 |         34 |          0 |          5 |         39 |
+| components\ui\search                                                                                      |          2 |        106 |          0 |         13 |        119 |
+| components\ui\switch                                                                                      |          1 |         64 |          0 |          4 |         68 |
+| components\ui\theme                                                                                       |          1 |         49 |          0 |          6 |         55 |
+| data                                                                                                      |          3 |        143 |         35 |         10 |        188 |
+| hooks                                                                                                     |         11 |        535 |          2 |        143 |        680 |
+| hooks (Files)                                                                                             |          4 |         62 |          0 |         22 |         84 |
+| hooks\db                                                                                                  |          7 |        473 |          2 |        121 |        596 |
+| icons                                                                                                     |         61 |        973 |          0 |        117 |      1,090 |
+| icons (Files)                                                                                             |         41 |        646 |          0 |         80 |        726 |
+| icons\NavIcons                                                                                            |         16 |        263 |          0 |         29 |        292 |
+| icons\stats-icons                                                                                         |          4 |         64 |          0 |          8 |         72 |
+| lib                                                                                                       |          1 |          6 |          0 |          3 |          9 |
+| pages                                                                                                     |         22 |      3,793 |        141 |        503 |      4,437 |
+| pages\Auth                                                                                                |          2 |        170 |          0 |         28 |        198 |
+| pages\app                                                                                                 |         13 |      1,816 |         77 |        234 |      2,127 |
+| pages\app\NewPost                                                                                         |          2 |        483 |         56 |         64 |        603 |
+| pages\app\ProfilePage                                                                                     |          2 |        473 |          5 |         70 |        548 |
+| pages\app\Settings                                                                                        |          2 |        166 |          0 |         19 |        185 |
+| pages\app\bookmarksPage                                                                                   |          1 |        243 |          0 |         14 |        257 |
+| pages\app\category-page                                                                                   |          1 |         18 |          0 |          4 |         22 |
+| pages\app\draftsPage                                                                                      |          1 |         68 |          0 |          9 |         77 |
+| pages\app\feed                                                                                            |          1 |         87 |          1 |         13 |        101 |
+| pages\app\notifications-page                                                                              |          1 |        124 |          0 |         14 |        138 |
+| pages\app\statsPage                                                                                       |          1 |        136 |         15 |         23 |        174 |
+| pages\app\trending-page                                                                                   |          1 |         18 |          0 |          4 |         22 |
+| pages\landing page                                                                                        |          2 |      1,485 |         57 |        186 |      1,728 |
+| pages\layout                                                                                              |          2 |        262 |          7 |         44 |        313 |
+| pages\missing                                                                                             |          1 |         39 |          0 |          6 |         45 |
+| pages\search result                                                                                       |          2 |         21 |          0 |          5 |         26 |
+| store                                                                                                     |          1 |        144 |          0 |          8 |        152 |
+| utils                                                                                                     |          5 |        107 |         10 |         37 |        154 |
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                  | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\App.css                                            | PostCSS    |         34 |          5 |          7 |         46 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\App.js                                             | JavaScript |         42 |          0 |          4 |         46 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\auth\recover-password.js                | JavaScript |        180 |          1 |         18 |        199 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\auth\set-name.js                        | JavaScript |        155 |          0 |         19 |        174 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\auth\sign in\SignIn.css                 | PostCSS    |        169 |         63 |         34 |        266 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\auth\sign in\SignIn.js                  | JavaScript |        215 |         85 |         35 |        335 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\feedback form\feedback-form.js          | JavaScript |        411 |          0 |         22 |        433 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\navbar\Nav.css                          | PostCSS    |         45 |          0 |          7 |         52 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\navbar\Nav.js                           | JavaScript |         27 |          0 |          6 |         33 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\notifications\date-seperator.js         | JavaScript |         28 |          0 |          6 |         34 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\notifications\notif-item.js             | JavaScript |         90 |          0 |         10 |        100 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\onboarding\onboarding.js                | JavaScript |         23 |          0 |          6 |         29 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\post\Post.css                           | PostCSS    |        334 |          2 |         56 |        392 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\post\Post.js                            | JavaScript |        216 |          2 |         25 |        243 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\post\drafts-post.js                     | JavaScript |        101 |         49 |         12 |        162 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\post\list-view-post.css                 | PostCSS    |        341 |          2 |         56 |        399 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\post\list-view-post.js                  | JavaScript |        125 |          0 |         16 |        141 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\Account.js                     | JavaScript |        450 |          4 |         30 |        484 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\DangerZone.js                  | JavaScript |         82 |         13 |          8 |        103 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\DeleteAccountModel.js          | JavaScript |        132 |          3 |         11 |        146 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\DeletePostsModel.js            | JavaScript |        131 |          3 |         11 |        145 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\Input.js                       | JavaScript |         74 |          0 |          8 |         82 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\NotifItem.js                   | JavaScript |         59 |          0 |          5 |         64 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\Notifications.js               | JavaScript |        132 |          0 |         12 |        144 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\SectionHeader.js               | JavaScript |         26 |          0 |          4 |         30 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\settings\log-out.js                     | JavaScript |        150 |          0 |         16 |        166 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\sidebar\NavGroupe.js                    | JavaScript |         31 |          0 |          6 |         37 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\sidebar\NavItem.js                      | JavaScript |         60 |          0 |          7 |         67 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\sidebar\Sidebar.js                      | JavaScript |         68 |          0 |          5 |         73 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\sidebar\SidebarSection.js               | JavaScript |         20 |          0 |          5 |         25 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\coming-soon.js                       | JavaScript |         69 |          0 |          5 |         74 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\confirmationModel.js                 | JavaScript |         75 |          0 |          8 |         83 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\loader.js                            | JavaScript |         41 |          0 |          5 |         46 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\notify.js                            | JavaScript |         52 |          0 |          5 |         57 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\picture-preview.js                   | JavaScript |         55 |         24 |          8 |         87 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\primary\PrimaryLink.js               | JavaScript |         34 |          0 |          5 |         39 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\search\Search.css                    | PostCSS    |         52 |          0 |          7 |         59 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\search\Search.js                     | JavaScript |         54 |          0 |          6 |         60 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\switch\Switch.js                     | JavaScript |         64 |          0 |          4 |         68 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\components\ui\theme\Theme.js                       | JavaScript |         49 |          0 |          6 |         55 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\data\navigation.js                                 | JavaScript |         78 |         35 |          3 |        116 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\data\notifications-list.js                         | JavaScript |         38 |          0 |          4 |         42 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\data\stats.js                                      | JavaScript |         27 |          0 |          3 |         30 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\db\useBlogActions.js                         | JavaScript |         21 |          0 |          8 |         29 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\db\useCreateBlog.js                          | JavaScript |         55 |          0 |         14 |         69 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\db\useFeed.js                                | JavaScript |         85 |          0 |         17 |        102 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\db\useLikes.js                               | JavaScript |         71 |          1 |         17 |         89 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\db\usePostAnalytics.js                       | JavaScript |         64 |          0 |         22 |         86 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\db\useStats.js                               | JavaScript |         88 |          0 |         19 |        107 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\db\useUploadAvatar.js                        | JavaScript |         89 |          1 |         24 |        114 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\useAlert.js                                  | JavaScript |         21 |          0 |          6 |         27 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\useClickOutside.js                           | JavaScript |         14 |          0 |          5 |         19 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\useDarkMode.js                               | JavaScript |          7 |          0 |          3 |         10 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\hooks\useWindowSize.js                             | JavaScript |         20 |          0 |          8 |         28 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\AccountAdd.js                                | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Add.js                                       | JavaScript |         11 |          0 |          2 |         13 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\BackArrow.js                                 | JavaScript |         15 |          0 |          2 |         17 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Close.js                                     | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Comment.js                                   | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Community.js                                 | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\DownArrow.js                                 | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Edit.js                                      | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Eye.js                                       | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Facebook.js                                  | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Flash.js                                     | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Heart.js                                     | JavaScript |         20 |          0 |          2 |         22 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\ImageIcon.js                                 | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Instagram.js                                 | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\LinkedIn.js                                  | JavaScript |         17 |          0 |          2 |         19 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Lock.js                                      | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Mail.js                                      | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Menu.js                                      | JavaScript |         19 |          0 |          2 |         21 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\MenuClose.js                                 | JavaScript |         19 |          0 |          2 |         21 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Add.js                              | JavaScript |         14 |          0 |          1 |         15 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Bookmark.js                         | JavaScript |         14 |          0 |          1 |         15 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Categories.js                       | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Draft.js                            | JavaScript |         20 |          0 |          2 |         22 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\ExploreIcon.js                      | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Feed.js                             | JavaScript |         15 |          0 |          2 |         17 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Following.js                        | JavaScript |         23 |          0 |          2 |         25 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Hashtag.js                          | JavaScript |         14 |          0 |          1 |         15 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\HomeIcon.js                         | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Logout.js                           | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Moon.js                             | JavaScript |         15 |          0 |          2 |         17 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Notification.js                     | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\People.js                           | JavaScript |         21 |          0 |          2 |         23 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\ProfileIcon.js                      | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Settings.js                         | JavaScript |         20 |          0 |          2 |         22 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\NavIcons\Stats.js                            | JavaScript |         15 |          0 |          2 |         17 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Pen.js                                       | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\RightArrow.js                                | JavaScript |         23 |          0 |          2 |         25 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\SearchIcon.js                                | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Share.js                                     | JavaScript |         21 |          0 |          2 |         23 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\TrendingUp.js                                | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\Upload.js                                    | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\User.js                                      | JavaScript |         15 |          0 |          2 |         17 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\X.js                                         | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\close-sidebar.js                             | JavaScript |         21 |          0 |          2 |         23 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\delete-icon.js                               | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\feedback.js                                  | JavaScript |         17 |          0 |          2 |         19 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\filled-global-bookmark.js                    | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\filter.js                                    | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\global-bookmark.js                           | JavaScript |         14 |          0 |          1 |         15 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\logout.js                                    | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\more.js                                      | JavaScript |         15 |          0 |          2 |         17 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\no-eye.js                                    | JavaScript |         14 |          0 |          1 |         15 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\open-sidebar.js                              | JavaScript |         21 |          0 |          2 |         23 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\person.js                                    | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\read-line.js                                 | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\read.js                                      | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\stats-icons\Comment.js                       | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\stats-icons\Eye.js                           | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\stats-icons\book.js                          | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\stats-icons\like.js                          | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\icons\sun.js                                       | JavaScript |         14 |          0 |          2 |         16 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\index.css                                          | PostCSS    |         42 |          0 |          7 |         49 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\index.js                                           | JavaScript |         17 |          0 |          2 |         19 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\lib\supabase.js                                    | JavaScript |          6 |          0 |          3 |          9 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\logo.svg                                           | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\Auth\AuthPage.css                            | PostCSS    |        111 |          0 |         21 |        132 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\Auth\AuthPage.js                             | JavaScript |         59 |          0 |          7 |         66 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\NewPost\NewPostPage.css                  | PostCSS    |        162 |          0 |         27 |        189 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\NewPost\NewPostPage.js                   | JavaScript |        321 |         56 |         37 |        414 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\ProfilePage\ProfilePage.css              | PostCSS    |        181 |          0 |         29 |        210 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\ProfilePage\ProfilePage.js               | JavaScript |        292 |          5 |         41 |        338 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\Settings\SettingsPage.css                | PostCSS    |         94 |          0 |         12 |        106 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\Settings\SettingsPage.js                 | JavaScript |         72 |          0 |          7 |         79 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\bookmarksPage\bookmarks-page.js          | JavaScript |        243 |          0 |         14 |        257 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\category-page\category-page.js           | JavaScript |         18 |          0 |          4 |         22 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\draftsPage\drafts-page.js                | JavaScript |         68 |          0 |          9 |         77 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\feed\Feed.js                             | JavaScript |         87 |          1 |         13 |        101 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\notifications-page\notifications-page.js | JavaScript |        124 |          0 |         14 |        138 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\statsPage\stats-page.js                  | JavaScript |        136 |         15 |         23 |        174 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\app\trending-page\trending-page.js           | JavaScript |         18 |          0 |          4 |         22 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\landing page\LandingPage.css                 | PostCSS    |        872 |          3 |        141 |      1,016 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\landing page\LandingPage.js                  | JavaScript |        613 |         54 |         45 |        712 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\layout\app-layout.css                        | PostCSS    |         86 |          1 |         19 |        106 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\layout\app-layout.js                         | JavaScript |        176 |          6 |         25 |        207 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\missing\Missing.js                           | JavaScript |         39 |          0 |          6 |         45 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\search result\SearchResult.css               | PostCSS    |         12 |          0 |          2 |         14 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\pages\search result\SearchResult.js                | JavaScript |          9 |          0 |          3 |         12 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\store\store.js                                     | JavaScript |        144 |          0 |          8 |        152 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\utils\deleteAvatar.js                              | JavaScript |         38 |          0 |         11 |         49 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\utils\getAvatarUrl.js                              | JavaScript |          8 |          0 |          5 |         13 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\utils\getUser.js                                   | JavaScript |         21 |          1 |          8 |         30 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\utils\setUserDetails.js                            | JavaScript |         15 |          9 |          6 |         30 |
+| c:\Users\HP\Documents\Courses\react.js\trendy-blog\src\utils\updatePassword.js                            | JavaScript |         25 |          0 |          7 |         32 |
+| Total                                                                                                     |            |     10,257 |        444 |      1,356 |     12,057 |
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

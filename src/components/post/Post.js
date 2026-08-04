@@ -27,7 +27,9 @@ const Post = React.forwardRef(
     const [deleting, setDeleting] = useState(false);
 
     const isBookmarked = bookmarked.some((item) => item.id === post.id);
+
     const likeCount = Array.isArray(post?.likes) ? post.likes.length : 0;
+
     const commentCount =
       Array.isArray(post?.comments) ? post.comments.length : 0;
 
@@ -155,11 +157,6 @@ const Post = React.forwardRef(
                 <figure className="profileImgFigure">
                   <img
                     src={
-                      // post.profiles.avatar ?
-                      //   toString(post.profiles.avatar).includes("supabase") ?
-                      //     getAvatarUrl(post.profiles.avatar)
-                      //   : post.authorImage
-                      // : profilePlaceholder
                       post?.profiles?.avatar ?
                         getAvatarUrl(post.profiles.avatar)
                       : profilePlaceholder

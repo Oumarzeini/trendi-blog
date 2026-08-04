@@ -7,23 +7,36 @@ import Share from "../../../icons/Share";
 import GlobalBookmark from "../../../icons/global-bookmark";
 import FilledBookmark from "../../../icons/filled-global-bookmark";
 import profilePlaceholder from "../../../images/profile-placeholder.png";
+import More from "../../../icons/more";
 //  OTHER
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Activity, useRef } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import supabase from "../../../lib/supabase";
-import Loader from "../../../components/ui/loader";
 import ReactTimeAgo from "react-time-ago";
 import "react-time-ago/locale/en";
 import getAvatarUrl from "../../../utils/getAvatarUrl";
+import styled from "styled-components";
+//COMPONENTS
+import Loader from "../../../components/ui/loader";
+import ConfirmationModel from "../../../components/ui/confirmationModel";
+
 //HOOKS
 import useLikes from "../../../hooks/db/useLikes";
 import useAlert from "../../../hooks/useAlert";
 import getUser from "../../../utils/getUser";
+import usePostAnalytics from "../../../hooks/db/usePostAnalytics";
+import useClickOutside from "../../../hooks/useClickOutside";
 
 const PostPage = () => {
   // const [heartColor, setHeartColor] = useState(false);
   const [comment, setComment] = useState("");
+  const [editCommentValue, setEditCommentValue] = useState("");
+  const [oldComment, setOldComment] = useState("");
+  const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(true);
+  const [isEditComment, setIsEditComment] = useState(false);
+  const [loadingUpdatedComment, setLoadingUpdatedComment] = useState(false);
+  const [editCommentId, setEditCommentId] = useState(null);
   const [post, setPost] = useState(null);
   const [blogId, setBlogId] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -32,8 +45,41 @@ const PostPage = () => {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [addingComment, setAddingComment] = useState(false);
+  const [showCommentActions, setShowCommentActions] = useState(null);
+  const [showDeleteModel, setShowDeleteModel] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [editCommentFocus, setEditCommentFocus] = useState(false);
+
+  const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
+
+  const commentActionsRef = useRef();
+  const commentTextareaRef = useRef();
+
+  useEffect(() => {
+    if (!commentTextareaRef.current) {
+      return;
+    } else {
+      if (editCommentFocus) {
+        commentTextareaRef.current.focus();
+        const textLength = commentTextareaRef.current.value.length;
+        commentTextareaRef.current.setSelectionRange(textLength, textLength);
+      } else {
+        commentTextareaRef.current.blur();
+      }
+    }
+  }, [editCommentFocus]);
+
+  useEffect(() => {
+    if (oldComment === editCommentValue || loadingUpdatedComment) {
+      setIsUpdateButtonDisabled(true);
+    } else {
+      setIsUpdateButtonDisabled(false);
+    }
+  }, [editCommentValue, isEditComment, loadingUpdatedComment, oldComment]);
 
   const Alert = useAlert();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAndSetUser = async () => {
@@ -43,7 +89,6 @@ const PostPage = () => {
 
     getAndSetUser();
   }, []);
-  console.log(user);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,7 +114,7 @@ const PostPage = () => {
         setLoading(true);
         const { data, error } = await supabase
           .from("blogs")
-          .select(`*, likes(id)`)
+          .select(`*, likes(id), profiles(*)`)
           .eq("id", postId)
           .single();
 
@@ -135,8 +180,6 @@ const PostPage = () => {
     fetchComments();
   }, [fetchComments]);
 
-  console.log(comments);
-
   const addComment = async (content) => {
     if (!user || !content.trim() || !blogId) return;
 
@@ -155,16 +198,107 @@ const PostPage = () => {
     await fetchComments();
   };
 
-  console.log(blogId);
-
-  const isBookmarked = bookmarked.some((item) => item.id === post.id);
+  const isBookmarked = bookmarked.some((item) => item?.id === post?.id);
 
   const handleInvalid = (e) => {
     e.target.setCustomValidity("I can see you didn't enter sh!t.");
   };
 
   const handleInput = (e) => {
-    e.target.setCustomValidity("");
+    e.target.setCustomValidity("But what's your comment?");
+  };
+
+  usePostAnalytics(post?.id, user);
+
+  useClickOutside(commentActionsRef, () => {
+    setShowCommentActions(null);
+  });
+
+  const updateComment = async (commentId, update) => {
+    if (!commentId || !user?.id) {
+      Alert("err", "Unable to update comment right now.", true);
+      return;
+    }
+
+    const trimmedUpdate = update?.trim();
+
+    if (!trimmedUpdate) {
+      Alert("err", "Comment cannot be empty.", true);
+      return;
+    }
+
+    try {
+      setLoadingUpdatedComment(true);
+      const { data, error } = await supabase
+        .from("comments")
+        .update({ content: trimmedUpdate })
+        .eq("id", commentId)
+        .eq("user_id", user.id)
+        .select();
+
+      if (error) {
+        Alert("err", `Error updating comment: ${error.message || error}`, true);
+        console.log(error);
+        return;
+      }
+
+      if (data?.[0]) {
+        setComments((prevComments) =>
+          prevComments.map((commentItem) =>
+            commentItem.id === commentId ?
+              { ...commentItem, content: trimmedUpdate }
+            : commentItem,
+          ),
+        );
+      }
+
+      setIsEditComment(false);
+      setEditCommentId(null);
+      setEditCommentValue("");
+      Alert("success", "Comment updated successfully", true);
+      await fetchComments();
+    } catch (err) {
+      console.error("Error updating comment:", err.message || err);
+      Alert("err", `Error updating comment: ${err.message || err}`, true);
+    } finally {
+      setLoadingUpdatedComment(false);
+    }
+  };
+
+  const onUpdate = async (id, content) => {
+    try {
+      await updateComment(id, content);
+    } catch (err) {
+      console.log("error updating comment", err);
+    }
+  };
+
+  const deleteComment = async (commentId) => {
+    if (!commentId || !user) return;
+
+    try {
+      setIsDeleting(true);
+      const { error } = await supabase
+        .from("comments")
+        .delete()
+        .eq("id", commentId)
+        .eq("user_id", user.id);
+      if (error) {
+        Alert("err", "Error Deleting Comment:", error.message || error, true);
+        console.log("Error Deleting Comment:", error.message);
+        return;
+      }
+
+      Alert("success", "Comment deleted", true);
+      setComments((prev) => prev.filter((comment) => comment.id !== commentId));
+      setOverlayOn(false);
+      setShowDeleteModel(false);
+    } catch (err) {
+      Alert("err", "Error Deleting Comment:", err.message || err, true);
+      console.log("Error Deleting Comment:", err.message);
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   if (loading) return <Loader />;
@@ -217,7 +351,7 @@ const PostPage = () => {
             <Link to={`/app/profile/${author?.username}`}>
               <p className="name">{author.full_name}</p>{" "}
             </Link>
-            <p className="username">{author.username}</p>
+            <p className="username">@{author.username}</p>
           </div>
         </div>
 
@@ -294,24 +428,132 @@ const PostPage = () => {
           : comments.map((comment) => (
               <div className="commentContainer" key={comment.id}>
                 <figure className="CommentProfileImgFigure">
-                  <img
-                    src={
-                      getAvatarUrl(comment.profiles.avatar) ||
-                      profilePlaceholder
-                    }
-                    alt=""
-                  />
+                  <Link to={`/app/profile/${comment.profiles.username}`}>
+                    <img
+                      src={
+                        getAvatarUrl(comment.profiles.avatar) ||
+                        profilePlaceholder
+                      }
+                      alt=""
+                    />
+                  </Link>
                 </figure>
 
                 <div className="nameAndCommentContainer">
                   <div className="nameAndDateContainer">
-                    <p className="name">{comment.profiles.username}</p>
+                    <p
+                      onClick={() => {
+                        navigate(`/app/profile/${comment?.profiles?.username}`);
+                      }}
+                      className="name"
+                      style={{ cursor: "pointer" }}
+                    >
+                      {comment?.profiles?.username}
+                    </p>
                     <p className="date">
-                      <ReactTimeAgo date={comment.created_at} local={"en"} />
+                      <ReactTimeAgo date={comment?.created_at} local={"en"} />
                     </p>
                   </div>
 
-                  <p className="commentContent">{comment.content}</p>
+                  <div className="commentAndMoreContainer">
+                    {isEditComment && editCommentId === comment.id ?
+                      <EditCommentContainer>
+                        <textarea
+                          ref={commentTextareaRef}
+                          type="text"
+                          value={editCommentValue}
+                          onChange={(e) => setEditCommentValue(e.target.value)}
+                          disabled={loadingUpdatedComment}
+                        ></textarea>
+                        <div className="btnsContainer">
+                          <button
+                            onClick={() => {
+                              setIsEditComment(false);
+                              setEditCommentFocus(false);
+                            }}
+                            className="cancelEditBtn"
+                          >
+                            Cancel
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              if (oldComment === editCommentValue) {
+                                setIsUpdateButtonDisabled(true);
+                                return;
+                              }
+                              onUpdate(comment.id, editCommentValue);
+                            }}
+                            disabled={isUpdateButtonDisabled}
+                            className="updateCommentBtn"
+                          >
+                            {loadingUpdatedComment ? "Updating..." : "Update"}
+                          </button>
+                        </div>
+                      </EditCommentContainer>
+                    : <p className="commentContent"> {comment.content} </p>}
+
+                    {comment.user_id === user.id && (
+                      <div
+                        onClick={() => {
+                          setShowCommentActions((prev) =>
+                            prev === null ? comment.id : null,
+                          );
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <More
+                          height={"20px"}
+                          width={"20px"}
+                          color={`var(--text)`}
+                        />
+                      </div>
+                    )}
+
+                    <Activity
+                      mode={
+                        showCommentActions === comment.id ? "visible" : "hidden"
+                      }
+                    >
+                      <CommentActionsContainer ref={commentActionsRef}>
+                        <li
+                          role="button"
+                          onClick={() => {
+                            setEditCommentValue(comment.content);
+                            setOldComment(comment.content);
+                            setEditCommentId(comment.id);
+                            setIsEditComment(true);
+                            setShowCommentActions(null);
+                            setEditCommentFocus(true);
+                          }}
+                        >
+                          Edit
+                        </li>
+                        <li
+                          role="button"
+                          onClick={() => {
+                            setOverlayOn(true);
+                            setShowDeleteModel(true);
+                          }}
+                        >
+                          Delete
+                        </li>
+                      </CommentActionsContainer>{" "}
+                    </Activity>
+
+                    <Activity mode={showDeleteModel ? "visible" : "hidden"}>
+                      <ConfirmationModel
+                        title={"Delete Comment"}
+                        subTitle={"This can't be undone"}
+                        actionText={isDeleting ? "Deleting" : "Delete"}
+                        onAction={() => deleteComment(comment.id)}
+                        onCancel={() => {
+                          setOverlayOn(false);
+                          setShowDeleteModel(false);
+                        }}
+                      />
+                    </Activity>
+                  </div>
 
                   {/* <span
                   className="commentHeart"
@@ -368,3 +610,121 @@ const PostPage = () => {
 };
 
 export default PostPage;
+
+const CommentActionsContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 0 2px black;
+  gap: 0;
+  background-color: var(--surface);
+  padding: 5px;
+  position: absolute;
+  top: 20px;
+  right: 0px;
+  z-index: 200;
+
+  & li {
+    width: 100%;
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+  }
+
+  & li:hover {
+    background-color: var(--border);
+  }
+`;
+
+const EditCommentContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  gap: 10px;
+
+  & textarea {
+    width: 50%;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background-color: var(--surface);
+    font-size: 0.9rem;
+
+    &:focus {
+      outline-color: var(--primary);
+    }
+  }
+
+  & div.btnsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+  }
+
+  & button {
+    display: grid;
+    place-content: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: var(--bg);
+    color: var(--text);
+    border: 1px solid gray;
+    min-width: 30%;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  & button.updateCommentBtn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+  }
+
+  & button.updateCommentBtn:hover {
+    font-weight: 500;
+  }
+
+  & button.updateCommentBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  & button.updateCommentBtn:disabled:hover {
+    font-weight: 400;
+  }
+
+  & button.cancelEditBtn:hover {
+    color: var(--err-color);
+    border-color: var(--err-color);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    & textarea {
+      width: 100%;
+    }
+
+    & div.btnsContainer {
+      width: 100%;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    & button {
+      width: 40%;
+      font-size: 0.9rem;
+    }
+  }
+`;

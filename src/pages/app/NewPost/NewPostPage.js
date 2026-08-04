@@ -9,7 +9,6 @@ import getUser from "../../../utils/getUser";
 import useAlert from "../../../hooks/useAlert";
 import { useParams, useNavigate } from "react-router-dom";
 import supabase from "../../../lib/supabase";
-import getAvatarUrl from "../../../utils/getAvatarUrl";
 
 const NewPostPage = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -75,9 +74,9 @@ const NewPostPage = () => {
       setCategory(post?.category || "uncategorized");
       setBody(post.body);
 
-      if (post.image_url) {
-        const imageURL = await getAvatarUrl(post.image_url);
-        setPostImage(imageURL);
+      if (post?.image_url) {
+        // const imageURL = await getAvatarUrl(post.image_url);
+        setPostImage(post?.image_url);
       } else {
         setPostImage(null);
       }
@@ -294,6 +293,10 @@ const NewPostPage = () => {
               Attach an image
             </label>
             <input
+              style={{
+                position: "absolute",
+                left: "-10000px",
+              }}
               id="image"
               type="file"
               accept="image/*"

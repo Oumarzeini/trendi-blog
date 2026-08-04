@@ -15,6 +15,7 @@ import DraftsPage from "./pages/app/draftsPage/drafts-page";
 import StatsPage from "./pages/app/statsPage/stats-page";
 import CategoryPage from "./pages/app/category-page/category-page";
 import TrendingPage from "./pages/app/trending-page/trending-page";
+import SearchResult from "./pages/search result/SearchResult";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="stats" element={<StatsPage />} />
         <Route path="category" element={<CategoryPage />} />
         <Route path="trending" element={<TrendingPage />} />
+        <Route path="search-result" element={<SearchResult />} />
         <Route path="*" element={<Missing />} />
       </Route>
       <Route path="*" element={<Missing />}></Route>

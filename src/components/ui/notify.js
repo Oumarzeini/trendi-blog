@@ -5,7 +5,7 @@ const Container = styled.div`
   min-width: 200px;
   width: fit-content;
 
-  height: 50px;
+  height: fit-content;
   border-radius: 8px;
   border: 1px solid ${(props) => (props.$isSuccess ? `var(--primary)` : "red")};
   border-left: 3px solid

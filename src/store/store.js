@@ -6,6 +6,14 @@ export default createStore({
   setOverlayOn: action((state, payload) => {
     state.overlayOn = payload;
   }),
+  searchResults: [],
+  setSearchResults: action((state, payload) => {
+    state.searchResults = payload;
+  }),
+  searchQuery: "",
+  setSearchQuery: action((state, payload) => {
+    state.searchQuery = payload;
+  }),
   sidebarIsOpen: false,
   setSidebarIsOpen: action((state, payload) => {
     state.sidebarIsOpen = payload;

@@ -13,8 +13,6 @@ import Feedback from "../../icons/feedback";
 //HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
 import useAlert from "../../hooks/useAlert";
-//PAGES
-import SearchResult from "../search result/SearchResult";
 // REACT AND OTHER
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
@@ -24,10 +22,11 @@ import getUser from "../../utils/getUser";
 import supabase from "../../lib/supabase";
 
 const AppLayout = () => {
-  const [searchFocus, setSearchFocus] = useState(false);
+  //const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [showSearch, setShowSearch] = useState(true);
   const [user, setUser] = useState(null);
+  //const [showSearchPage, setShowSearchPage] = useState(false);
 
   const navigate = useNavigate();
   const alert = useAlert();
@@ -112,7 +111,9 @@ const AppLayout = () => {
           display: overlayOn || feedbackFormOpen ? "block" : "none",
         }}
       ></div>
+
       <Notify />
+
       <main
         className={
           overlayOn || feedbackFormOpen ?
@@ -159,11 +160,7 @@ const AppLayout = () => {
           <img ref={logoRef} className="app-logo" src={logo} alt="" />
 
           {showSearch ?
-            <Search
-              setSearchFocus={setSearchFocus}
-              openSearch={openSearch}
-              setOpenSearch={setOpenSearch}
-            />
+            <Search openSearch={openSearch} setOpenSearch={setOpenSearch} />
           : ""}
 
           <div className="feedback-profile-container">
@@ -191,10 +188,20 @@ const AppLayout = () => {
         {feedbackFormOpen && <FeedbackForm />}
 
         <Sidebar />
+        <Outlet />
 
+        {/* <>
+          <Activity mode={showSearchPage ? "visible" : "hidden"}>
+            <SearchResult setShowSearchPage={setShowSearchPage} />
+          </Activity>
+          <Activity mode={showSearchPage ? "hidden" : "visible"}>
+            <Outlet />
+          </Activity>
+        </> */}
+        {/* 
         {searchFocus ?
           <SearchResult />
-        : <Outlet />}
+        : <Outlet />} */}
         {/* </section> */}
       </main>
     </>

@@ -110,6 +110,12 @@
   }
 }
 
+input[type="file"] {
+    position: absolute !important;
+    left: -10000px !important;
+    background-color: red;
+}
+
 .buttonsContainer {
   width: 100%;
   display: flex;

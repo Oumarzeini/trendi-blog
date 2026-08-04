@@ -166,11 +166,20 @@ const BookmarksPage = () => {
 
   const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
 
-  const searchResults = bookmarked.filter(
-    (post) =>
-      post.title.toLowerCase().includes(search.toLowerCase()) ||
-      post.body.toLowerCase().includes(search.toLowerCase()),
-  );
+  const searchResults =
+    sortBy === "oldest" ?
+      bookmarked
+        .filter(
+          (post) =>
+            post.title.toLowerCase().includes(search.toLowerCase()) ||
+            post.body.toLowerCase().includes(search.toLowerCase()),
+        )
+        .reverse()
+    : bookmarked.filter(
+        (post) =>
+          post.title.toLowerCase().includes(search.toLowerCase()) ||
+          post.body.toLowerCase().includes(search.toLowerCase()),
+      );
 
   return (
     <Main>
@@ -232,10 +241,10 @@ const BookmarksPage = () => {
         )}
         {searchResults.map((post) =>
           width <= 500 ?
-            <Link to={`/app/post/${post.id}`}>
+            <Link to={`/app/post/${post.id}`} key={post.id}>
               <ListViewPost variant="compact" post={post} key={post.id} />{" "}
             </Link>
-          : <Link to={`/app/post/${post.id}`}>
+          : <Link to={`/app/post/${post.id}`} key={post.id}>
               <Post variant="compact" post={post} key={post.id} />
             </Link>,
         )}
