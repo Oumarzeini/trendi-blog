@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { useStoreActions } from "easy-peasy";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 const PrimaryLink = styled(NavLink)`
   display: flex;
@@ -27,9 +27,28 @@ const PrimaryBtn = ({ path, children }) => {
   const setSidebarIsOpen = useStoreActions(
     (actions) => actions.setSidebarIsOpen,
   );
+  const setShowSignInModel = useStoreActions(
+    (actions) => actions.setShowSignInModel,
+  );
+  const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
+  const isGuest = useStoreState((state) => state.guest.isGuest);
+  const navigate = useNavigate();
 
   return (
-    <PrimaryLink onClick={() => setSidebarIsOpen(false)} to={path}>
+    <PrimaryLink
+      onClick={(e) => {
+        e.preventDefault();
+        setSidebarIsOpen(false);
+        if (isGuest) {
+          setShowSignInModel(true);
+          setOverlayOn(true);
+          return;
+        }
+        navigate(path);
+      }}
+      to={path}
+      end
+    >
       {children}
     </PrimaryLink>
   );

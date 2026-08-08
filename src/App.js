@@ -16,6 +16,7 @@ import StatsPage from "./pages/app/statsPage/stats-page";
 import CategoryPage from "./pages/app/category-page/category-page";
 import TrendingPage from "./pages/app/trending-page/trending-page";
 import SearchResult from "./pages/search result/SearchResult";
+import RequireAuth from "./components/auth/requireAuth";
 
 function App() {
   return (
@@ -26,16 +27,20 @@ function App() {
       <Route path="/app" element={<AppLayout />}>
         <Route index element={<Feed />} />
         <Route path="feed" element={<Feed />} />
+
+        <Route element={<RequireAuth />}>
+          <Route path="profile/:username" element={<ProfilePage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="write/:postId?" element={<NewPostPage />} />
+          <Route path="notifications" element={<NotificationsPage />} />
+          <Route path="bookmarks" element={<BookmarksPage />} />
+          <Route path="drafts" element={<DraftsPage />} />
+          <Route path="stats" element={<StatsPage />} />
+          <Route path="category" element={<CategoryPage />} />
+          <Route path="trending" element={<TrendingPage />} />
+        </Route>
+
         <Route path="post/:id" element={<PostPage />} />
-        <Route path="profile/:username" element={<ProfilePage />} />
-        <Route path="settings" element={<SettingsPage />} />
-        <Route path="write/:postId?" element={<NewPostPage />} />
-        <Route path="notifications" element={<NotificationsPage />} />
-        <Route path="bookmarks" element={<BookmarksPage />} />
-        <Route path="drafts" element={<DraftsPage />} />
-        <Route path="stats" element={<StatsPage />} />
-        <Route path="category" element={<CategoryPage />} />
-        <Route path="trending" element={<TrendingPage />} />
         <Route path="search-result" element={<SearchResult />} />
         <Route path="*" element={<Missing />} />
       </Route>

@@ -14,19 +14,23 @@ import Feedback from "../../icons/feedback";
 import useWindowSize from "../../hooks/useWindowSize";
 import useAlert from "../../hooks/useAlert";
 // REACT AND OTHER
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import getAvatarUrl from "../../utils/getAvatarUrl";
 import getUser from "../../utils/getUser";
 import supabase from "../../lib/supabase";
+import SignInModel from "../../components/ui/signInModel";
 
 const AppLayout = () => {
   //const [searchFocus, setSearchFocus] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [showSearch, setShowSearch] = useState(true);
   const [user, setUser] = useState(null);
-  //const [showSearchPage, setShowSearchPage] = useState(false);
+  const showSignInModel = useStoreState((state) => state.showSignInModel);
+  const isGuest = useStoreState((s) => s.guest.isGuest);
+  const setOverlayOn = useStoreActions((a) => a.setOverlayOn);
+  const setShowSignInModel = useStoreActions((a) => a.setShowSignInModel);
 
   const navigate = useNavigate();
   const alert = useAlert();
@@ -176,12 +180,20 @@ const AppLayout = () => {
               />
             </span>
 
-            <Link to={`/app/profile/${user?.username}`}>
-              {" "}
-              <figure>
-                <img src={getAvatarUrl(user?.avatar)} alt="" />
-              </figure>
-            </Link>
+            <figure
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                if (isGuest) {
+                  setOverlayOn(true);
+                  setShowSignInModel(true);
+                  return;
+                } else {
+                  navigate(`/app/profile/${user?.username}`);
+                }
+              }}
+            >
+              <img src={getAvatarUrl(user?.avatar)} alt="" />
+            </figure>
           </div>
         </header>
 
@@ -189,6 +201,8 @@ const AppLayout = () => {
 
         <Sidebar />
         <Outlet />
+
+        {showSignInModel && <SignInModel />}
 
         {/* <>
           <Activity mode={showSearchPage ? "visible" : "hidden"}>

@@ -2,9 +2,19 @@ import { createStore, action, persist } from "easy-peasy";
 import logo from "../images/logo.png";
 
 export default createStore({
+  guest: persist({
+    isGuest: false,
+    setIsGuest: action((state, payload) => {
+      state.isGuest = payload;
+    }),
+  }),
   overlayOn: false,
   setOverlayOn: action((state, payload) => {
     state.overlayOn = payload;
+  }),
+  showSignInModel: false,
+  setShowSignInModel: action((state, payload) => {
+    state.showSignInModel = payload;
   }),
   searchResults: [],
   setSearchResults: action((state, payload) => {

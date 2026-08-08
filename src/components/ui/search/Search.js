@@ -162,13 +162,18 @@ export default Search;
 const InputContainer = styled.div`
   width: 100%;
   height: 40px;
-  background-color: rgb(221, 218, 218);
+  background-color: transparent;
+  border: 2px solid rgb(221, 218, 218);
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
   padding: 5px;
   border-radius: 10px;
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const SearchButton = styled.button`

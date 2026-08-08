@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import PrimaryLink from "../ui/primary/PrimaryLink";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 const StyledIcon = styled.span`
   display: flex;
@@ -44,6 +44,12 @@ const NavItem = ({ icon, label, path, isPrimary }) => {
   const setSidebarIsOpen = useStoreActions(
     (actions) => actions.setSidebarIsOpen,
   );
+  const setShowSignInModel = useStoreActions(
+    (actions) => actions.setShowSignInModel,
+  );
+  const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
+  const isGuest = useStoreState((state) => state.guest.isGuest);
+  const navigate = useNavigate();
 
   if (isPrimary) {
     return (
@@ -54,7 +60,26 @@ const NavItem = ({ icon, label, path, isPrimary }) => {
     );
   }
   return (
-    <StyledNavLink onClick={() => setSidebarIsOpen(false)} to={path} end>
+    <StyledNavLink
+      onClick={(e) => {
+        e.preventDefault();
+        setSidebarIsOpen(false);
+
+        if (isGuest) {
+          if (path === "feed") {
+            navigate("/app/feed");
+            return;
+          }
+          setShowSignInModel(true);
+          setOverlayOn(true);
+          return;
+        }
+
+        navigate(path);
+      }}
+      to={path}
+      end
+    >
       <StyledIcon>
         <Icon />
       </StyledIcon>

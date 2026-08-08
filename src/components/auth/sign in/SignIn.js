@@ -6,6 +6,7 @@ import Mail from "../../../icons/Mail";
 import Lock from "../../../icons/Lock";
 import Eye from "../../../icons/Eye";
 import NoEye from "../../../icons/no-eye";
+import { useStoreActions } from "easy-peasy";
 
 const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
   const [userEmail, setUserEmail] = useState("");
@@ -14,6 +15,7 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [pwVisible, setPwVisible] = useState(false);
+  const setIsGuest = useStoreActions((a) => a.guest.setIsGuest);
 
   const navigate = useNavigate();
 
@@ -111,6 +113,7 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
             setShowSetName(true);
           } else {
             setSuccess("successsfully signed in");
+            setIsGuest(false);
             navigate("/app");
           }
         }

@@ -51,6 +51,10 @@ const PostPage = () => {
   const [editCommentFocus, setEditCommentFocus] = useState(false);
 
   const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
+  const setShowSignInModel = useStoreActions(
+    (actions) => actions.setShowSignInModel,
+  );
+  const isGuest = useStoreState((state) => state.guest.isGuest);
 
   const commentActionsRef = useRef();
   const commentTextareaRef = useRef();
@@ -144,7 +148,7 @@ const PostPage = () => {
     getPost();
   }, [slugWithId, postId]);
 
-  const { liked, likesCount, toggleLike } = useLikes(blogId, user);
+  const { liked, likesCount, toggleLike } = useLikes(blogId, user ?? null);
 
   const fetchComments = useCallback(async () => {
     if (!blogId) return;
@@ -208,7 +212,7 @@ const PostPage = () => {
     e.target.setCustomValidity("But what's your comment?");
   };
 
-  usePostAnalytics(post?.id, user);
+  usePostAnalytics(post?.id, user ?? null);
 
   useClickOutside(commentActionsRef, () => {
     setShowCommentActions(null);
@@ -233,7 +237,7 @@ const PostPage = () => {
         .from("comments")
         .update({ content: trimmedUpdate })
         .eq("id", commentId)
-        .eq("user_id", user.id)
+        .eq("user_id", user?.id)
         .select();
 
       if (error) {
@@ -282,7 +286,7 @@ const PostPage = () => {
         .from("comments")
         .delete()
         .eq("id", commentId)
-        .eq("user_id", user.id);
+        .eq("user_id", user?.id);
       if (error) {
         Alert("err", "Error Deleting Comment:", error.message || error, true);
         console.log("Error Deleting Comment:", error.message);
@@ -372,6 +376,11 @@ const PostPage = () => {
               role="button"
               className="post-page-likes"
               onClick={() => {
+                if (isGuest) {
+                  setOverlayOn(true);
+                  setShowSignInModel(true);
+                  return;
+                }
                 toggleLike();
               }}
             >
@@ -390,6 +399,11 @@ const PostPage = () => {
 
             <span
               onClick={() => {
+                if (isGuest) {
+                  setOverlayOn(true);
+                  setShowSignInModel(true);
+                  return;
+                }
                 toggleBookmark(post);
               }}
               style={{
@@ -493,7 +507,7 @@ const PostPage = () => {
                       </EditCommentContainer>
                     : <p className="commentContent"> {comment.content} </p>}
 
-                    {comment.user_id === user.id && (
+                    {comment.user_id === user?.id && (
                       <div
                         onClick={() => {
                           setShowCommentActions((prev) =>
@@ -589,6 +603,12 @@ const PostPage = () => {
             }}
             disabled={comment && !addingComment ? false : true}
             onClick={() => {
+              if (isGuest) {
+                setOverlayOn(true);
+                setShowSignInModel(true);
+                return;
+              }
+
               try {
                 setAddingComment(true);
                 addComment(comment);

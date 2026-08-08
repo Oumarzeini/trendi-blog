@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 import RecoverPassword from "../../components/auth/recover-password";
 import SetName from "../../components/auth/set-name";
 import Notify from "../../components/ui/notify";
+import { useStoreActions } from "easy-peasy";
 
 const AuthPage = () => {
   const [authOption, setAuthOption] = useState("signin");
   const [showRecover, setShowRecover] = useState(false);
   const [showSetName, setShowSetName] = useState(false);
+  const setIsGuest = useStoreActions((a) => a.guest.setIsGuest);
 
   return (
     <main className="authPageMain">
@@ -53,7 +55,14 @@ const AuthPage = () => {
 
           <div className="continueContainer">
             <Link to="/app">
-              <p className="continueAG">Continue as a guest</p>
+              <p
+                onClick={() => {
+                  setIsGuest(true);
+                }}
+                className="continueAG"
+              >
+                Continue as a guest
+              </p>
             </Link>
           </div>
         </section>

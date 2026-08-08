@@ -90,7 +90,8 @@ hr {
   font-size: 1.1rem;
   padding: 10px;
   padding-bottom: 3rem;
-
+ 
+  word-spacing: 3px;
   line-height: 25px;
   width: 100%;
   font-family: system-ui;
