@@ -4,7 +4,7 @@ import Close from "../../../icons/Close";
 import { useRef, useEffect, useState } from "react";
 import supabase from "../../../lib/supabase";
 import { useStoreActions } from "easy-peasy";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Search = ({ openSearch, setOpenSearch }) => {
@@ -18,6 +18,15 @@ const Search = ({ openSearch, setOpenSearch }) => {
   const setSearchQuery = useStoreActions((actions) => actions.setSearchQuery);
 
   const navigate = useNavigate();
+  const path = useLocation().pathname;
+
+  const handleCloseSearchResult = () => {
+    if (path.includes("search-result")) {
+      navigate("/app/feed");
+    } else {
+      return;
+    }
+  };
 
   useEffect(() => {
     if (shouldFocus && searchRef.current) {
@@ -119,7 +128,7 @@ const Search = ({ openSearch, setOpenSearch }) => {
               setSearchResults([]);
               setSearchQuery("");
               setOpenSearch(false);
-              navigate("/app/feed");
+              handleCloseSearchResult();
             }}
             className="closeIconSpan"
           >

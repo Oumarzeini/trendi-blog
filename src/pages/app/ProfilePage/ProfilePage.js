@@ -9,6 +9,7 @@ import Loader from "../../../components/ui/loader";
 import Notify from "../../../components/ui/notify";
 import PicturePreview from "../../../components/ui/picture-preview";
 import Post from "../../../components/post/Post";
+import InsightsDisplay from "../../../components/ui/insightsDisplay";
 //HOOKS
 import useAlert from "../../../hooks/useAlert";
 import useUploadAvatar from "../../../hooks/db/useUploadAvatar";
@@ -47,7 +48,7 @@ function ProfilePage() {
   const alert = useAlert();
 
   const { username: routeUsername } = useParams();
-  console.log(routeUsername);
+
   const isOwner = signedInUser?.id === user?.id;
 
   useClickOutside(imgMenuRef, () => setShowAvatarMenu(false));
@@ -295,6 +296,8 @@ function ProfilePage() {
             : "No bio yet"}
           </p>
         </div>
+
+        <InsightsDisplay />
 
         <Activity mode={isOwner ? "visible" : "hidden"}>
           <button

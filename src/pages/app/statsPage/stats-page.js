@@ -94,7 +94,6 @@ const StatsPage = () => {
   }, []);
 
   const { likes, comments, views, reads, loading } = useStats(user?.id);
-  console.log(likes, comments, views, reads);
 
   return (
     <Main>
