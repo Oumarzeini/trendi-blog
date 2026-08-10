@@ -227,6 +227,7 @@ const ButtonsContainer = styled.div`
     color: var(--text);
     border-radius: 8px;
     cursor: pointer;
+    font-size: 1rem;
   }
 
   & .submit-btn {
@@ -237,6 +238,10 @@ const ButtonsContainer = styled.div`
     color: white;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 1rem;
+    &:active {
+      scale: 0.9;
+    }
   }
 `;
 
@@ -253,6 +258,7 @@ const FeedbackForm = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const dropdownRef = useRef();
   const wraperRef = useRef();
@@ -350,17 +356,23 @@ const FeedbackForm = () => {
         </div>
       </div>
 
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form action="https://formspree.io/f/mjybyygg" method="POST">
+        <input type="hidden" name="_captcha" value="false"></input>
+        <input
+          type="hidden"
+          name="_subject"
+          value={`${feedbackType} from Trendi-blog`}
+        />
         <MessageContainer className="message-container">
           <label htmlFor="feedback-field">
             Describe Your Feedback : <span className="required">*</span>
           </label>
           <textarea
+            name="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Start typing..."
             required
-            name="feedback-field"
             id="feedback-field"
           ></textarea>
         </MessageContainer>
@@ -371,6 +383,7 @@ const FeedbackForm = () => {
         <InputWraper className="input-wraper">
           <div className="input-label-container">
             <input
+              name="firstname"
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
               placeholder="Your firstname"
@@ -383,6 +396,7 @@ const FeedbackForm = () => {
 
           <div className="input-label-container">
             <input
+              name="lastname"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
               placeholder="Your lastname"
@@ -400,12 +414,13 @@ const FeedbackForm = () => {
         <InputWraper className="input-wraper">
           <div className="input-label-container" style={{ width: "100%" }}>
             <input
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={{ width: "100%" }}
               placeholder="example@gmail.com"
               required
-              type="text"
+              type="email"
               id="email"
             />
             <label htmlFor="email"></label>
@@ -422,7 +437,13 @@ const FeedbackForm = () => {
           >
             Cancel
           </button>
-          <button className="submit-btn">Submit</button>
+          <button
+            onClick={() => setSubmitting(true)}
+            type="submit"
+            className="submit-btn"
+          >
+            {submitting ? "Submitting..." : "Submit"}
+          </button>
         </ButtonsContainer>
       </form>
     </Wraper>

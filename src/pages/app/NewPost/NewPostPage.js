@@ -114,12 +114,6 @@ const NewPostPage = () => {
       setCategory("uncategorized");
     }
 
-    // alert(
-    //   "success",
-    //   `title: ${title}, category: ${category}, content: ${body}, img: ${JSON.stringify(postImage)}`,
-    //   true,
-    // );
-
     setLoading(true);
 
     try {
@@ -149,58 +143,6 @@ const NewPostPage = () => {
       setLoading(false);
     }
   };
-
-  // const handleDraft = async () => {
-  //   if (!title || !body || title === "" || body === "") {
-  //     alert("err", "Please fill the title and content fields", true);
-  //     console.log("Please fill the title and content fields");
-  //     return;
-  //   }
-
-  //   const returnUser = async () => {
-  //     const currentUser = await getUser();
-  //     return currentUser;
-  //   };
-
-  //   const user = await returnUser();
-
-  //   const toBase64 = (file) => {
-  //     return new Promise((resolve) => {
-  //       const reader = new FileReader();
-  //       reader.onload = () => resolve(reader.result);
-  //       reader.readAsDataURL(file);
-  //     });
-  //   };
-
-  //   const imageData = postImage ? await toBase64(postImage) : "";
-
-  //   const post = {
-  //     id: draftPosts.length ? draftPosts[draftPosts.length - 1] + 1 : 1,
-  //     title,
-  //     category: category ? category : "uncategorized",
-  //     body,
-  //     image: imageData,
-  //     author: user.full_name,
-  //     authorImage: user.avatar,
-  //     authorUsername: user.username,
-  //   };
-
-  //   setDraftLoading(true);
-  //   try {
-  //     setDraftPosts(post);
-  //     alert("success", "Post added to drafts successfully", true);
-  //     setTitle("");
-  //     setCategory("");
-  //     setBody("");
-  //     setPostImage(null);
-  //     setPreviewImg(null);
-  //     setShowPreviewImg(false);
-  //   } catch (err) {
-  //     alert("err", err, true);
-  //   } finally {
-  //     setDraftLoading(false);
-  //   }
-  // };
 
   return (
     <main className="newPostMain">

@@ -36,13 +36,16 @@ const AppLayout = () => {
   const alert = useAlert();
 
   useEffect(() => {
+    if (isGuest) {
+      return;
+    }
     const getAndSetUser = async () => {
       const currentUser = await getUser();
       setUser(currentUser);
     };
 
     getAndSetUser();
-  }, []);
+  }, [isGuest]);
 
   useEffect(() => {
     const {

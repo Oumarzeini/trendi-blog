@@ -22,7 +22,7 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
   useEffect(() => {
     setError("");
     setSuccess("");
-  }, [userEmail, userPassword, authOption]);
+  }, [userEmail, userPassword, authOption, setIsGuest]);
 
   const handleSignUp = async (email, password) => {
     try {

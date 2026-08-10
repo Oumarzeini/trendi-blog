@@ -8,7 +8,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import useUploadAvatar from "../../hooks/db/useUploadAvatar";
 import useAlert from "../../hooks/useAlert";
 // REACT
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 // HELPERS
 import getUser from "../../utils/getUser";
 import getAvatarUrl from "../../utils/getAvatarUrl";
@@ -224,7 +224,7 @@ const Account = () => {
 
   const alert = useAlert();
 
-  const getAndSetUser = async () => {
+  const getAndSetUser = useCallback(async () => {
     const currentUser = await getUser();
     setUser(currentUser);
     setName(currentUser.full_name);
@@ -238,11 +238,11 @@ const Account = () => {
       username: currentUser.username,
       bio: currentUser?.bio ?? "",
     });
-  };
+  }, []);
 
   useEffect(() => {
     getAndSetUser();
-  }, []);
+  }, [getAndSetUser]);
 
   useEffect(() => {
     const updatedInof = () => {
@@ -260,6 +260,7 @@ const Account = () => {
     initialInfo.name,
     initialInfo.username,
     initialInfo.bio,
+    getAndSetUser,
   ]);
 
   const handleAvatarChange = async (e) => {
