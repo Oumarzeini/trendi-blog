@@ -92,20 +92,43 @@ const NewPostPage = () => {
   useEffect(() => {
     if (postImage) {
       setShowPreviewImg(true);
-      if (isEditMode) {
-        setPreviewImg(postImage);
-      } else {
+
+      if (postImage instanceof File) {
         const previewUrl = URL.createObjectURL(postImage);
         setPreviewImg(previewUrl);
 
         return () => URL.revokeObjectURL(previewUrl);
       }
+
+      setPreviewImg(postImage);
     } else {
       setShowPreviewImg(false);
+      setPreviewImg(null);
     }
-  }, [postImage, isEditMode]);
+  }, [postImage]);
 
   const { createBlog } = useCreateBlog(user);
+
+  const uploadImageFile = async (file) => {
+    if (!file || !(file instanceof File)) return null;
+
+    const filePath = `blogs/${user?.id}/${Date.now()}-${file.name}`;
+    const { error } = await supabase.storage
+      .from("blog-images")
+      .upload(filePath, file);
+
+    if (error) {
+      alert("err", error.message, true);
+      console.log(error.message);
+      return null;
+    }
+
+    const { data } = supabase.storage
+      .from("blog-images")
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  };
 
   const handlePublish = async () => {
     if (!title || !body || title === "" || body === "") {
@@ -122,7 +145,13 @@ const NewPostPage = () => {
 
     try {
       if (isEditMode) {
-        const updates = { title, category, body, image_url: postImage };
+        let image_url = postImage;
+
+        if (postImage instanceof File) {
+          image_url = await uploadImageFile(postImage);
+        }
+
+        const updates = { title, category, body, image_url };
         await updateBlog(editedBlogId, updates);
         setTitle("");
         setCategory("");
@@ -150,10 +179,7 @@ const NewPostPage = () => {
 
   const handleImageChange = (e) => {
     if (!e.target.files[0]) return;
-    const imageUrl = URL.createObjectURL(e.target.files[0]);
-    setPostImage(imageUrl);
-
-    setPreviewImg(imageUrl);
+    setPostImage(e.target.files[0]);
     setMenuVisible(false);
   };
 
