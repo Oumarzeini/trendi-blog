@@ -10,7 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-
+  
   --bg: #f6f6fb;
   --text: #1f1f1f;
   --surface: #f6f6fb;
@@ -19,6 +19,8 @@ body {
   --primary: rgb(55, 136, 255);
   --err-bg: rgba(255, 0, 0, 0.187);
   --err-color: rgb(113, 0, 0);
+  --success-color: green;
+  --success-bg: #b9ff96;
   --notif-bg-not-read: rgb(233, 241, 252);
   --notif-bg-read: var(--surface);
   --notif-border-not-read: var(--primary);

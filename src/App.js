@@ -17,12 +17,14 @@ import CategoryPage from "./pages/app/category-page/category-page";
 import TrendingPage from "./pages/app/trending-page/trending-page";
 import SearchResult from "./pages/search result/SearchResult";
 import RequireAuth from "./components/auth/requireAuth";
+import UpdatePassword from "./pages/Auth/update-password";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/auth" element={<AuthPage />} />
+      <Route path="/auth/update-password" element={<UpdatePassword />} />
 
       <Route path="/app" element={<AppLayout />}>
         <Route index element={<Feed />} />

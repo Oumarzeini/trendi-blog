@@ -6,13 +6,27 @@ import { Link } from "react-router-dom";
 import RecoverPassword from "../../components/auth/recover-password";
 import SetName from "../../components/auth/set-name";
 import Notify from "../../components/ui/notify";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import supabase from "../../lib/supabase";
+import { useEffect } from "react";
 
 const AuthPage = () => {
   const [authOption, setAuthOption] = useState("signin");
   const [showRecover, setShowRecover] = useState(false);
   const [showSetName, setShowSetName] = useState(false);
+  const isGuest = useStoreState((a) => a.guest.isGuest);
   const setIsGuest = useStoreActions((a) => a.guest.setIsGuest);
+
+  useEffect(() => {
+    if (isGuest) {
+      const logOut = async () => {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) return;
+      };
+      logOut();
+    }
+  }, [isGuest]);
 
   return (
     <main className="authPageMain">

@@ -25,8 +25,10 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
   }, [userEmail, userPassword, authOption, setIsGuest]);
 
   const handleSignUp = async (email, password) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     try {
-      if (email === "" || password === "") {
+      if (email === "" || password === "" || !regex.test(email)) {
         setError("Please fill Name, Email and Password fields and");
         return;
       }
@@ -46,6 +48,9 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
       const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          redirectTo: "http://192.168.56.1:3000/auth",
+        },
       });
 
       if (error) {

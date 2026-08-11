@@ -1,5 +1,6 @@
 import { useState, useRef, Activity } from "react";
 import styled from "styled-components";
+import supabase from "../../lib/supabase";
 
 const Container = styled.div`
   width: 40%;
@@ -36,13 +37,27 @@ const InputContainer = styled.div`
   width: 90%;
 `;
 
-const FeedbackContainer = styled.div`
+const ErrorFeedback = styled.div`
   width: 90%;
   background-color: var(--err-bg);
   color: var(--err-color);
   border: 1px solid red;
   padding: 10px;
   border-radius: 6px;
+
+  @media (min-width: 768px) {
+    margin-top: 10px;
+  }
+`;
+
+const SuccessFeedback = styled.div`
+  width: 90%;
+  background-color: var(--success-bg);
+  color: var(--success-color);
+  border: 1px solid green;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 500;
 
   @media (min-width: 768px) {
     margin-top: 10px;
@@ -102,6 +117,12 @@ const SendBtn = styled.button`
   font-size: 1.1rem;
   margin-top: 1rem;
   cursor: pointer;
+  opacity: 1;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `;
 
 const BackBtn = styled.button`
@@ -129,26 +150,47 @@ const RecoverPassword = ({ setShowRecover }) => {
   const emailRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [showErr, setShowErr] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
   const [isBackBtnDisabled, setIsBackBtnDisabled] = useState(false);
+  const [isSendButtonDisabled, setIsSenddButtonDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   //const isValidEmail = () => {};
 
-  const handleSubmit = () => {
-    if (email === "") {
+  const handleSubmit = async () => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (email === "" || !regex.test(email)) {
       emailRef.current.style.borderColor = "red";
       emailRef.current.style.borderWidth = "3px";
       setIsBackBtnDisabled(true);
-
+      setShowErr(true);
+      setErrMsg("Please enter a valid Email");
+      setIsSenddButtonDisabled(true);
       setTimeout(() => {
         emailRef.current.style.borderColor = "black";
         emailRef.current.style.borderWidth = "1px";
         setIsBackBtnDisabled(false);
       }, 1500);
-    } else if (!email.includes("omar")) {
-      setShowErr(true);
-      setErrMsg("Please enter a valid Email");
     } else {
-      console.log("sending recovery email process...");
+      setLoading(true);
+      try {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: "http://192.168.56.1:3000/auth/update-password",
+        });
+        if (error) {
+          throw error;
+        } else {
+          setSuccessMsg("Check your Email inbox for a reset link.");
+          setShowSuccess(true);
+          setIsSenddButtonDisabled(true);
+        }
+      } catch (err) {
+        setShowErr(true);
+        setErrMsg(`An error occured, ${err} , Please try again`);
+      } finally {
+        setLoading(false);
+      }
     }
   };
   return (
@@ -162,9 +204,13 @@ const RecoverPassword = ({ setShowRecover }) => {
           <Input
             onFocus={() => {
               setShowErr(false);
+              setShowSuccess(false);
             }}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setIsSenddButtonDisabled(false);
+            }}
             ref={emailRef}
             type="email"
             id="email"
@@ -174,13 +220,23 @@ const RecoverPassword = ({ setShowRecover }) => {
         </InputContainer>
 
         <Activity mode={showErr ? "visible" : "hidden"}>
-          <FeedbackContainer>
+          <ErrorFeedback>
             <p>{errMsg}</p>
-          </FeedbackContainer>
+          </ErrorFeedback>
         </Activity>
 
-        <SendBtn onClick={handleSubmit} type="submit">
-          Send Email
+        <Activity mode={showSuccess ? "visible" : "hidden"}>
+          <SuccessFeedback>
+            <p>{successMsg}</p>
+          </SuccessFeedback>
+        </Activity>
+
+        <SendBtn
+          disabled={isSendButtonDisabled || loading}
+          onClick={handleSubmit}
+          type="submit"
+        >
+          {loading ? "Sending..." : "Send Email"}
         </SendBtn>
         <BackBtn
           disabled={isBackBtnDisabled}
