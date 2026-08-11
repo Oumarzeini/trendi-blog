@@ -30,6 +30,7 @@
   font-size: 1.8rem;
   margin-left: 10px;
   margin-bottom: 20px;
+  font-family: "Poppins", system-ui, sans-serif;
 }
 
 .categoryContainer {
@@ -90,7 +91,7 @@ hr {
   font-size: 1.1rem;
   padding: 10px;
   padding-bottom: 3rem;
- 
+  font-family: "Poppins", system-ui, sans-serif !important;
   word-spacing: 3px;
   line-height: 25px;
   width: 100%;
@@ -215,6 +216,7 @@ hr {
 .commentContent {
   width: 100%;
   font-size: 0.9rem;
+  font-family: "Poppins", system-ui, sans-serif !important;
 }
 
 .commentForm {
@@ -270,6 +272,10 @@ hr {
 @media (max-width: 768px) {
   .postPageSection {
     padding-inline: 10px;
+  }
+
+  .postContent {
+    line-height: 28px;
   }
 
   .commentForm {

@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmationModel from "../ui/confirmationModel";
 import useBlogActions from "../../hooks/db/useBlogActions";
 import useAlert from "../../hooks/useAlert";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Post = React.forwardRef(
   ({ variant = "full", post, showActions = false, onDeleteSuccess }, ref) => {
@@ -25,6 +26,8 @@ const Post = React.forwardRef(
     const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
     const [showModel, setShowModel] = useState(false);
     const [deleting, setDeleting] = useState(false);
+
+    const { width } = useWindowSize();
 
     const isBookmarked = bookmarked.some((item) => item.id === post.id);
 
@@ -166,7 +169,11 @@ const Post = React.forwardRef(
                 </figure>
 
                 <div className="nameNUsernameContainer">
-                  <p className="name">{post.profiles.full_name}</p>
+                  <p className="name">
+                    {width <= 500 && post.profiles.full_name.length >= 10 ?
+                      post.profiles.full_name.slice(0, 10) + "..."
+                    : post.profiles.full_name}
+                  </p>
                   <p className="username">{post.profiles.username}</p>
                 </div>
               </div>
