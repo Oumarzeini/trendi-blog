@@ -205,7 +205,7 @@ const PostPage = () => {
   const isBookmarked = bookmarked.some((item) => item?.id === post?.id);
 
   const handleInvalid = (e) => {
-    e.target.setCustomValidity("I can see you didn't enter sh!t.");
+    e.target.setCustomValidity("But what's your  comment ?.");
   };
 
   const handleInput = (e) => {
