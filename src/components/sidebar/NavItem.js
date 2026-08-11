@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import PrimaryLink from "../ui/primary/PrimaryLink";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import getUser from "../../utils/getUser";
+import { useState, useEffect } from "react";
 
 const StyledIcon = styled.span`
   display: flex;
@@ -49,6 +51,18 @@ const NavItem = ({ icon, label, path, isPrimary }) => {
   );
   const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
   const isGuest = useStoreState((state) => state.guest.isGuest);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (isGuest) return;
+    const fetchUser = async () => {
+      const currentUser = await getUser();
+      setUser(currentUser);
+    };
+
+    fetchUser();
+  }, [isGuest]);
+
   const navigate = useNavigate();
 
   if (isPrimary) {
@@ -57,6 +71,31 @@ const NavItem = ({ icon, label, path, isPrimary }) => {
         <Icon />
         <p>{label}</p>
       </PrimaryLink>
+    );
+  }
+  if (path === "profile") {
+    return (
+      <StyledNavLink
+        onClick={(e) => {
+          e.preventDefault();
+          setSidebarIsOpen(false);
+
+          if (isGuest) {
+            setShowSignInModel(true);
+            setOverlayOn(true);
+            return;
+          }
+
+          navigate(`/app/profile/${user.username}`);
+        }}
+        to={path}
+        end
+      >
+        <StyledIcon>
+          <Icon />
+        </StyledIcon>
+        <StyledLabel>{label}</StyledLabel>
+      </StyledNavLink>
     );
   }
   return (

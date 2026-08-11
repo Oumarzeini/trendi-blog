@@ -85,7 +85,7 @@ function ProfilePage() {
           if (isMounted) {
             setUser(null);
             setPosts([]);
-            setError("User not found");
+            setError("User not found Please try refreshing the page");
           }
           return;
         }
@@ -115,7 +115,10 @@ function ProfilePage() {
         }
       } catch (err) {
         if (isMounted) {
-          setError(err.message || "Could not load profile");
+          setError(
+            err.message + "Please try refreshing the page" ||
+              "Could not load profile Please try refreshing the page",
+          );
           console.error(err);
         }
       } finally {

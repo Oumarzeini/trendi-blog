@@ -191,7 +191,11 @@ const AppLayout = () => {
                   setShowSignInModel(true);
                   return;
                 } else {
-                  navigate(`/app/profile/${user?.username}`);
+                  if (user) {
+                    navigate(`/app/profile/${user?.username}`);
+                  } else {
+                    return;
+                  }
                 }
               }}
             >

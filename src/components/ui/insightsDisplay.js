@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import Eye from "../../icons/stats-icons/Eye";
-import Like from "../../icons/stats-icons/like";
+import Eye from "../../icons/Eye";
+import Like from "../../icons/Like";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import supabase from "../../lib/supabase";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Container = styled.div`
   display: flex;
@@ -19,16 +20,17 @@ const InsightEl = styled.div`
   align-items: center;
   padding: 5px;
   padding-inline: 15px;
-  box-shadow: 0 1px 2px var(--primary);
+  box-shadow: 0 0 2px gray;
   border-radius: 8px;
   gap: 10px;
 
   @media (max-width: 768px) {
-padding-inline: 10px;
-  & p
-    font-size: 0.9rem;
-    
-    white-space: nowrap;
+    padding-inline: 10px;
+    & p {
+      font-size: 0.8rem;
+
+      white-space: nowrap;
+    }
   }
 `;
 
@@ -36,6 +38,8 @@ const InsightsDisplay = () => {
   const [user, setUser] = useState(null);
   const [insights, setInsights] = useState({ likes: 0, views: 0 });
   const [loading, setLoading] = useState(false);
+
+  const { width } = useWindowSize();
 
   const { username: routeUsername } = useParams();
 
@@ -137,11 +141,19 @@ const InsightsDisplay = () => {
   return (
     <Container>
       <InsightEl>
-        <Eye />
+        <Eye
+          width={width <= 500 ? "20px" : "30px"}
+          height={width <= 500 ? "20px" : "30px"}
+          color={"gray"}
+        />
         <p> {loading ? "loading..." : `${insights.views} Posts Views`}</p>
       </InsightEl>
       <InsightEl>
-        <Like />
+        <Like
+          width={width <= 500 ? "20px" : "30px"}
+          height={width <= 500 ? "20px" : "30px"}
+          color={"gray"}
+        />
         <p>{loading ? "loading..." : `${insights.likes} Posts Likes`}</p>
       </InsightEl>
     </Container>

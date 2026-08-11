@@ -7,7 +7,7 @@ import useCreateBlog from "../../../hooks/db/useCreateBlog";
 import useBlogActions from "../../../hooks/db/useBlogActions";
 import getUser from "../../../utils/getUser";
 import useAlert from "../../../hooks/useAlert";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import supabase from "../../../lib/supabase";
 
 const NewPostPage = () => {
@@ -22,11 +22,15 @@ const NewPostPage = () => {
   const [loading, setLoading] = useState(false);
   const [editedBlogId, setEditedBlogId] = useState(null);
 
-  // const [draftLoading, setDraftLoading] = useState(false);
-  // const draftPosts = useStoreState((state) => state.drafts.draftPosts);
-  // const setDraftPosts = useStoreActions(
-  //   (actions) => actions.drafts.setDraftPosts,
-  // );
+  const path = useLocation().pathname;
+
+  useEffect(() => {
+    setTitle("");
+    setCategory("");
+    setBody("");
+    setPreviewImg(null);
+    setPostImage(null);
+  }, [path]);
 
   const { updateBlog } = useBlogActions();
 
@@ -144,6 +148,15 @@ const NewPostPage = () => {
     }
   };
 
+  const handleImageChange = (e) => {
+    if (!e.target.files[0]) return;
+    const imageUrl = URL.createObjectURL(e.target.files[0]);
+    setPostImage(imageUrl);
+
+    setPreviewImg(imageUrl);
+    setMenuVisible(false);
+  };
+
   return (
     <main className="newPostMain">
       <header className="newPostHeader">
@@ -211,9 +224,7 @@ const NewPostPage = () => {
                   type="file"
                   accept="image/*"
                   onChange={(e) => {
-                    if (!e.target.files[0]) return;
-                    setPostImage(e.target.files[0]);
-                    setMenuVisible(false);
+                    handleImageChange(e);
                   }}
                 />
               </li>

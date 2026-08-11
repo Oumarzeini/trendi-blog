@@ -69,10 +69,10 @@ const SignIn = ({ authOption, setShowRecover, setShowSetName }) => {
   };
 
   const handleSignIn = async (email, password) => {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    //  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     try {
-      if (email === "" || password === "" || regex.test(email)) {
-        setError("Please fill Email and Password fields");
+      if (email === "" || password === "" || !email.includes("@")) {
+        setError("Please Enter a Valid Email and Password ");
         return;
       }
 
