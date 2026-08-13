@@ -22,7 +22,16 @@ import useAlert from "../../hooks/useAlert";
 import useWindowSize from "../../hooks/useWindowSize";
 
 const Post = React.forwardRef(
-  ({ variant = "full", post, showActions = false, onDeleteSuccess }, ref) => {
+  (
+    {
+      isMD = true,
+      variant = "full",
+      post,
+      showActions = false,
+      onDeleteSuccess,
+    },
+    ref,
+  ) => {
     const bookmarked = useStoreState((state) => state.bookmarks.bookmarked);
     const setOverlayOn = useStoreActions((actions) => actions.setOverlayOn);
     const [showModel, setShowModel] = useState(false);
@@ -145,7 +154,11 @@ const Post = React.forwardRef(
               </p>
 
               <p dir="auto" className="bodyAbbreviation">
-                <ReactMarkdown>{post.body.slice(0, 60) + "..."}</ReactMarkdown>
+                {isMD ?
+                  <ReactMarkdown>
+                    {post.body.slice(0, 60) + "..."}
+                  </ReactMarkdown>
+                : post.body.slice(0, 60) + "..."}
               </p>
 
               <div className="detailsContainer">

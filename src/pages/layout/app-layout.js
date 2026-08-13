@@ -164,7 +164,14 @@ const AppLayout = () => {
 
           : ""}
 
-          <img ref={logoRef} className="app-logo" src={logo} alt="" />
+          <img
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/")}
+            ref={logoRef}
+            className="app-logo"
+            src={logo}
+            alt=""
+          />
 
           {showSearch ?
             <Search openSearch={openSearch} setOpenSearch={setOpenSearch} />

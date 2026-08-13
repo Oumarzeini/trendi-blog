@@ -209,7 +209,11 @@ const LandingPage = () => {
             </div>
           </>
         : <>
-            <div className="logoContainer">
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/")}
+              className="logoContainer"
+            >
               <img loading="lazy" src={logo} alt="" />
               <p>Trendi-blog</p>
             </div>
@@ -371,7 +375,7 @@ const LandingPage = () => {
                   key={post.id}
                 >
                   {" "}
-                  <Post variant="compact" post={post} />
+                  <Post isMD={false} variant="compact" post={post} />
                 </div>
               ))
             }
