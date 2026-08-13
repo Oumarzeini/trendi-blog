@@ -2,7 +2,7 @@ import "./NewPostPage.css";
 import styled from "styled-components";
 import ImageIcon from "../../../icons/ImageIcon";
 import Eye from "../../../icons/Eye";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import useCreateBlog from "../../../hooks/db/useCreateBlog";
 import useBlogActions from "../../../hooks/db/useBlogActions";
 import getUser from "../../../utils/getUser";
@@ -22,6 +22,8 @@ const NewPostPage = () => {
   const [loading, setLoading] = useState(false);
   const [editedBlogId, setEditedBlogId] = useState(null);
 
+  const textareaRef = useRef(null);
+
   const path = useLocation().pathname;
 
   useEffect(() => {
@@ -40,6 +42,43 @@ const NewPostPage = () => {
   const { postId } = useParams();
   const isEditMode = Boolean(postId);
 
+  const makeBold = () => {
+    const text = textareaRef.current;
+
+    const start = text.selectionStart;
+    const end = text.selectionEnd;
+
+    if (start === end) {
+      textareaRef.current.focus();
+      return;
+    }
+
+    const selectedText = body.slice(start, end);
+
+    const newText =
+      body.slice(0, start) + `**${selectedText}**` + body.slice(end);
+    setBody(newText);
+    textareaRef.current.focus();
+  };
+
+  const makeItalic = () => {
+    const text = textareaRef.current;
+
+    const start = text.selectionStart;
+    const end = text.selectionEnd;
+    if (start === end) {
+      textareaRef.current.focus();
+      return;
+    }
+    const selectedText = body.slice(start, end);
+
+    const newText =
+      body.slice(0, start) + `*${selectedText}*` + body.slice(end);
+    setBody(newText);
+    textareaRef.current.focus();
+  };
+
+  //SET CURRENT USER
   useEffect(() => {
     const getAndSetUser = async () => {
       const currentUser = await getUser();
@@ -48,6 +87,7 @@ const NewPostPage = () => {
     getAndSetUser();
   }, []);
 
+  //FETCH POST FOR EDITTING
   useEffect(() => {
     if (!isEditMode || !user) return;
 
@@ -89,6 +129,7 @@ const NewPostPage = () => {
     fetchPostForEditing();
   }, [postId, isEditMode, user, navigate, alert]);
 
+  // SETTING THE PREVIEWED IMAGE
   useEffect(() => {
     if (postImage) {
       setShowPreviewImg(true);
@@ -109,6 +150,7 @@ const NewPostPage = () => {
 
   const { createBlog } = useCreateBlog(user);
 
+  //UPLOAD AN IMAGE AND GET THE URL
   const uploadImageFile = async (file) => {
     if (!file || !(file instanceof File)) return null;
 
@@ -194,6 +236,7 @@ const NewPostPage = () => {
           <div className="labelInputContainer">
             <label htmlFor="title">POST TITLE</label>
             <input
+              dir="auto"
               placeholder="Enter title..."
               id="title"
               type="text"
@@ -205,6 +248,7 @@ const NewPostPage = () => {
           <div className="labelInputContainer">
             <label htmlFor="category">POST CATEGORY</label>
             <input
+              dir="auto"
               placeholder="Enter category..."
               id="category"
               type="text"
@@ -216,8 +260,24 @@ const NewPostPage = () => {
         </div>
 
         <div className="contentContainer">
-          <label htmlFor="content">Content</label>
+          <div className="label-actions-container">
+            <label htmlFor="content">Content</label>
+
+            <div className="actionsContainer">
+              <p onClick={makeBold} title="Highlighted text to bold">
+                {" "}
+                <strong>B</strong>{" "}
+              </p>
+
+              <p onClick={makeItalic} title="Highlighted text to italic">
+                {" "}
+                <i>I</i>{" "}
+              </p>
+            </div>
+          </div>
           <textarea
+            ref={textareaRef}
+            dir="auto"
             name="content"
             id="content"
             placeholder="Enter content..."

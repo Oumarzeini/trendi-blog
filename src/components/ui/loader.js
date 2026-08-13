@@ -36,7 +36,7 @@ const Img = styled.img`
 const Loader = () => {
   return (
     <Wraper>
-      <Img src={logo} />
+      <Img src={logo} loading="lazy" />
       <p>One Moment...</p>
     </Wraper>
   );

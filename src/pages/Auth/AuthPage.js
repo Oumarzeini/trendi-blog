@@ -33,7 +33,7 @@ const AuthPage = () => {
       <Notify />
       <section className="logoSection">
         <figure>
-          <img src={logo} alt="" />
+          <img loading="lazy" src={logo} alt="" />
         </figure>
         <p>Read, write and connect on the go.</p>
       </section>

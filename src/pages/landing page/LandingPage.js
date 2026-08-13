@@ -18,7 +18,7 @@ import Linkedin from "../../icons/LinkedIn";
 import Sun from "../../icons/sun";
 // IMAGES
 import logo from "../../images/logo.png";
-import feedPreview from "../../images/feed-preview.png";
+import editorPreview from "../../images/editor preview.jpg";
 // HOOKS
 import useWindowSize from "../../hooks/useWindowSize";
 import useDarkMode from "../../hooks/useDarkMode";
@@ -27,6 +27,7 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import Loader from "../../components/ui/loader";
+import AlertIcon from "../../icons/alert-icon";
 
 const LandingPage = () => {
   const [menuIcon, setMenuIcon] = useState(true);
@@ -130,7 +131,7 @@ const LandingPage = () => {
   //   },
   // ];
 
-  const posts = [
+  const curatedPosts = [
     {
       id: 1,
       user_id: "8ce6e6f5-65db-4cf1-9d88-2fc436d11913",
@@ -209,7 +210,7 @@ const LandingPage = () => {
           </>
         : <>
             <div className="logoContainer">
-              <img src={logo} alt="" />
+              <img loading="lazy" src={logo} alt="" />
               <p>Trendi-blog</p>
             </div>
 
@@ -319,31 +320,25 @@ const LandingPage = () => {
               digital reality.
             </p>
 
-            {width > 768 && (
-              <div className="CTABtnsContainer">
-                <button
-                  onClick={() => navigate("/auth")}
-                  className="btn1 animate__zoomOutRight"
-                >
-                  Start Writing Free{" "}
-                  <RightArrow
-                    height={"20px"}
-                    width={"20px"}
-                    color="white"
-                  />{" "}
-                </button>
-                {/* <button className="btn2">Explore Stories</button> */}
-              </div>
-            )}
+            <div className="CTABtnsContainer">
+              <button
+                onClick={() => navigate("/auth")}
+                className="btn1 animate__zoomOutRight"
+              >
+                Start Writing Free{" "}
+                <RightArrow height={"20px"} width={"20px"} color="white" />{" "}
+              </button>
+              {/* <button className="btn2">Explore Stories</button> */}
+            </div>
           </div>
 
           <figure className="bloggingImageFigure">
-            <img src={feedPreview} alt="" />
+            <img src={editorPreview} loading="lazy" alt="" />
           </figure>
         </section>
 
-        {width < 768 && (
-          <div className="CTABtnsContainer">
+        {/* {width < 768 && (
+            <div className="CTABtnsContainer">
             <button
               onClick={() => navigate("/auth")}
               className="btn1 animate__zoomOutRight"
@@ -351,9 +346,9 @@ const LandingPage = () => {
               Start Writing Free{" "}
               <RightArrow height={"20px"} width={"20px"} color="white" />{" "}
             </button>
-            {/* <button className="btn2">Explore Stories</button> */}
+            <button className="btn2">Explore Stories</button>
           </div>
-        )}
+        )} */}
 
         <section id="trending-stories" className="curatedStoriesSection">
           <h3>Editor's choice</h3>
@@ -362,9 +357,9 @@ const LandingPage = () => {
           </p>
 
           <div className="storiesContainer">
-            {!posts ?
+            {!curatedPosts ?
               <Loader />
-            : posts.map((post) => (
+            : curatedPosts.map((post) => (
                 <div
                   ref={(el) => (elementRefs.current[`post-${post.id}`] = el)}
                   data-id={`post-${post.id}`}
@@ -498,6 +493,7 @@ const LandingPage = () => {
               <div className="opinionProfileContainer">
                 <figure>
                   <img
+                    loading="lazy"
                     src="https://images.pexels.com/photos/7970671/pexels-photo-7970671.jpeg"
                     alt=""
                   />
@@ -532,6 +528,7 @@ const LandingPage = () => {
               <div className="opinionProfileContainer">
                 <figure>
                   <img
+                    loading="lazy"
                     src="https://images.pexels.com/photos/7610766/pexels-photo-7610766.jpeg"
                     alt=""
                   />
@@ -565,6 +562,7 @@ const LandingPage = () => {
               <div className="opinionProfileContainer">
                 <figure>
                   <img
+                    loading="lazy"
                     src="https://images.pexels.com/photos/3931342/pexels-photo-3931342.jpeg"
                     alt=""
                   />
@@ -609,7 +607,7 @@ const LandingPage = () => {
                 }}
                 className="heading"
               >
-                <img src={logo} alt="" />
+                <img loading="lazy" src={logo} alt="" />
                 Trendi-blog
               </h3>
               <p className="subHeading">
@@ -695,6 +693,15 @@ const LandingPage = () => {
               <p>
                 © 2026 Trendi-blog Inc. All rights reserved. Built with love by
                 creators for creators.
+              </p>
+            </div>
+            <div className="statement">
+              <span>
+                <AlertIcon height="20px" width="20px" color="#cabe00" />
+              </span>
+              <p>
+                All the links in the footer do not work, they are just a
+                blueprint
               </p>
             </div>
             <div className="leftContainer">

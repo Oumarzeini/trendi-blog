@@ -102,6 +102,7 @@ const Search = ({ openSearch, setOpenSearch }) => {
         <>
           <InputContainer>
             <input
+              autoComplete="off"
               ref={searchRef}
               type="text"
               name="search"

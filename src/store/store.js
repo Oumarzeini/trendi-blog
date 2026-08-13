@@ -8,6 +8,10 @@ export default createStore({
       state.isGuest = payload;
     }),
   }),
+  errorFetchingBlogs: false,
+  setErrorFetchingBlogs: action((state, payload) => {
+    state.errorFetchingBlogs = payload;
+  }),
   overlayOn: false,
   setOverlayOn: action((state, payload) => {
     state.overlayOn = payload;

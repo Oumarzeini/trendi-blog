@@ -51,6 +51,24 @@
       background-color: var(--bg);
       color: var(--text);
     }
+
+    & input#title {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+
+    & input#category:not(:focus) {
+      max-width: fit-content;
+      font-weight: 600;
+     
+      letter-spacing: 1px;
+      background-color: greenyellow;
+      color: green;
+      padding-inline: 5px;
+      padding-block: 2px;
+      border: 1px solid green;
+      border-radius: 10px;
+    }
   }
 }
 
@@ -69,6 +87,36 @@
   border-radius: 10px;
   box-shadow: 0 0 4px var(--border);
   gap: 20px;
+
+  & .label-actions-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+
+    & .actionsContainer {
+      display: flex;
+      gap: 5px;
+        & p {
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding-inline: 5px;
+      border-radius: 3px;
+      display: grid;
+      place-content: center;
+
+      &:hover {
+       background-color: rgba(173, 173, 173, 0.463);
+
+      }
+    }
+    }
+
+    
+
+    
+  }
 
   & label {
     font-size: 10px;
@@ -111,9 +159,9 @@
 }
 
 input[type="file"] {
-    position: absolute !important;
-    left: -10000px !important;
-    background-color: red;
+  position: absolute !important;
+  left: -10000px !important;
+  background-color: red;
 }
 
 .buttonsContainer {
@@ -135,8 +183,8 @@ input[type="file"] {
   }
 
   & button.btn-loading {
-    opacity: .5;
-    scale: .9;
+    opacity: 0.5;
+    scale: 0.9;
   }
 
   & .draftBtn {
@@ -159,7 +207,7 @@ input[type="file"] {
   }
 
   & .publishBtn:hover {
-    background-color: rgb(55, 136, 250, .8);
+    background-color: rgb(55, 136, 250, 0.8);
   }
 }
 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useFeed from "../../../hooks/db/useFeed";
 import { useCallback, useRef } from "react";
 import Loader from "../../../components/ui/loader";
+import { useStoreState } from "easy-peasy";
 
 const StyledMain = styled.main`
   display: flex;
@@ -40,6 +41,7 @@ const PostsContainer = styled.div`
 
 const Feed = () => {
   const { loading, blogs, fetchBlogs, hasMore } = useFeed();
+  const errorFetchingBlogs = useStoreState((s) => s.errorFetchingBlogs);
 
   const observer = useRef();
 
@@ -54,7 +56,7 @@ const Feed = () => {
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
           fetchBlogs();
-          console.log("reaching the last post");
+          //console.log("reaching the last post");
         }
       });
 
@@ -77,8 +79,24 @@ const Feed = () => {
     <StyledMain>
       <h2 className="latestUpdates">Latest Updates</h2>
       <PostsContainer>
-        {!blogs.length ?
+        {loading && !blogs.length ?
           <Loader />
+        : errorFetchingBlogs ?
+          <>
+            <p style={{ width: "80%", marginLeft: "1rem", fontSize: "1.1rem" }}>
+              Error getting blogs, Please check your internet connection and{" "}
+              <span
+                style={{
+                  fontWeight: "500",
+                  color: "var(--primary)",
+                  cursor: "pointer",
+                }}
+                onClick={fetchBlogs}
+              >
+                try again
+              </span>{" "}
+            </p>
+          </>
         : blogs.map((post, index) => (
             <Link
               to={`/app/post/${slugify(post.title)}-${post.id}`}

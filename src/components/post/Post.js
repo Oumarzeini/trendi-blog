@@ -14,6 +14,7 @@ import React, { Activity, useState } from "react";
 import "react-time-ago/locale/en";
 import ReactTimeAgo from "react-time-ago";
 import styled from "styled-components";
+import ReactMarkdown from "react-markdown";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModel from "../ui/confirmationModel";
 import useBlogActions from "../../hooks/db/useBlogActions";
@@ -139,15 +140,20 @@ const Post = React.forwardRef(
             }}
           >
             <div className="textContainer">
-              <p className="title">{post.title}</p>
+              <p dir="auto" className="title">
+                {post.title}
+              </p>
 
-              <p className="bodyAbbreviation">
-                {post.body.slice(0, 60) + "..."}
+              <p dir="auto" className="bodyAbbreviation">
+                <ReactMarkdown>{post.body.slice(0, 60) + "..."}</ReactMarkdown>
               </p>
 
               <div className="detailsContainer">
                 <p className="category--date">
-                  <span className="category">{post.category}</span> &bull;{" "}
+                  <span dir="auto" className="category">
+                    {post.category}
+                  </span>{" "}
+                  &bull;{" "}
                   <span className="date">
                     <ReactTimeAgo date={post.created_at} locale="en" />{" "}
                   </span>
@@ -159,6 +165,7 @@ const Post = React.forwardRef(
               <div className="userContainer">
                 <figure className="profileImgFigure">
                   <img
+                    loading="lazy"
                     src={
                       post?.profiles?.avatar ?
                         getAvatarUrl(post.profiles.avatar)

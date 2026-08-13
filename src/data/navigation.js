@@ -1,6 +1,6 @@
 import Feed from "../icons/NavIcons/Feed";
 //import ExploreIcon from "../icons/NavIcons/ExploreIcon";
-import Notification from "../icons/NavIcons/Notification";
+//import Notification from "../icons/NavIcons/Notification";
 import Bookmark from "../icons/NavIcons/Bookmark";
 import Add from "../icons/NavIcons/Add";
 import Categories from "../icons/NavIcons/Categories";
@@ -28,11 +28,11 @@ const navItems = [
       //   label: "Explore",
       //   path: "explore",
       // },
-      {
-        icon: Notification,
-        label: "Notifications",
-        path: "notifications",
-      },
+      // {
+      //   icon: Notification,
+      //   label: "Notifications",
+      //   path: "notifications",
+      // },
       {
         icon: Bookmark,
         label: "Bookmarks",

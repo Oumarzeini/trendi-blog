@@ -36,6 +36,10 @@ const Container = styled.div`
     color: ${(props) =>
       props.$isSuccess ? `var(--primary)` : `var(--err-color)`};
   }
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const Notify = () => {

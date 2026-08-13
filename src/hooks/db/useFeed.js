@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import supabase from "../../lib/supabase";
 import useAlert from "../useAlert";
+import { useStoreActions } from "easy-peasy";
 
 const PAGE_SIZE = 5;
 
@@ -9,6 +10,7 @@ const useFeed = () => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const setErrorFetchingBlogs = useStoreActions((a) => a.setErrorFetchingBlogs);
 
   const alert = useAlert();
 
@@ -42,7 +44,12 @@ const useFeed = () => {
 
       if (error) {
         console.log(error);
-        alert("err", error.message, true);
+        setErrorFetchingBlogs(true);
+        alert(
+          "err",
+          "Error getting blogs, check your internet connection and try again",
+          true,
+        );
       } else {
         setBlogs((prev) => {
           const existingIds = new Set(prev.map((post) => post.id));
@@ -65,7 +72,7 @@ const useFeed = () => {
       setLoading(false);
       isFetchingRef.current = false;
     }
-  }, [alert]);
+  }, [alert, setErrorFetchingBlogs]);
 
   useEffect(() => {
     fetchBlogs();

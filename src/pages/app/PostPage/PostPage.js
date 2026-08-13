@@ -17,6 +17,9 @@ import ReactTimeAgo from "react-time-ago";
 import "react-time-ago/locale/en";
 import getAvatarUrl from "../../../utils/getAvatarUrl";
 import styled from "styled-components";
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+
 //COMPONENTS
 import Loader from "../../../components/ui/loader";
 import ConfirmationModel from "../../../components/ui/confirmationModel";
@@ -326,10 +329,14 @@ const PostPage = () => {
           </figure>
         )}
 
-        <h3 className="title">{post.title}</h3>
+        <h3 dir="auto" id="post-page-title" className="title post-page-title">
+          {post.title}
+        </h3>
 
         <div className="categoryContainer">
-          <span className="category">{post.category}</span>{" "}
+          <span dir="auto" className="category">
+            {post.category}
+          </span>{" "}
           <span className="bullet">&bull;</span>{" "}
           <span className="date">
             {" "}
@@ -361,7 +368,11 @@ const PostPage = () => {
 
         <hr />
 
-        <article className="postContent">{post.body}</article>
+        <article dir="auto" className="postContent">
+          <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+            {post.body}
+          </ReactMarkdown>
+        </article>
 
         <div className="commentsAndLikesContainer">
           <h2>Comments ({comments ? comments.length : 0})</h2>
@@ -473,6 +484,7 @@ const PostPage = () => {
                     {isEditComment && editCommentId === comment.id ?
                       <EditCommentContainer>
                         <textarea
+                          dir="auto"
                           ref={commentTextareaRef}
                           type="text"
                           value={editCommentValue}
@@ -505,7 +517,11 @@ const PostPage = () => {
                           </button>
                         </div>
                       </EditCommentContainer>
-                    : <p className="commentContent"> {comment.content} </p>}
+                    : <p dir="auto" className="commentContent">
+                        {" "}
+                        {comment.content}{" "}
+                      </p>
+                    }
 
                     {comment.user_id === user?.id && (
                       <div
@@ -586,6 +602,7 @@ const PostPage = () => {
       <div className="commentFormContainer">
         <form className="commentForm" onSubmit={(e) => e.preventDefault()}>
           <input
+            dir="auto"
             type="text"
             onInvalid={handleInvalid}
             onInput={handleInput}

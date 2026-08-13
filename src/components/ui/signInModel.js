@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Mail from "../../icons/Mail";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useStoreActions } from "easy-peasy";
 
 const Container = styled.div`
@@ -108,6 +108,15 @@ const SignInModel = () => {
   );
 
   const navigate = useNavigate();
+  const path = useLocation().pathname;
+
+  const onCancel = () => {
+    setShowSignInModel(false);
+    setOverlayOn(false);
+    if (path.includes("profile")) {
+      navigate(-1);
+    }
+  };
   return (
     <Container>
       <Header>
@@ -130,13 +139,7 @@ const SignInModel = () => {
       </p>
 
       <ButtonsContainer>
-        <button
-          onClick={() => {
-            setShowSignInModel(false);
-            setOverlayOn(false);
-          }}
-          className="cancel-button"
-        >
+        <button onClick={onCancel} className="cancel-button">
           Cancel
         </button>
         <button

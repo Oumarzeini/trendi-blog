@@ -367,6 +367,15 @@
     width: 390px;
     height: initial;
     margin-inline: auto;
+
+  }
+
+  .title {
+    font-size: 1.3rem !important;
+  }
+
+  .bodyAbbreviation {
+    font-size: 1rem;
   }
 }
 
@@ -391,3 +400,4 @@
     }
   }
 }
+
