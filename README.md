@@ -241,6 +241,12 @@ https://github.com/Oumarzeini
 
 ---
 
+## Live Demo
+
+https://trendi-blog.omarspace.com
+
+---
+
 # License
 
 This project is licensed under the MIT License.
