@@ -1,71 +1,246 @@
-# Getting Started with Create React App
+# Trendi Blog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> A modern, full-stack blogging platform built with React, Vite, and Supabase.
 
-## Available Scripts
+Trendi Blog is a feature-rich blogging application where users can create, edit, discover, and interact with blog posts in a clean and responsive interface. It focuses on performance, usability, and modern web development practices while showcasing a production-ready React application.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🔐 User authentication
+- 👤 User profiles
+- ✍️ Create, edit delete and bookmark blog posts
+- 📝 Markdown editor with live rendering
+- 💬 Comment system
+- ❤️ Like posts
+- 🔎 Search functionality
+- 📱 Fully responsive design
+- ⚡ Fast navigation powered by React Router
+- ☁️ Supabase backend
+- 📊 PostHog analytics integration
+- 🚨 Sentry error monitoring
+- 🎨 Styled Components + CSS modules
+- ⚡ Built with Vite for fast development and builds
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+<!-- ## 📸 Screenshots
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Add screenshots here after deployment.
 
-### `npm run build`
+| Home | Blog Post |
+|------|-----------|
+| ![](docs/home.png) | ![](docs/post.png) |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+--- -->
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Frontend
 
-### `npm run eject`
+- React 19
+- Vite
+- React Router v7
+- Styled Components
+- React Markdown
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Backend
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Supabase
+  - Authentication
+  - Database
+  - Storage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Monitoring
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- PostHog
+- Sentry
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Clone the repository
 
-### Code Splitting
+```bash
+git clone https://github.com/Oumarzeini/trendi-blog.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+cd trendi-blog
+```
 
-### Analyzing the Bundle Size
+## Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm install
+```
 
-### Making a Progressive Web App
+## Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Create a `.env` file in the project root.
 
-### Advanced Configuration
+```env
+VITE_SUPABASE_URL=your_supabase_url
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-### Deployment
+VITE_POSTHOG_KEY=your_posthog_key
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+VITE_POSTHOG_HOST=https://us.i.posthog.com
 
-### `npm run build` fails to minify
+VITE_SENTRY_DSN=your_sentry_dsn
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# TrendyBlog" 
+> Never commit your `.env` file.
+
+---
+
+# Running Locally
+
+```bash
+npm run dev
+```
+
+The application will be available at
+
+```
+http://localhost:5173
+```
+
+---
+
+# Production Build
+
+```bash
+npm run build
+```
+
+Preview the production build
+
+```bash
+npm run preview
+```
+
+---
+
+# Project Structure
+
+```
+src/
+│
+├── components/
+├── hooks/
+├── pages/
+├── store/
+├── styles/
+├── lib/
+├── icons/
+└── utils/
+```
+
+---
+
+# Main Functionality
+
+### Authentication
+
+- Sign up
+- Sign in
+- Password reset
+- Protected routes
+
+### Blog Management
+
+- Create posts
+- Edit posts
+- Delete posts
+- Upload cover images
+
+### User Interaction
+
+- Like posts
+- Comment on posts
+- Browse posts
+- Search for posts
+
+### Markdown Support
+
+Supports rich markdown including:
+
+- Headings
+- Lists
+- Images
+- Code blocks
+- Blockquotes
+- Links
+- Tables
+
+---
+
+# Analytics
+
+The application uses **PostHog** to collect anonymous usage analytics and understand how users interact with the application.
+
+---
+
+# Error Monitoring
+
+Errors are automatically reported using **Sentry**, making debugging easier in production.
+
+---
+
+# Deployment
+
+The project is built with Vite and can be deployed on platforms such as:
+
+- Vercel
+- Netlify
+- GitHub Pages
+
+---
+
+# Future Improvements
+
+- Rich text editor
+- Follow users
+- Notifications
+- Reading statistics
+- Dark mode improvements
+- Tags
+- Categories
+- Drafts
+- Admin dashboard
+
+---
+
+# Learning Outcomes
+
+This project helped reinforce knowledge of:
+
+- React architecture
+- Custom Hooks
+- State management
+- Authentication flows
+- Database design
+- Supabase
+- API integration
+- Markdown rendering
+- Analytics
+- Error monitoring
+- Responsive UI design
+
+---
+
+# Author
+
+**Omar Zeini**
+
+GitHub
+
+https://github.com/Oumarzeini
+
+---
+
+# License
+
+This project is licensed under the MIT License.
