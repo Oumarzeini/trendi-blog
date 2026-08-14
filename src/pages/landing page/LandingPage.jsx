@@ -337,7 +337,7 @@ const LandingPage = () => {
           </div>
 
           <figure className="bloggingImageFigure">
-            <img src={editorPreview} loading="lazy" alt="" />
+            <img src={editorPreview} fetchPriority="high" alt="" />
           </figure>
         </section>
 

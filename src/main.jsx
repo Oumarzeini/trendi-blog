@@ -6,6 +6,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { StoreProvider } from "easy-peasy";
 import store from "./store/store";
+import { PostHogProvider } from "@posthog/react";
 
 Sentry.init({
   dsn: "https://d25f7430cdb3e4e9991ec4612ec20a61@o4511905462288384.ingest.de.sentry.io/4511905487585360",
@@ -30,13 +31,20 @@ Sentry.init({
   enableLogs: true,
 });
 
+const options = {
+  api_host: import.meta.env.VITE_POSTHOG_HOST,
+  defaults: '2026-05-30',
+} 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <StoreProvider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </StoreProvider>
+  <React.StrictMode apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN} options={options}>
+    <PostHogProvider>
+      <StoreProvider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </StoreProvider>
+    </PostHogProvider>
   </React.StrictMode>,
 );
