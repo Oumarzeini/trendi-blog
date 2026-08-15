@@ -22,14 +22,14 @@ const usePostAnalytics = (blogId, user) => {
           .select();
 
         if (error) console.error("Error inserting blog view:", error);
-        console.log(
-          "view should be registered",
-          data,
-          "blog id:",
-          blogId,
-          "user id : ",
-          user?.id,
-        );
+        // console.log(
+        //   "view should be registered",
+        //   data,
+        //   "blog id:",
+        //   blogId,
+        //   "user id : ",
+        //   user?.id,
+        // );
       } catch (err) {
         console.error("Unexpected error inserting blog view:", err);
       }

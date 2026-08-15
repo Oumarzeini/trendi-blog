@@ -26,8 +26,8 @@
   flex-grow: 1;
 }
 
-.title {
-  font-size: 1.8rem;
+.post-page-title {
+  font-size: 2rem;
   margin-left: 10px;
   margin-bottom: 20px;
   font-family: "Poppins", system-ui, sans-serif;
@@ -97,9 +97,19 @@ hr {
   padding-bottom: 3rem;
   font-family: "Poppins", system-ui, sans-serif !important;
   word-spacing: 3px;
-  line-height: 25px;
+  line-height: 28px;
   max-width: 100% !important;
   font-family: system-ui;
+
+  & h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1.5rem;
+  }
+
+  & a {
+    color: blue;
+    text-decoration: underline;
+    font-weight: 500;
+  }
 }
 
 pre {
@@ -284,12 +294,17 @@ pre {
 }
 
 @media (max-width: 768px) {
+
+  .post-page-title {
+    font-size: 2rem !important;
+  }
+
   .postPageSection {
     padding-inline: 10px;
   }
 
   .postContent {
-    line-height: 28px;
+    line-height: 27px;
   }
 
   .commentForm {

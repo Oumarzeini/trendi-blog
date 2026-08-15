@@ -153,13 +153,13 @@ const Post = React.forwardRef(
                 {post.title}
               </p>
 
-              <p dir="auto" className="bodyAbbreviation">
+              <article dir="auto" className="bodyAbbreviation">
                 {isMD ?
                   <ReactMarkdown>
                     {post.body.slice(0, 60) + "..."}
                   </ReactMarkdown>
                 : post.body.slice(0, 60) + "..."}
-              </p>
+              </article>
 
               <div className="detailsContainer">
                 <p className="category--date">

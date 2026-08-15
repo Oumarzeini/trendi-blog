@@ -5,7 +5,7 @@ import Post from "../../components/post/Post";
 // ICONS
 import Menu from "../../icons/Menu";
 import MenuClose from "../../icons/MenuClose";
-import TrendingUp from "../../icons/TrendingUp";
+import Trusted from "../..//icons/trusted-icon"
 import RightArrow from "../../icons/RightArrow";
 import AccountAdd from "../../icons/AccountAdd";
 import Pen from "../../icons/Pen";
@@ -307,19 +307,19 @@ const LandingPage = () => {
           <div className="heroTextContainer">
             <p className="label">
               {" "}
-              <TrendingUp
+              <Trusted
                 height={"15px"}
                 width={"20px"}
                 color={`var(--text)`}
               />{" "}
-              The #1 writing community
+              Trusted By Thousands of Writers
             </p>
             <h2>
               Your Stories deserve a <span className="trendy">trendy</span>{" "}
               home.
             </h2>
             <p className="heroParagraph">
-              Join Trendi-blog to share your ideas, connect with millions of
+              Join Trendi-blog to share your ideas, connect with thousands of
               readers, and turn your passion for writing into a beautiful
               digital reality.
             </p>
@@ -410,8 +410,7 @@ const LandingPage = () => {
                 </span>
                 <p className="stepName">Create Account</p>
                 <p className="stepDescription">
-                  Sign up in seconds and customize your profile to reflect your
-                  unique writing style and personality.
+                  Create your account in minutes, choose your username, and set up your writer profile so you can start sharing your work.
                 </p>
               </div>
             </div>
@@ -436,8 +435,7 @@ const LandingPage = () => {
                 </span>
                 <p className="stepName">Write & Publish</p>
                 <p className="stepDescription">
-                  Our clean editor lets you focus on your words. Add images,
-                  formatting, and tags with effortless ease.
+                  Write your post in the clean editor, add a title, cover image, and category, then publish it to your audience with just a few clicks.
                 </p>
               </div>
             </div>

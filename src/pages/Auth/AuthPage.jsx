@@ -2,7 +2,7 @@ import "./AuthPage.css";
 import SignIn from "../../components/auth/sign in/SignIn";
 import logo from "../../images/logo.png";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RecoverPassword from "../../components/auth/recover-password";
 import SetName from "../../components/auth/set-name";
 import Notify from "../../components/ui/notify";
@@ -16,6 +16,28 @@ const AuthPage = () => {
   const [showSetName, setShowSetName] = useState(false);
   const isGuest = useStoreState((a) => a.guest.isGuest);
   const setIsGuest = useStoreActions((a) => a.guest.setIsGuest);
+  const [session, setSession] = useState(null);
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(isGuest) {
+      return;
+    }
+
+    const getSession = async () => {
+      const {data : {session}, error} = await supabase.auth.getSession();
+      if(error) {
+        return;
+      } else {
+        navigate("/app");
+      };
+      
+    }
+
+
+    getSession();
+  }, [session, isGuest]);
 
   useEffect(() => {
     if (isGuest) {
