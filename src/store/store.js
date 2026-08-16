@@ -3,7 +3,7 @@ import logo from "../images/logo.png";
 
 export default createStore({
   guest: persist({
-    isGuest: false,
+    isGuest: true,
     setIsGuest: action((state, payload) => {
       state.isGuest = payload;
     }),

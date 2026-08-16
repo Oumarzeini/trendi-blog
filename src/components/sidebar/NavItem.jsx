@@ -73,7 +73,7 @@ const NavItem = ({ icon, label, path, isPrimary }) => {
       </PrimaryLink>
     );
   }
-  if (path === "profile") {
+  if (path === "my-profile") {
     return (
       <StyledNavLink
         onClick={(e) => {
@@ -86,7 +86,7 @@ const NavItem = ({ icon, label, path, isPrimary }) => {
             return;
           }
 
-          navigate(`/app/profile/${user.username}`);
+          navigate(`/app/my-profile/${user.username}`);
         }}
         to={path}
         end

@@ -19,6 +19,7 @@ import getAvatarUrl from "../../../utils/getAvatarUrl";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
+import getPostDescription from "../../../utils/getPostDescription";
 
 //COMPONENTS
 import Loader from "../../../components/ui/loader";
@@ -30,6 +31,7 @@ import useAlert from "../../../hooks/useAlert";
 import getUser from "../../../utils/getUser";
 import usePostAnalytics from "../../../hooks/db/usePostAnalytics";
 import useClickOutside from "../../../hooks/useClickOutside";
+import SEO from "../../../components/SEO/SEO"
 
 const PostPage = () => {
   // const [heartColor, setHeartColor] = useState(false);
@@ -308,6 +310,14 @@ const PostPage = () => {
     }
   };
 
+  const slugify = (text) =>
+    text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+    
+    const slug =`${slugify(post?.title)}-${post?.id}`
+
   if (loading) return <Loader />;
   if (!post || !author)
     return (
@@ -321,6 +331,8 @@ const PostPage = () => {
     );
 
   return (
+    <>
+    <SEO title={post?.title} description={getPostDescription(post?.body)} url={`/app/post/${slug}`} image={post?.image_url} type="article" />
     <section className="postPageSection">
       <div className="content-section">
         {post.image_url && (
@@ -643,6 +655,7 @@ const PostPage = () => {
         </form>
       </div>
     </section>
+    </>
   );
 };
 

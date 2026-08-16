@@ -1,4 +1,4 @@
-import "./ProfilePage.css";
+import "../ProfilePage/ProfilePage.css";
 //ICONS
 import Edit from "../../../icons/Edit";
 import Add from "../../../icons/Add";
@@ -24,7 +24,7 @@ import supabase from "../../../lib/supabase";
 import { useEffect, useState, Activity, useRef } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
-function ProfilePage() {
+function MyProfilePage() {
   const [user, setUser] = useState(null);
   const [signedInUser, setSignedInUser] = useState(null);
   const [error, setError] = useState("");
@@ -64,14 +64,14 @@ function ProfilePage() {
       setError("");
 
       try {
-        // const { data: authData, error: authError } =
-        //   await supabase.auth.getUser();
+        const { data: authData, error: authError } =
+          await supabase.auth.getUser();
 
-        // if (authError) throw authError;
+        if (authError) throw authError;
 
-        // if (isMounted) {
-        //   setSignedInUser(authData.user);
-        // }
+        if (isMounted) {
+          setSignedInUser(authData.user);
+        }
 
         const { data: profileData, error: profileError } = await supabase
           .from("profiles")
@@ -85,7 +85,7 @@ function ProfilePage() {
           if (isMounted) {
             setUser(null);
             setPosts([]);
-            setError("User not found, Check your spelling");
+            setError("User not found Please try refreshing the page");
           }
           return;
         }
@@ -116,7 +116,8 @@ function ProfilePage() {
       } catch (err) {
         if (isMounted) {
           setError(
-            err
+            err.message + "Please try refreshing the page" ||
+              "Could not load profile Please try refreshing the page",
           );
           console.error(err);
         }
@@ -142,6 +143,55 @@ function ProfilePage() {
     };
   }, [routeUsername]);
 
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setUploadLoading(true);
+    try {
+      alert("success", "Uploading...", true);
+      const newPath = await uploadAvatar(file, user, alert);
+
+      if (newPath) {
+        setUser((prev) => ({
+          ...prev,
+          avatar: newPath,
+        }));
+      }
+      setShowAvatarMenu(false);
+    } catch (err) {
+      alert("err", err, true);
+      console.log(err);
+    } finally {
+      setUploadLoading(false);
+    }
+  };
+
+  const handleDeleteAvatar = async () => {
+    setDeleteLoading(true);
+
+    try {
+      const currentUser = await getUser();
+      deleteAvatar(currentUser.id, alert);
+      setShowAvatarMenu(false);
+      alert("success", "Deleting...", true);
+
+      setUser((prev) => ({
+        ...prev,
+        avatar: null,
+      }));
+    } catch (err) {
+      console.error(err);
+      alert("err", err, true);
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+
+  const handlePostDeleted = (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+  };
 
   if (loading) return <Loader />;
   return (
@@ -177,7 +227,64 @@ function ProfilePage() {
             />
           </figure>
 
-        
+          {isOwner ?
+            <>
+              <span
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowAvatarMenu((prev) => !prev);
+                }}
+                className="edit-profile-img-icon"
+              >
+                <Edit height={"25px"} width={"25px"} color={`var(--primary)`} />
+              </span>
+
+              <div
+                ref={imgMenuRef}
+                className={showAvatarMenu ? "img-menu show" : "img-menu"}
+              >
+                <ul>
+                  <li
+                    role="button"
+                    className={uploadLoading ? "isDisabled" : ""}
+                  >
+                    <label className="profile-img-label" htmlFor="profile-img">
+                      <ImgIcon
+                        height={"20px"}
+                        width={"20px"}
+                        color={`var(--text)`}
+                      />
+                      {uploadLoading ? "Uploading..." : "Choose new picture"}
+                    </label>
+                    <input
+                      onChange={(e) => handleAvatarChange(e)}
+                      className="profile-img-input"
+                      type="file"
+                      accept="image/*"
+                      id="profile-img"
+                    />
+                  </li>
+                  <li
+                    role="button"
+                    onClick={() => {
+                      if (!user?.avatar) return;
+                      handleDeleteAvatar();
+                    }}
+                    className={!user?.avatar ? "isDisabled" : ""}
+                  >
+                    {" "}
+                    <DeleteIcon
+                      height={"20px"}
+                      width={"20px"}
+                      color={`var(--text)`}
+                    />{" "}
+                    {deleteLoading ? "Deleting..." : "Delete current picture"}
+                  </li>
+                </ul>
+              </div>
+            </>
+          : null}
         </div>
         <div className="nameNUsernameContainer">
           <p className="fullname">{user?.full_name ?? "Undefined"}</p>
@@ -187,14 +294,27 @@ function ProfilePage() {
           <p className="descriptionText">
             {user?.bio ?
               user.bio
-           
+            : isOwner ?
+              <Link to="/app/settings">Add Bio</Link>
             : "No bio yet"}
           </p>
         </div>
 
         <InsightsDisplay />
 
-       
+        <Activity mode={isOwner ? "visible" : "hidden"}>
+          <button
+            className="editProfileBtn"
+            onClick={() => {
+              navigate("/app/settings");
+            }}
+          >
+            <Edit height={"25px"} width={"25px"} color={"white"} /> Edit Profile
+          </button>
+          <Link className="editProfileBtn" to={"/app/write"}>
+            <Add height={"25px"} width={"25px"} color={"white"} /> New Post
+          </Link>
+        </Activity>
       </section>
 
       <section className="recentStoriesSection">
@@ -210,7 +330,7 @@ function ProfilePage() {
                 post={post}
                 key={post.id}
                 showActions={isOwner ? true : false}
-                
+                onDeleteSuccess={handlePostDeleted}
               />
             ))}
           </div>
@@ -220,4 +340,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default MyProfilePage;

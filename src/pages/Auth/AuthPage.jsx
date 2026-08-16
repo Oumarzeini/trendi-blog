@@ -9,6 +9,7 @@ import Notify from "../../components/ui/notify";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import supabase from "../../lib/supabase";
 import { useEffect } from "react";
+import SEO from "../../components/SEO/SEO";
 
 const AuthPage = () => {
   const [authOption, setAuthOption] = useState("signin");
@@ -29,59 +30,63 @@ const AuthPage = () => {
   }, [isGuest]);
 
   return (
-    <main className="authPageMain">
-      <Notify />
-      <section className="logoSection">
-        <figure>
-          <img loading="lazy" src={logo} alt="" />
-        </figure>
-        <p>Read, write and connect on the go.</p>
-      </section>
-
-      {showSetName ?
-        <SetName />
-      : !showRecover ?
-        <section>
-          <div className="signingOptionsContainer">
-            <button
-              onClick={() => setAuthOption("signin")}
-              className={
-                authOption === "signin" ? "chosenAuthOption" : "signinBtn"
-              }
-            >
-              Sign in
-            </button>
-            <button
-              onClick={() => setAuthOption("signup")}
-              className={
-                authOption === "signup" ? "chosenAuthOption" : "signupBtn"
-              }
-            >
-              Sign up
-            </button>
-          </div>
-
-          <SignIn
-            setShowRecover={setShowRecover}
-            authOption={authOption}
-            setShowSetName={setShowSetName}
-          />
-
-          <div className="continueContainer">
-            <Link to="/app">
-              <p
-                onClick={() => {
-                  setIsGuest(true);
-                }}
-                className="continueAG"
-              >
-                Continue as a guest
-              </p>
-            </Link>
-          </div>
+    <>
+      <SEO title={"Sign in"} description={"Sign in to your Trendi Blog account or create a new one to read, save, and interact with posts."}  url={"/ap"}/>
+      
+      <main className="authPageMain">
+        <Notify />
+        <section className="logoSection">
+          <figure>
+            <img loading="lazy" src={logo} alt="" />
+          </figure>
+          <p>Read, write and connect on the go.</p>
         </section>
-      : <RecoverPassword setShowRecover={setShowRecover} />}
-    </main>
+
+        {showSetName ?
+          <SetName />
+        : !showRecover ?
+          <section>
+            <div className="signingOptionsContainer">
+              <button
+                onClick={() => setAuthOption("signin")}
+                className={
+                  authOption === "signin" ? "chosenAuthOption" : "signinBtn"
+                }
+              >
+                Sign in
+              </button>
+              <button
+                onClick={() => setAuthOption("signup")}
+                className={
+                  authOption === "signup" ? "chosenAuthOption" : "signupBtn"
+                }
+              >
+                Sign up
+              </button>
+            </div>
+
+            <SignIn
+              setShowRecover={setShowRecover}
+              authOption={authOption}
+              setShowSetName={setShowSetName}
+            />
+
+            <div className="continueContainer">
+              <Link to="/app">
+                <p
+                  onClick={() => {
+                    setIsGuest(true);
+                  }}
+                  className="continueAG"
+                >
+                  Continue as a guest
+                </p>
+              </Link>
+            </div>
+          </section>
+        : <RecoverPassword setShowRecover={setShowRecover} />}
+      </main>
+    </>
   );
 };
 

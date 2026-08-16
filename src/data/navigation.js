@@ -91,8 +91,8 @@ const navItems = [
     items: [
       {
         icon: ProfileIcon,
-        label: "Profile",
-        path: "profile",
+        label: "My Profile",
+        path: "my-profile",
       },
       {
         icon: Settings,

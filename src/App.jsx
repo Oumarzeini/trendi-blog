@@ -18,6 +18,7 @@ import TrendingPage from "./pages/app/trending-page/trending-page";
 import SearchResult from "./pages/search result/SearchResult";
 import RequireAuth from "./components/auth/requireAuth";
 import UpdatePassword from "./pages/Auth/update-password";
+import MyProfilePage from "./pages/app/My profile/myProfile";
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         <Route path="feed" element={<Feed />} />
 
         <Route element={<RequireAuth />}>
-          <Route path="profile/:username" element={<ProfilePage />} />
+          <Route path="my-profile/:username" element={<MyProfilePage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="write/:postId?" element={<NewPostPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
@@ -44,6 +45,7 @@ function App() {
 
         <Route path="post/:id" element={<PostPage />} />
         <Route path="search-result" element={<SearchResult />} />
+        <Route path="profile/:username" element={<ProfilePage />} />
         <Route path="*" element={<Missing />} />
       </Route>
       <Route path="*" element={<Missing />}></Route>

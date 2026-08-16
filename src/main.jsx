@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { StoreProvider } from "easy-peasy";
 import store from "./store/store";
 import { PostHogProvider } from "@posthog/react";
+import { HelmetProvider } from "react-helmet-async"
 
 Sentry.init({
   dsn: "https://d25f7430cdb3e4e9991ec4612ec20a61@o4511905462288384.ingest.de.sentry.io/4511905487585360",
@@ -42,7 +43,9 @@ root.render(
     <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN} options={options}>
       <StoreProvider store={store}>
         <BrowserRouter>
-          <App />
+          <HelmetProvider>
+              <App />
+            </HelmetProvider>
         </BrowserRouter>
       </StoreProvider>
     </PostHogProvider>

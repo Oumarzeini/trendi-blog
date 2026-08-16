@@ -21,6 +21,7 @@ import getAvatarUrl from "../../utils/getAvatarUrl";
 import getUser from "../../utils/getUser";
 import supabase from "../../lib/supabase";
 import SignInModel from "../../components/ui/signInModel";
+import SEO from "../../components/SEO/SEO"
 
 const AppLayout = () => {
   //const [searchFocus, setSearchFocus] = useState(false);
@@ -112,6 +113,7 @@ const AppLayout = () => {
 
   return (
     <>
+    <SEO title="Discover Posts" description="Discover interesting posts, stories, and ideas from the Trendi Blog community." url="/app" />
       <div
         className="overlay"
         style={{
@@ -199,7 +201,7 @@ const AppLayout = () => {
                   return;
                 } else {
                   if (user) {
-                    navigate(`/app/profile/${user?.username}`);
+                    navigate(`/app/my-profile/${user?.username}`);
                   } else {
                     return;
                   }

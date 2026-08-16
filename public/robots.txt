@@ -1,3 +1,15 @@
 # https://www.robotstxt.org/robotstxt.html
+
 User-agent: *
-Disallow:
+Allow: /
+
+Disallow: /app/settings
+Disallow: /app/my-profile
+Disallow: /app/write
+Disallow: /app/stats
+Disallow: /app/category
+Disallow: /app/trending
+Disallow: /app/bookmark
+
+
+Sitemap: https://trendi-blog.omarspace.com/sitemap.xml
