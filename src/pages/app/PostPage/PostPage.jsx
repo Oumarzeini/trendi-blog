@@ -316,7 +316,7 @@ const PostPage = () => {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)+/g, "");
     
-    const slug =`${slugify(post?.title)}-${post?.id}`
+   
 
   if (loading) return <Loader />;
   if (!post || !author)
@@ -329,6 +329,10 @@ const PostPage = () => {
         </Link>
       </p>
     );
+
+     const slug =`${slugify(post?.title)}-${post?.id}`
+
+    
 
   return (
     <>
