@@ -5,6 +5,7 @@ import useFeed from "../../../hooks/db/useFeed";
 import { useCallback, useRef } from "react";
 import Loader from "../../../components/ui/loader";
 import { useStoreState } from "easy-peasy";
+import RightArrow from "../../../icons/RightArrow";
 
 const StyledMain = styled.main`
   display: flex;
@@ -97,6 +98,35 @@ const Feed = () => {
               </span>{" "}
             </p>
           </>
+        : !loading && !blogs.length ?
+          <>
+            <NoBlogs
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "10px",
+                fontSize: "1.5rem",
+              }}
+            >
+              <p>
+              No Blogs found now{" "} </p>
+              <span style={{marginLeft: "1rem", display: "block"}}>
+              <Link
+                style={{ color: "var(--primary)", fontWeight: "500" }}
+                to={"/app/write"}
+              >
+                {" "}
+                Write a blog{" "}
+                <RightArrow
+                  height="20px"
+                  width="20px"
+                  color="var(--primary)"
+                />{" "}
+              </Link>{" "}
+              </span>
+            </NoBlogs>
+          </>
         : blogs.map((post, index) => (
             <Link
               to={`/app/post/${slugify(post.title)}-${post.id}`}
@@ -116,3 +146,17 @@ const Feed = () => {
 };
 
 export default Feed;
+
+const NoBlogs = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: row;
+  font-size: 1.5rem;
+  gap: 1rem;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+
+  }
+`
