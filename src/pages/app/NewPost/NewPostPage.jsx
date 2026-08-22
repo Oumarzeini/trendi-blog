@@ -201,7 +201,7 @@ const NewPostPage = () => {
         setPostImage(null);
         setPreviewImg(null);
         setShowPreviewImg(false);
-        navigate(`/app/profile/${user?.username}`);
+        navigate(`/app/my-profile/${user?.username}`);
       } else {
         await createBlog({ title, body, category, file: postImage });
         setTitle("");
