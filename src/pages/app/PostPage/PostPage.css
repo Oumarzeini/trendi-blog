@@ -110,6 +110,15 @@ hr {
     margin-bottom: 1.7rem;
   }
 
+  & blockquote {
+    padding: 10px;
+    padding-left: 2rem;
+    border-left: 1px solid var(--primary);
+    border-radius: 8px;
+    display: grid;
+    place-content: center;
+  }
+
   & a {
     color: blue;
     text-decoration: underline;
