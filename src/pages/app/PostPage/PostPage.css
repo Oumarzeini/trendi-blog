@@ -120,7 +120,7 @@ hr {
     border-left: 3px solid rgb(55, 136, 255);
     border-radius: 0 8px 8px 0;
     
-    background-color: #efefefc5;
+    background-color: var(--quote-bg);
     margin-bottom: 1.7rem;
   }
 
